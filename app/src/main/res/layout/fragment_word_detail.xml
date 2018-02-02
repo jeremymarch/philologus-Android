@@ -1,0 +1,16 @@
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/wordDetailScrollView"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="#ffffffff">
+
+    <WebView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:layout_marginLeft="0dp"
+        android:fontFamily="sans-serif-light"
+        android:textColor="#ff707070"
+        android:id="@+id/definition"
+        android:textSize="18sp" />
+
+</ScrollView>

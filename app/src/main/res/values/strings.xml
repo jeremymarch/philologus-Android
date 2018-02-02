@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">philolog.us</string>
+    <string name="title_word_detail">Word Detail</string>
+    <string name="greek_button">Greek</string>
+    <string name="latin_button">Latin</string>
+</resources>

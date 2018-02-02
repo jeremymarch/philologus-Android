@@ -1,0 +1,53 @@
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent">
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:id="@+id/tvLOL"
+        android:background="#ffffffff">
+        <!--fake focusable, so EditText doesn't get focus on load-->
+        <LinearLayout
+
+            android:focusable="true"
+            android:focusableInTouchMode="true"
+            android:layout_width="0px"
+            android:layout_height="0px"/>
+        <Button
+            android:id="@+id/toggleButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:paddingLeft="8dp"
+            android:text="Greek: "
+            android:textSize="26sp"
+            android:paddingTop="6dp"
+            android:paddingBottom="6dp"
+            android:background="#ffffffff"/>
+        <EditText
+            android:id="@+id/word_search"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text=""
+            android:textSize="26sp"
+            android:maxLines="1"
+            android:paddingTop="6dp"
+            android:paddingBottom="6dp"/>
+    </LinearLayout>
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tvLOL"
+        android:orientation="vertical" >
+        <ListView
+            android:id="@id/android:list"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#ffffff"
+            android:paddingLeft="0dp"
+            android:paddingRight="0dp"
+            android:divider="@null"
+            android:dividerHeight="0dp"
+            android:drawSelectorOnTop="true" />
+    </LinearLayout>
+</RelativeLayout>
