@@ -77,7 +77,7 @@ public class WordProvider extends ContentProvider {
 							new String[] { String.valueOf(id) }, null, null,
 							null, null);
 			result.setNotificationUri(getContext().getContentResolver(), GREEK_URI_WORDS);
-		}else if (LATIN_URI_WORDS.equals(uri)) {
+		} else if (LATIN_URI_WORDS.equals(uri)) {
 			Log.e("abc", "query 1");
 			result = PHDBHandler
 					.getInstance(getContext())

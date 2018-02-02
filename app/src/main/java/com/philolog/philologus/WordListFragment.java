@@ -4,6 +4,8 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.database.Cursor;
+import android.inputmethodservice.Keyboard;
+import android.inputmethodservice.KeyboardView;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
 import android.support.v4.app.LoaderManager.LoaderCallbacks;
@@ -19,18 +21,26 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.View.OnTouchListener;
 import android.view.ViewGroup;
+import android.view.WindowManager;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.view.animation.LinearInterpolator;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.philolog.philologus.database.PHDBHandler;
 import com.philolog.philologus.database.Word;
 import com.philolog.philologus.database.WordProvider;
+import com.philolog.philologus.phkeyboard.PHKeyboardView;
+import com.philolog.philologus.phkeyboard.PHLocalOnKeyboardActionListener;
+import android.view.View.OnFocusChangeListener;
 
 public class WordListFragment extends ListFragment implements OnClickListener {
-
+    public PHKeyboardView mKeyboardView;
     public ListAdapter gla;
     //public ListAdapter lla;
     public CursorLoader cc;
@@ -106,6 +116,9 @@ public class WordListFragment extends ListFragment implements OnClickListener {
     @Override
     public void onClick(View v) {
         Button b = v.findViewById(R.id.toggleButton);
+        EditText s = getView().findViewById(R.id.word_search);
+        s.setText("");
+
         if (lang == Word.LANG_GREEK) {
             lang = Word.LANG_LATIN;
             b.setText(R.string.latin_button);
@@ -185,8 +198,75 @@ public class WordListFragment extends ListFragment implements OnClickListener {
         }
         b.setOnClickListener(this);
 
-        EditText e = (EditText) view.findViewById(R.id.word_search);
+        return view;
+    }
 
+    public void openKeyboard(View v)
+    {
+        if (mKeyboardView.getVisibility() == View.GONE) {
+
+            Animation animation = AnimationUtils
+                    .loadAnimation(getContext(),
+                            R.anim.slide_in_bottom);
+            animation.setRepeatCount(Animation.INFINITE);
+            animation.setRepeatMode(Animation.RESTART);
+            animation.setInterpolator(new LinearInterpolator());
+            mKeyboardView.showWithAnimation(animation, null);
+
+            mKeyboardView.setVisibility(View.VISIBLE);
+            mKeyboardView.bringToFront();
+            mKeyboardView.setEnabled(true);
+            if ( v != null) {
+                ((InputMethodManager) getActivity().getSystemService(Activity.INPUT_METHOD_SERVICE)).hideSoftInputFromWindow(v.getWindowToken(), 0);
+            }
+        }
+    }
+
+    public void hideCustomKeyboard(View v) {
+        //mKeyboardView.setVisibility(View.GONE);
+
+        InputMethodManager imm = (InputMethodManager) getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
+        Animation animation = AnimationUtils.loadAnimation(getContext(), R.anim.slide_out_bottom);
+        mKeyboardView.startAnimation(animation);
+        mKeyboardView.setVisibility(View.GONE);
+        mKeyboardView.setEnabled(false);
+
+        //mKeyboardView.setVisibility(View.GONE);
+        //mKeyboardView.invalidate();
+
+    }
+
+    @Override
+    public void onViewCreated(final View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        // Restore the previously serialized activated item position.
+        if (savedInstanceState != null
+                && savedInstanceState.containsKey(STATE_ACTIVATED_POSITION)) {
+            setActivatedPosition(savedInstanceState
+                    .getInt(STATE_ACTIVATED_POSITION));
+        }
+
+        ListView lv =  view.findViewById(android.R.id.list);
+
+        lv.setOnTouchListener(new OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                EditText e = (EditText) getView().findViewById(R.id.word_search);
+                e.clearFocus();
+                //e.setSelected(false);
+                //hideCustomKeyboard(view);
+
+                //InputMethodManager imm = (InputMethodManager) getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+                //imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
+
+                return false;
+            }
+        });
+
+        EditText e = (EditText) view.findViewById(R.id.word_search);
+        e.setInputType(0); //this is needed to hide normal soft keyboard
         e.addTextChangedListener(new TextWatcher() {
 
             @Override
@@ -209,29 +289,40 @@ public class WordListFragment extends ListFragment implements OnClickListener {
             }
         });
 
-        return view;
-    }
+        Keyboard mKeyboard= new Keyboard(getContext(), R.xml.hoplitekeyboard);
+        mKeyboardView = (PHKeyboardView)view.findViewById(R.id.keyboardview);
+        mKeyboardView.setKeyboard( mKeyboard );
+        // Do not show the preview balloons
+        mKeyboardView.setPreviewEnabled(false);
+        mKeyboardView.setOnKeyboardActionListener(new PHLocalOnKeyboardActionListener((EditText)e, mKeyboardView, getContext()));
 
-    @Override
-    public void onViewCreated(View view, Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
+        //http://debugreport.blogspot.com/2012/09/how-to-hide-android-soft-keyboard.html
+        getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+        InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(e.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
+/*
+        e.setOnTouchListener(new View.OnTouchListener(){
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                // your code here....
+                getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+                openKeyboard(view);
+                return true;
+            }
+        });*/
 
-        // Restore the previously serialized activated item position.
-        if (savedInstanceState != null
-                && savedInstanceState.containsKey(STATE_ACTIVATED_POSITION)) {
-            setActivatedPosition(savedInstanceState
-                    .getInt(STATE_ACTIVATED_POSITION));
-        }
-
-        getListView().setOnTouchListener(new OnTouchListener() {
+        e.setOnFocusChangeListener(new OnFocusChangeListener() {
             @Override
-            public boolean onTouch(View v, MotionEvent event) {
-                //EditText e = (EditText) v.findViewById(R.id.word_search);
-                //e.setSelected(false);
-                InputMethodManager imm = (InputMethodManager) getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
-                imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
+            public void onFocusChange(View view, boolean hasFocus) {
+                getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+                InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm.hideSoftInputFromWindow(view.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
 
-                return false;
+                if (hasFocus) {
+                    openKeyboard(view);
+                    view.requestFocus();
+                } else {
+                    hideCustomKeyboard(view);
+                }
             }
         });
     }

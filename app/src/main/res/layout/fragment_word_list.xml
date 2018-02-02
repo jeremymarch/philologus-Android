@@ -32,7 +32,8 @@
             android:textSize="26sp"
             android:maxLines="1"
             android:paddingTop="6dp"
-            android:paddingBottom="6dp"/>
+            android:paddingBottom="6dp"
+            android:inputType="none"/>
     </LinearLayout>
     <LinearLayout
         android:layout_width="fill_parent"
@@ -50,4 +51,16 @@
             android:dividerHeight="0dp"
             android:drawSelectorOnTop="true" />
     </LinearLayout>
+    <com.philolog.philologus.phkeyboard.PHKeyboardView
+        android:id="@+id/keyboardview"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:focusable="true"
+        android:focusableInTouchMode="true"
+        android:visibility="gone"
+        android:padding="1dp"
+        android:translationZ="999dp"
+        />
 </RelativeLayout>
