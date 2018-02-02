@@ -5,6 +5,9 @@ import android.database.Cursor;
 import android.util.Log;
 
 public class Word {
+	public static final int LANG_GREEK = 0;
+	public static final int LANG_LATIN = 1;
+
 	public static final String LATIN_TABLE_NAME = "ZLATINWORDS";
 	public static final String GREEK_TABLE_NAME = "ZGREEKWORDS";
     public static final String LATIN_DEF_TABLE_NAME = "ZLATINDEFS";
@@ -16,9 +19,12 @@ public class Word {
 	//must be called _id : https://stackoverflow.com/questions/5812030/java-lang-illegalargumentexception-column-id-does-not-exist
 	public static final String COL_ID = "_id";
 	public static final String COL_WORD = "ZWORD";
+	public static final String COL_UNACCENTED_WORD = "ZUNACCENTEDWORD";
 
 	// For database projection so order is consistent
-	public static final String[] FIELDS = { COL_ID, COL_WORD };
+	public static final String[] GREEK_FIELDS = { COL_ID, COL_WORD };
+	public static final String[] LATIN_FIELDS = { COL_ID, COL_UNACCENTED_WORD };
+	public static String[] FIELDS = GREEK_FIELDS;
 
 	// Fields corresponding to database columns
 	public long id = -1;

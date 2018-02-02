@@ -2,6 +2,7 @@ package com.philolog.philologus;
 
 import android.app.Activity;
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
@@ -80,33 +81,60 @@ public class WordListFragment extends ListFragment implements OnClickListener {
     public WordListFragment() {
     }
 
-    @Override
-    public void onClick(View v) {
-        android.net.Uri langURI;
-        Button b = (Button) v.findViewById(R.id.toggleButton);
-        if (lang == 0) {
+    private void setLang(int newLanguage)
+    {
+        if (newLanguage == Word.LANG_LATIN) {
             //Log.e("abc", "langl = " + lang);
-            langURI = WordProvider.LATIN_URI_WORDS;
-            b.setText(R.string.latin_button);
+            WordProvider.URI_WORDS = WordProvider.LATIN_URI_WORDS;
+
             Word.TABLE_NAME = Word.LATIN_TABLE_NAME;
             Word.DEF_TABLE_NAME = Word.LATIN_DEF_TABLE_NAME;
-            lang = 1;
+            //Word.FIELDS = Word.LATIN_FIELDS;
+            lang = Word.LANG_LATIN;
         }
         else {
             //Log.e("abc", "langg = " + lang);
-            langURI = WordProvider.GREEK_URI_WORDS;
-            b.setText(R.string.greek_button);
+            WordProvider.URI_WORDS = WordProvider.GREEK_URI_WORDS;
+
             Word.TABLE_NAME = Word.GREEK_TABLE_NAME;
             Word.DEF_TABLE_NAME = Word.GREEK_DEF_TABLE_NAME;
-            lang = 0;
+            //Word.FIELDS = Word.GREEK_FIELDS;
+            lang = Word.LANG_GREEK;
         }
-        cc.setUri(langURI);
+    }
+
+    @Override
+    public void onClick(View v) {
+        Button b = v.findViewById(R.id.toggleButton);
+        if (lang == Word.LANG_GREEK) {
+            lang = Word.LANG_LATIN;
+            b.setText(R.string.latin_button);
+        }
+        else
+        {
+            lang = Word.LANG_GREEK;
+            b.setText(R.string.greek_button);
+        }
+        setLang(lang);
+
+        //cc.setProjection(Word.FIELDS);
+        cc.setUri(WordProvider.URI_WORDS);
         cc.forceLoad();
+
+        SharedPreferences pref = getContext().getApplicationContext().getSharedPreferences("PhilologusPref", 0); // 0 - for private mode
+        SharedPreferences.Editor ed = pref.edit();
+        ed.putInt("lang", lang);
+        ed.commit();
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        SharedPreferences pref = getContext().getApplicationContext().getSharedPreferences("PhilologusPref", 0); // 0 - for private mode
+        lang = pref.getInt("lang", 0);
+
+        setLang(lang);
 
         gla = new PHSimpleCursorAdapter(getActivity(),
                 R.layout.word_listitem, null, new String[]{
@@ -118,20 +146,8 @@ public class WordListFragment extends ListFragment implements OnClickListener {
 */
         setListAdapter(gla);
 
-        android.net.Uri langURI;
-        if (lang == 0) {
-
-            Log.e("abc", "langg = " + lang);
-            langURI = WordProvider.GREEK_URI_WORDS;
-
-        }
-        else {
-            Log.e("abc", "langl = " + lang);
-            langURI = WordProvider.LATIN_URI_WORDS;
-        }
-
         cc = new CursorLoader(getActivity(),
-                langURI, Word.FIELDS, null, null,
+                WordProvider.URI_WORDS, Word.FIELDS, null, null,
                 null);
 
         // Load the content
@@ -158,10 +174,18 @@ public class WordListFragment extends ListFragment implements OnClickListener {
                              Bundle savedInstanceState) {
 
         final View view = inflater.inflate(R.layout.fragment_word_list, null);
+        Button b = view.findViewById(R.id.toggleButton);
+        if (lang == Word.LANG_GREEK)
+        {
+            b.setText(R.string.greek_button);
+        }
+        else
+        {
+            b.setText(R.string.latin_button);
+        }
+        b.setOnClickListener(this);
 
         EditText e = (EditText) view.findViewById(R.id.word_search);
-
-        //final ListView lv = (ListView) view.findViewById(R.id.person_list);
 
         e.addTextChangedListener(new TextWatcher() {
 
@@ -184,9 +208,6 @@ public class WordListFragment extends ListFragment implements OnClickListener {
                 }
             }
         });
-
-        Button b = (Button) view.findViewById(R.id.toggleButton);
-        b.setOnClickListener(this);
 
         return view;
     }

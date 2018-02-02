@@ -22,6 +22,8 @@ public class WordProvider extends ContentProvider {
 	public static final Uri LATIN_URI_WORDS = Uri.parse(LATIN_WORDS);
 	public static final String LATIN_WORD_BASE = LATIN_WORDS + "/";
 
+	public static Uri URI_WORDS = GREEK_URI_WORDS;
+
 	public WordProvider() {
 	}
 
