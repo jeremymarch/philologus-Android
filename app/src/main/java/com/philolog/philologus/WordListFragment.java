@@ -13,6 +13,7 @@ import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
 import android.support.v4.widget.SimpleCursorAdapter;
 import android.text.Editable;
+import android.text.InputType;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -277,8 +278,13 @@ public class WordListFragment extends ListFragment implements OnClickListener {
         });
 
         EditText e = (EditText) view.findViewById(R.id.word_search);
-        e.setInputType(0); //this is needed to hide normal soft keyboard; must be called after view created.
 
+        //https://stackoverflow.com/questions/13586354/android-hide-soft-keyboard-from-edittext-while-not-losing-cursor/13975236
+        e.setInputType(InputType.TYPE_NULL); //this is needed to hide normal soft keyboard; must be called after view created.
+        if (android.os.Build.VERSION.SDK_INT >= 11) {
+            e.setRawInputType(InputType.TYPE_CLASS_TEXT);
+        }
+        
         e.addTextChangedListener(new TextWatcher() {
 
             @Override
