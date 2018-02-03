@@ -283,8 +283,9 @@ public class WordListFragment extends ListFragment implements OnClickListener {
         e.setInputType(InputType.TYPE_NULL); //this is needed to hide normal soft keyboard; must be called after view created.
         if (android.os.Build.VERSION.SDK_INT >= 11) {
             e.setRawInputType(InputType.TYPE_CLASS_TEXT);
+            e.setTextIsSelectable(true); //also needed, or android:textIsSelectable="true" in xml
         }
-        
+
         e.addTextChangedListener(new TextWatcher() {
 
             @Override
