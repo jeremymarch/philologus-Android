@@ -1,43 +1,51 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:translationZ="999dp">
+    android:translationZ="999dp"
+    android:background="#ffffffff">
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
         android:id="@+id/tvLOL"
-        android:background="#ffffffff">
+        android:layout_margin="5dp"
+        android:background="@drawable/search_frame">
         <!--fake focusable, so EditText doesn't get focus on load-->
+
         <LinearLayout
 
             android:focusable="true"
             android:focusableInTouchMode="true"
             android:layout_width="0px"
-            android:layout_height="0px"/>
+            android:layout_height="0px"
+            />
         <Button
             android:id="@+id/toggleButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:paddingLeft="8dp"
-            android:text="Greek: "
-            android:textSize="23sp"
-            android:paddingTop="10dp"
-            android:paddingBottom="10dp"
-            android:background="#ffffffff"
-            android:layout_marginTop="3dp"
-            android:layout_marginBottom="3dp"/>
+            android:paddingRight="6dp"
+            android:text="@string/greek_button"
+            android:textSize="21sp"
+            android:paddingTop="4dp"
+            android:paddingBottom="4dp"
+            android:background="@android:color/transparent"
+            android:layout_marginTop="2dp"
+            android:layout_marginBottom="2dp"
+            android:minHeight="0dp"
+            android:minWidth="0dp"/>
         <EditText
             android:id="@+id/word_search"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:text=""
-            android:textSize="23sp"
+            android:textSize="21sp"
             android:maxLines="1"
-            android:paddingTop="10dp"
-            android:paddingBottom="10dp"
-            android:layout_marginTop="3dp"
-            android:layout_marginBottom="3dp"
+            android:paddingTop="4dp"
+            android:paddingBottom="4dp"
+            android:layout_marginTop="2dp"
+            android:layout_marginBottom="2dp"
+            android:background="@android:color/transparent"
             android:inputType="none"/>
     </LinearLayout>
     <LinearLayout
