@@ -7,6 +7,7 @@ import android.inputmethodservice.Keyboard;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.view.MenuItem;
+import android.view.View;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
@@ -59,7 +60,11 @@ public class WordListActivity extends FragmentActivity implements
         //imm.hideSoftInputFromWindow(.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
         */
     }
-
+    public void clearSearch(View v)
+    {
+        EditText s = findViewById(R.id.word_search);
+        s.setText("");
+    }
     /**
      * Callback method from {@link WordListFragment.Callbacks} indicating that
      * the item with the given ID was selected.

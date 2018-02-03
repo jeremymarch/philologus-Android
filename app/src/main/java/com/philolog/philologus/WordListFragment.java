@@ -115,6 +115,12 @@ public class WordListFragment extends ListFragment implements OnClickListener {
         }
     }
 
+    public void clearSearch(View v)
+    {
+        EditText s = v.findViewById(R.id.word_search);
+        s.setText("");
+    }
+
     @Override
     public void onClick(View v) {
         Button b = v.findViewById(R.id.toggleButton);

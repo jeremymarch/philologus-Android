@@ -3,10 +3,9 @@
     android:layout_height="fill_parent"
     android:translationZ="999dp"
     android:background="#ffffffff">
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
         android:id="@+id/tvLOL"
         android:layout_margin="5dp"
         android:background="@drawable/search_frame">
@@ -23,6 +22,7 @@
             android:id="@+id/toggleButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
             android:paddingLeft="8dp"
             android:paddingRight="6dp"
             android:text="@string/greek_button"
@@ -38,6 +38,9 @@
             android:id="@+id/word_search"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
+            android:layout_toRightOf="@id/toggleButton"
+            android:layout_toLeftOf="@id/clear"
+            android:layout_gravity="left"
             android:text=""
             android:textSize="21sp"
             android:maxLines="1"
@@ -47,7 +50,19 @@
             android:layout_marginBottom="2dp"
             android:background="@android:color/transparent"
             android:inputType="none"/>
-    </LinearLayout>
+        <Button
+            android:id="@+id/clear"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:padding="8dp"
+
+            android:text="x"
+            android:onClick="clearSearch"
+            android:background="@android:color/transparent"
+            android:minHeight="10dp"
+            android:minWidth="10dp"/>
+    </RelativeLayout>
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
