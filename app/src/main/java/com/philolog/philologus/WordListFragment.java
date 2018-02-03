@@ -291,14 +291,15 @@ public class WordListFragment extends ListFragment implements OnClickListener {
 
                 int l = getListView().getLastVisiblePosition();
                 int f = getListView().getFirstVisiblePosition();
-                Log.e("abc", "First: " + f + ", last: " + l + ", count: " + (l-f));
+                //Log.e("abc", "First: " + f + ", last: " + l + ", count: " + (l-f));
                 int seq = PHDBHandler.getInstance(getContext()).scrollTo(wordPrefix);
 
                 //to scroll approximately to the middle.
                 seq = seq - ((l-f)/2) + 2 - 1;
-                if (seq > -1) {
-                    getListView().setSelection(seq);// .smoothScrollToPosition(5000);
+                if (seq < 0) {
+                    seq = 0;
                 }
+                getListView().setSelection(seq);// .smoothScrollToPosition(5000);
             }
         });
 
