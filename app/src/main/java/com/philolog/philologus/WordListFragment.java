@@ -5,7 +5,6 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.inputmethodservice.Keyboard;
-import android.inputmethodservice.KeyboardView;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
 import android.support.v4.app.LoaderManager.LoaderCallbacks;
@@ -14,7 +13,6 @@ import android.support.v4.content.Loader;
 import android.support.v4.widget.SimpleCursorAdapter;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -30,7 +28,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ListAdapter;
 import android.widget.ListView;
-import android.widget.Toast;
 
 import com.philolog.philologus.database.PHDBHandler;
 import com.philolog.philologus.database.Word;
@@ -110,6 +107,9 @@ public class WordListFragment extends ListFragment implements OnClickListener {
             Word.DEF_TABLE_NAME = Word.GREEK_DEF_TABLE_NAME;
             //Word.FIELDS = Word.GREEK_FIELDS;
             lang = Word.LANG_GREEK;
+        }
+        if (mKeyboardView != null) {
+            mKeyboardView.setLang(newLanguage);
         }
     }
 
@@ -266,7 +266,7 @@ public class WordListFragment extends ListFragment implements OnClickListener {
         });
 
         EditText e = (EditText) view.findViewById(R.id.word_search);
-        e.setInputType(0); //this is needed to hide normal soft keyboard
+        e.setInputType(0); //this is needed to hide normal soft keyboard; must be called after view created.
         e.addTextChangedListener(new TextWatcher() {
 
             @Override
@@ -289,12 +289,14 @@ public class WordListFragment extends ListFragment implements OnClickListener {
             }
         });
 
-        Keyboard mKeyboard= new Keyboard(getContext(), R.xml.hoplitekeyboard);
+        Keyboard mKeyboard= new Keyboard(getContext(), R.xml.phkeyboardgreek);
         mKeyboardView = (PHKeyboardView)view.findViewById(R.id.keyboardview);
         mKeyboardView.setKeyboard( mKeyboard );
         // Do not show the preview balloons
         mKeyboardView.setPreviewEnabled(false);
         mKeyboardView.setOnKeyboardActionListener(new PHLocalOnKeyboardActionListener((EditText)e, mKeyboardView, getContext()));
+
+        mKeyboardView.setLang(lang);
 
         //http://debugreport.blogspot.com/2012/09/how-to-hide-android-soft-keyboard.html
         getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Keyboard xmlns:android="http://schemas.android.com/apk/res/android"
+    android:keyWidth="9.02%p"
+    android:keyHeight="7.9%p"
+    android:horizontalGap="3dp"
+    android:verticalGap="3dp">
+    <!--https://stackoverflow.com/questions/7752580/creating-a-softkeyboard-with-multiple-alternate-characters-per-key-->
+    <Row android:rowEdgeFlags="top">
+        <Key android:codes="56"    android:keyLabel="q" android:keyEdgeFlags="left"  />
+        <Key android:codes="62"    android:keyLabel="w"  />
+        <Key android:codes="44"    android:keyLabel="e" />
+        <Key android:codes="57"    android:keyLabel="r"  />
+        <Key android:codes="59"    android:keyLabel="t" />
+        <Key android:codes="64"    android:keyLabel="y"  />
+        <Key android:codes="60"    android:keyLabel="u"  />
+        <Key android:codes="48"    android:keyLabel="i"  />
+        <Key android:codes="54"    android:keyLabel="o"  />
+        <Key android:codes="55" android:keyLabel="p" android:keyEdgeFlags="right" />
+
+    </Row>
+    <Row>
+        <Key android:codes="40"    android:keyLabel="a" android:horizontalGap="5.6%p" />
+        <Key android:codes="58"    android:keyLabel="s" />
+        <Key android:codes="43"    android:keyLabel="d"  />
+        <Key android:codes="45"    android:keyLabel="f" />
+        <Key android:codes="46"    android:keyLabel="g"  />
+        <Key android:codes="47"    android:keyLabel="h"  />
+        <Key android:codes="49"    android:keyLabel="j"  />
+        <Key android:codes="50"    android:keyLabel="k"  />
+        <Key android:codes="51" android:keyLabel="l"/>
+    </Row>
+    <Row android:rowEdgeFlags="bottom">
+        <Key android:codes="65"    android:keyLabel="z" android:horizontalGap="5.6%p" />
+        <Key android:codes="63"    android:keyLabel="x" />
+        <Key android:codes="42"    android:keyLabel="c"  />
+        <Key android:codes="61"    android:keyLabel="v" />
+        <Key android:codes="41"    android:keyLabel="b"  />
+        <Key android:codes="53"    android:keyLabel="n"  />
+        <Key android:codes="52"    android:keyLabel="m"  />
+
+        <Key android:codes="38" android:keyLabel=" " android:keyWidth="18.5%p" android:isRepeatable="true"/>
+
+    </Row>
+
+</Keyboard>
