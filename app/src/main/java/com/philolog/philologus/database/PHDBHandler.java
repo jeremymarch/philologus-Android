@@ -2,6 +2,7 @@ package com.philolog.philologus.database;
 
 import android.content.Context;
 import android.database.Cursor;
+import android.database.DatabaseUtils;
 import android.database.sqlite.SQLiteDatabase;
 
 import com.readystatesoftware.sqliteasset.SQLiteAssetHelper;
@@ -47,7 +48,9 @@ public class PHDBHandler extends SQLiteAssetHelper {
         }
         else
         {
-            return -1;
+            //past last word, return the last + 1 because positions are zero-indexed
+            long count = DatabaseUtils.queryNumEntries(singleton.getReadableDatabase(), Word.TABLE_NAME);
+            return ((int)count + 1);
         }
     }
 
