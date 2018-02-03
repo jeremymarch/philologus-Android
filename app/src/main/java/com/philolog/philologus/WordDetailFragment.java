@@ -1,5 +1,6 @@
 package com.philolog.philologus;
 
+import android.content.pm.ActivityInfo;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
@@ -47,6 +48,9 @@ public class WordDetailFragment extends Fragment {
             //Log.e("abcdefid", "id: " + getArguments().getLong(ARG_ITEM_ID));
 
             def = PHDBHandler.getInstance(getContext()).getDef(getArguments().getLong(ARG_ITEM_ID));
+        }
+        if(getResources().getBoolean(R.bool.portrait_only)){
+            getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         }
     }
 

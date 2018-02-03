@@ -20,19 +20,23 @@
             android:layout_height="wrap_content"
             android:paddingLeft="8dp"
             android:text="Greek: "
-            android:textSize="26sp"
-            android:paddingTop="6dp"
-            android:paddingBottom="6dp"
-            android:background="#ffffffff"/>
+            android:textSize="23sp"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:background="#ffffffff"
+            android:layout_marginTop="3dp"
+            android:layout_marginBottom="3dp"/>
         <EditText
             android:id="@+id/word_search"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:text=""
-            android:textSize="26sp"
+            android:textSize="23sp"
             android:maxLines="1"
-            android:paddingTop="6dp"
-            android:paddingBottom="6dp"
+            android:paddingTop="10dp"
+            android:paddingBottom="10dp"
+            android:layout_marginTop="3dp"
+            android:layout_marginBottom="3dp"
             android:inputType="none"/>
     </LinearLayout>
     <LinearLayout

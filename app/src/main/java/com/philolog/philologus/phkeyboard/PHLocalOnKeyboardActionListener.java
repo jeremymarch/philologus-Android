@@ -57,10 +57,6 @@ public class PHLocalOnKeyboardActionListener implements KeyboardView.OnKeyboardA
     public PHKeyboardView kv;
     public Context c;
 
-    private boolean caps = false;
-    private String capsL = "l";
-    private String miscL = "n"; //m for misc, n for normal
-
     public PHLocalOnKeyboardActionListener(EditText et, PHKeyboardView kview, Context co)
     {
         e = et;
@@ -77,30 +73,8 @@ public class PHLocalOnKeyboardActionListener implements KeyboardView.OnKeyboardA
         String str2 = editable.toString();
         start = fixCursorStart(start, str2, e);
         String s = "";
-        if( primaryCode == CodeCancel ) {
-            //hideCustomKeyboard();
 
-        } /* else if( primaryCode==CodeDelete ) {
-                if( editable!=null && start>0 ) editable.delete(start - 1, start);
-            } else if( primaryCode==CodeClear ) {
-                if( editable!=null ) editable.clear();
-            } else if( primaryCode==CodeLeft ) {
-                if( start>0 ) edittext.setSelection(start - 1);
-            } else if( primaryCode==CodeRight ) {
-                if (start < edittext.length()) edittext.setSelection(start + 1);
-            } else if( primaryCode==CodeAllLeft ) {
-                edittext.setSelection(0);
-            } else if( primaryCode==CodeAllRight ) {
-                edittext.setSelection(edittext.length());
-            } else if( primaryCode==CodePrev ) {
-                View focusNew= edittext.focusSearch(View.FOCUS_BACKWARD);
-                if( focusNew!=null ) focusNew.requestFocus();
-            } else if( primaryCode==CodeNext ) {
-                View focusNew= edittext.focusSearch(View.FOCUS_FORWARD);
-                if( focusNew!=null ) focusNew.requestFocus();
-
-            } */
-        else if( primaryCode == 1 ) {
+        if( primaryCode == 1 ) {
             s = "α";
         }  else if( primaryCode == 2 ) {
             s = "β";
@@ -120,7 +94,7 @@ public class PHLocalOnKeyboardActionListener implements KeyboardView.OnKeyboardA
             s = "ι";
         }  else if( primaryCode == 10 ) {
             s = "κ";
-        }  else if( primaryCode == 11) {
+        }  else if( primaryCode == 11 ) {
             s = "λ";
         }  else if( primaryCode == 12 ) {
             s = "μ";
@@ -148,7 +122,7 @@ public class PHLocalOnKeyboardActionListener implements KeyboardView.OnKeyboardA
             s = "ψ";
         }  else if( primaryCode == 24 ) {
             s = "ω";
-        } else if( primaryCode == 40 ) {
+        }  else if( primaryCode == 40 ) {
             s = "a";
         }  else if( primaryCode == 41 ) {
             s = "b";
@@ -168,7 +142,7 @@ public class PHLocalOnKeyboardActionListener implements KeyboardView.OnKeyboardA
             s = "i";
         }  else if( primaryCode == 49 ) {
             s = "j";
-        }  else if( primaryCode == 50) {
+        }  else if( primaryCode == 50 ) {
             s = "k";
         }  else if( primaryCode == 51 ) {
             s = "l";
@@ -196,13 +170,11 @@ public class PHLocalOnKeyboardActionListener implements KeyboardView.OnKeyboardA
             s = "w";
         }  else if( primaryCode == 63 ) {
             s = "x";
-        }
-        else if( primaryCode == 64 ) {
+        }  else if( primaryCode == 64 ) {
             s = "y";
         }  else if( primaryCode == 65 ) {
             s = "z";
-        }
-        else if( primaryCode == 38 ) { //Delete
+        }  else if( primaryCode == 38 ) { //Delete
             if( start > 0 )
             {
                 int i = 0;
@@ -286,5 +258,4 @@ public class PHLocalOnKeyboardActionListener implements KeyboardView.OnKeyboardA
         else
             return false;
     }
-
 }

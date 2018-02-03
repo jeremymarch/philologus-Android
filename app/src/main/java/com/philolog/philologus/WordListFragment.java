@@ -3,6 +3,7 @@ package com.philolog.philologus;
 import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.content.pm.ActivityInfo;
 import android.database.Cursor;
 import android.inputmethodservice.Keyboard;
 import android.os.Bundle;
@@ -144,6 +145,10 @@ public class WordListFragment extends ListFragment implements OnClickListener {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        if(getResources().getBoolean(R.bool.portrait_only)){
+            getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+        }
+
         SharedPreferences pref = getContext().getApplicationContext().getSharedPreferences("PhilologusPref", 0); // 0 - for private mode
         lang = pref.getInt("lang", 0);
 
@@ -156,7 +161,7 @@ public class WordListFragment extends ListFragment implements OnClickListener {
         /*lla = new PHSimpleCursorAdapter(getActivity(),
                 R.layout.word_listitem, null, new String[]{
                 Word.COL_WORD}, new int[]{R.id.word}, 0);
-*/
+        */
         setListAdapter(gla);
 
         cc = new CursorLoader(getActivity(),
@@ -234,7 +239,6 @@ public class WordListFragment extends ListFragment implements OnClickListener {
 
         //mKeyboardView.setVisibility(View.GONE);
         //mKeyboardView.invalidate();
-
     }
 
     @Override
@@ -267,6 +271,7 @@ public class WordListFragment extends ListFragment implements OnClickListener {
 
         EditText e = (EditText) view.findViewById(R.id.word_search);
         e.setInputType(0); //this is needed to hide normal soft keyboard; must be called after view created.
+
         e.addTextChangedListener(new TextWatcher() {
 
             @Override
@@ -322,6 +327,9 @@ public class WordListFragment extends ListFragment implements OnClickListener {
                 if (hasFocus) {
                     openKeyboard(view);
                     view.requestFocus();
+                    EditText e = (EditText)view;
+                    //e.setCursorVisible(true);
+                    //e.setTextIsSelectable(true);
                 } else {
                     hideCustomKeyboard(view);
                 }
