@@ -5,7 +5,12 @@
     android:horizontalGap="3dp"
     android:verticalGap="3dp">
 <!--https://stackoverflow.com/questions/7752580/creating-a-softkeyboard-with-multiple-alternate-characters-per-key-->
-    <Row android:rowEdgeFlags="top">
+    <!--blank top row gives space between top of keys and top of keyboard-->
+    <Row android:horizontalGap="0%p" android:keyHeight="0.1%p" android:rowEdgeFlags="top">
+
+    </Row>
+    <Row>
+
         <Key android:codes="5"    android:keyLabel="ε"  android:horizontalGap="6%p"/>
         <Key android:codes="17"    android:keyLabel="ρ" />
         <Key android:codes="19"    android:keyLabel="τ"  />
