@@ -1,10 +1,18 @@
 package com.philolog.philologus;
 
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
+import android.inputmethodservice.Keyboard;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.view.MenuItem;
+import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
+import android.widget.EditText;
+
+import com.philolog.philologus.phkeyboard.PHKeyboardView;
+import com.philolog.philologus.phkeyboard.PHLocalOnKeyboardActionListener;
 
 public class WordListActivity extends FragmentActivity implements
         WordListFragment.Callbacks {
@@ -13,6 +21,7 @@ public class WordListActivity extends FragmentActivity implements
      * Whether or not the activity is in two-pane mode, i.e. running on a tablet
      * device.
      */
+    public PHKeyboardView mKeyboardView;
     private boolean mTwoPane;
 
     @Override
@@ -34,6 +43,21 @@ public class WordListActivity extends FragmentActivity implements
         }
 
         // TODO: If exposing deep links into your app, handle intents here.
+        /*
+        Keyboard mKeyboard= new Keyboard(getContext(), R.xml.phkeyboardgreek);
+        mKeyboardView = (PHKeyboardView)view.findViewById(R.id.keyboardview);
+        mKeyboardView.setKeyboard( mKeyboard );
+        // Do not show the preview balloons
+        mKeyboardView.setPreviewEnabled(false);
+        mKeyboardView.setOnKeyboardActionListener(new PHLocalOnKeyboardActionListener((EditText)e, mKeyboardView, getContext()));
+
+        //mKeyboardView.setLang(lang);
+
+        //http://debugreport.blogspot.com/2012/09/how-to-hide-android-soft-keyboard.html
+        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+        //InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+        //imm.hideSoftInputFromWindow(.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
+        */
     }
 
     /**

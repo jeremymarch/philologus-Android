@@ -25,7 +25,8 @@
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="1"
-        tools:layout="@layout/fragment_word_list" />
+        tools:layout="@layout/fragment_word_list"
+        android:translationZ="999dp"/>
 
     <FrameLayout
         android:id="@+id/word_detail_container"

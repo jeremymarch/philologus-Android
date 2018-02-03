@@ -14,6 +14,7 @@ import android.support.v4.content.Loader;
 import android.support.v4.widget.SimpleCursorAdapter;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -287,9 +288,16 @@ public class WordListFragment extends ListFragment implements OnClickListener {
                                       int before, int count) {
                 EditText e = (EditText) view.findViewById(R.id.word_search);
                 String wordPrefix = e.getText().toString();
+
+                int l = getListView().getLastVisiblePosition();
+                int f = getListView().getFirstVisiblePosition();
+                Log.e("abc", "First: " + f + ", last: " + l + ", count: " + (l-f));
                 int seq = PHDBHandler.getInstance(getContext()).scrollTo(wordPrefix);
+
+                //to scroll approximately to the middle.
+                seq = seq - ((l-f)/2) + 2 - 1;
                 if (seq > -1) {
-                    getListView().setSelection(seq - 1);// .smoothScrollToPosition(5000);
+                    getListView().setSelection(seq);// .smoothScrollToPosition(5000);
                 }
             }
         });
