@@ -16,6 +16,7 @@ import android.text.Editable;
 import android.text.InputType;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.util.TimingLogger;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -297,22 +298,32 @@ public class WordListFragment extends ListFragment implements OnClickListener {
             }
 
             @Override
-            public void onTextChanged(CharSequence s, int start,
-                                      int before, int count) {
-                EditText e = (EditText) view.findViewById(R.id.word_search);
-                String wordPrefix = e.getText().toString();
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
 
-                int l = getListView().getLastVisiblePosition();
-                int f = getListView().getFirstVisiblePosition();
-                //Log.e("abc", "First: " + f + ", last: " + l + ", count: " + (l-f));
-                int seq = PHDBHandler.getInstance(getContext()).scrollTo(wordPrefix);
+                EditText e = view.findViewById(R.id.word_search);
+                final String wordPrefix = e.getText().toString();
 
-                //to scroll approximately to the middle.
-                seq = seq - ((l-f)/2) + 2 - 1;
-                if (seq < 0) {
-                    seq = 0;
-                }
-                getListView().setSelection(seq);// .smoothScrollToPosition(5000);
+                getListView().post(new Runnable() {
+                    @Override
+                    public void run() {
+                        TimingLogger timings = new TimingLogger("querytime", "methodA");
+                        ListView lv = getListView();
+                        int l = lv.getLastVisiblePosition();
+                        int f = lv.getFirstVisiblePosition();
+                        timings.addSplit("work A");
+                        int seq = PHDBHandler.getInstance(getContext()).scrollTo(wordPrefix);
+                        timings.addSplit("work B");
+
+                        //to scroll approximately to the middle.
+                        seq = seq - ((l - f) / 2) + 2 - 1;
+                        if (seq < 0) {
+                            seq = 0;
+                        }
+                        lv.setSelection(seq);// .smoothScrollToPosition(5000);
+                        timings.addSplit("work C");
+                        timings.dumpToLog();
+                    }
+                });
             }
         });
 
