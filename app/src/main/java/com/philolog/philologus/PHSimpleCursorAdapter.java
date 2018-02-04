@@ -6,6 +6,8 @@ import android.graphics.Typeface;
 import android.view.View;
 import android.widget.TextView;
 
+import com.philolog.philologus.database.Word;
+
 /**
  * Created by jeremy on 1/30/18.
  */
@@ -26,6 +28,12 @@ public class PHSimpleCursorAdapter extends android.support.v4.widget.SimpleCurso
         super.bindView(view, context, cursor);
 
         final TextView _TextViewTitle = (TextView) view.findViewById(R.id.word);
-        _TextViewTitle.setTypeface(mCustomFont);
+        if (Word.TABLE_NAME == Word.GREEK_TABLE_NAME) {
+            _TextViewTitle.setTypeface(mCustomFont);
+        }
+        else
+        {
+            _TextViewTitle.setTypeface(Typeface.SANS_SERIF);
+        }
     }
 }
