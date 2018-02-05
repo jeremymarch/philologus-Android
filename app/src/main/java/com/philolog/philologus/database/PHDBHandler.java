@@ -72,8 +72,8 @@ public class PHDBHandler extends SQLiteAssetHelper {
     }
 
     public synchronized String getDef(final long id) {
-        String[] cols = {"ZDEF"};
-        final SQLiteDatabase db = this.getReadableDatabase();
+        String[] cols = { "ZDEF" };
+        final SQLiteDatabase db = singleton.getReadableDatabase();
         final Cursor cursor = db.query(Word.DEF_TABLE_NAME, cols,
                 "ZWORDID" + " IS ?", new String[] { String.valueOf(id) },
                 null, null, null, "1");
