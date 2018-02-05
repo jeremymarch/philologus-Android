@@ -4,6 +4,7 @@ package com.philolog.philologus.database;
 import android.content.ContentProvider;
 import android.content.ContentValues;
 import android.database.Cursor;
+import android.database.MergeCursor;
 import android.net.Uri;
 import android.util.Log;
 
@@ -57,6 +58,7 @@ public class WordProvider extends ContentProvider {
 	public Cursor query(Uri uri, String[] projection, String selection,
 			String[] selectionArgs, String sortOrder) {
 		Cursor result = null;
+        Cursor resultBefore = null;
 		//Log.e("abc", "GREEK query uri: " + uri + ", " + GREEK_URI_WORDS);
 		if (GREEK_URI_WORDS.equals(uri)) {
 			Log.e("abc", "query 1");
@@ -64,19 +66,32 @@ public class WordProvider extends ContentProvider {
 					.getInstance(getContext())
 					.getReadableDatabase()
 					.query(Word.GREEK_TABLE_NAME, Word.FIELDS, null, null, null,
-							null, Word.COL_ID, null);
+							null, Word.COL_ID, "1000");
 			result.setNotificationUri(getContext().getContentResolver(), GREEK_URI_WORDS);
 		} else if (uri.toString().startsWith(GREEK_WORD_BASE)) {
 			Log.e("abc", "query 2");
-			final long id = Long.parseLong(uri.getLastPathSegment());
+			final String wordPrefix = uri.getLastPathSegment();
 			result = PHDBHandler
 					.getInstance(getContext())
 					.getReadableDatabase()
 					.query(Word.GREEK_TABLE_NAME, Word.FIELDS,
-							Word.COL_ID + " IS ?",
-							new String[] { String.valueOf(id) }, null, null,
-                            Word.COL_ID, null);
-			result.setNotificationUri(getContext().getContentResolver(), GREEK_URI_WORDS);
+							"zunaccentedword >= ?",
+							new String[] { wordPrefix }, null, null,
+                            "zunaccentedword", "1000");
+
+            resultBefore = PHDBHandler
+                    .getInstance(getContext())
+                    .getReadableDatabase()
+                    .query(Word.GREEK_TABLE_NAME, Word.FIELDS,
+                            "zunaccentedword < ?",
+                            new String[] { wordPrefix }, null, null,
+                            "zunaccentedword DESC", "1000");
+
+            Cursor mc = new MergeCursor(new Cursor[]{resultBefore,result});
+
+			mc.setNotificationUri(getContext().getContentResolver(), GREEK_URI_WORDS);
+			return mc;
+
 		} else if (LATIN_URI_WORDS.equals(uri)) {
 			Log.e("abc", "query 3");
 			result = PHDBHandler

@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.database.Cursor;
 import android.inputmethodservice.Keyboard;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.ListFragment;
 import android.support.v4.app.LoaderManager.LoaderCallbacks;
@@ -143,6 +144,7 @@ public class WordListFragment extends ListFragment implements OnClickListener {
         //cc.setProjection(Word.FIELDS);
         cc.setUri(WordProvider.URI_WORDS);
         cc.forceLoad();
+
 
         SharedPreferences pref = getContext().getApplicationContext().getSharedPreferences("PhilologusPref", 0); // 0 - for private mode
         SharedPreferences.Editor ed = pref.edit();
@@ -303,6 +305,16 @@ public class WordListFragment extends ListFragment implements OnClickListener {
                 EditText e = view.findViewById(R.id.word_search);
                 final String wordPrefix = e.getText().toString();
 
+                Uri newuri= Uri.parse(WordProvider.GREEK_WORD_BASE + wordPrefix);
+                cc.setUri(newuri);
+                cc.forceLoad();
+
+                int height = getListView().getHeight();
+                int itemHeight = getListView().getChildAt(0).getHeight();
+                getListView().setSelectionFromTop(1001, height/2 - itemHeight*2);
+
+                //getListView().setSelectionFromTop(1001, 100);
+                /*
                 getListView().post(new Runnable() {
                     @Override
                     public void run() {
@@ -323,7 +335,7 @@ public class WordListFragment extends ListFragment implements OnClickListener {
                         timings.addSplit("work C");
                         timings.dumpToLog();
                     }
-                });
+                }); */
             }
         });
 
