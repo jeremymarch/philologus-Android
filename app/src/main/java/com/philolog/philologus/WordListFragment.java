@@ -304,14 +304,48 @@ public class WordListFragment extends ListFragment implements OnClickListener {
 
                 EditText e = view.findViewById(R.id.word_search);
                 final String wordPrefix = e.getText().toString();
+                ListView lv = getListView();
 
-                Uri newuri= Uri.parse(WordProvider.GREEK_WORD_BASE + wordPrefix);
+                Uri newuri = null;
+                if (wordPrefix.isEmpty()) {
+                    newuri = WordProvider.GREEK_URI_WORDS;
+                }
+                else
+                {
+                    newuri = Uri.parse(WordProvider.GREEK_WORD_BASE + wordPrefix);
+                }
                 cc.setUri(newuri);
                 cc.forceLoad();
 
-                int height = getListView().getHeight();
-                int itemHeight = getListView().getChildAt(0).getHeight();
-                getListView().setSelectionFromTop(1001, height/2 - itemHeight*2);
+                //int selectedSeq = 0;
+                if (!wordPrefix.isEmpty()) {
+                    //selectedSeq = PHSimpleCursorAdapter.pageSize + 1;
+                    int height = lv.getHeight();
+                    int itemHeight = lv.getChildAt(0).getHeight();
+                    lv.setSelectionFromTop(WordProvider.selectedSeq, height / 2 - itemHeight * 2);
+                }
+                else
+                {
+                    lv.setSelectionFromTop(0, 0);
+                }
+
+                //delayed because first time called it doesn't scroll properly, delay fixes
+                lv.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        ListView lv = getListView();
+
+                        if (!wordPrefix.isEmpty()) {
+                            int height = lv.getHeight();
+                            int itemHeight = lv.getChildAt(0).getHeight();
+                            lv.setSelectionFromTop(WordProvider.selectedSeq, height / 2 - itemHeight * 2);
+                        }
+                        else
+                        {
+                            lv.setSelectionFromTop(0, 0);
+                        }
+                    }
+                }, 100);
 
                 //getListView().setSelectionFromTop(1001, 100);
                 /*
