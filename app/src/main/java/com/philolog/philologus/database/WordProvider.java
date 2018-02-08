@@ -26,6 +26,8 @@ public class WordProvider extends ContentProvider {
 	public static final String LATIN_WORD_BASE = LATIN_WORDS + "/";
 
     public static final int GREEK_MAX_ID = 116497;
+    public static final int LATIN_MAX_ID = 51595;
+    public static int LANG_MAX_ID = GREEK_MAX_ID;
 
 	public static Uri URI_WORDS = GREEK_URI_WORDS;
 
@@ -66,22 +68,22 @@ public class WordProvider extends ContentProvider {
 		Cursor result = null;
         Cursor seqResult = null;
 		//Log.e("abc", "GREEK query uri: " + uri + ", " + GREEK_URI_WORDS);
-		if (GREEK_URI_WORDS.equals(uri)) {
+		if (GREEK_URI_WORDS.equals(uri) || LATIN_URI_WORDS.equals(uri)) {
 			Log.e("abc", "query 1");
 					result = PHDBHandler
 					.getInstance(getContext())
 					.getReadableDatabase()
-					.query(Word.GREEK_TABLE_NAME, Word.FIELDS, null, null, null,
+					.query(Word.TABLE_NAME, Word.FIELDS, null, null, null,
 							null, Word.COL_ID, String.valueOf(PHSimpleCursorAdapter.pageSize*2));
-			result.setNotificationUri(getContext().getContentResolver(), GREEK_URI_WORDS);
-		} else if (uri.toString().startsWith(GREEK_WORD_BASE)) {
+			result.setNotificationUri(getContext().getContentResolver(), URI_WORDS);
+		} else if (uri.toString().startsWith(GREEK_WORD_BASE) || uri.toString().startsWith(LATIN_WORD_BASE)) {
 			Log.e("abc", "query 2");
 			final String wordPrefix = uri.getLastPathSegment();
 			String[] cols = { "zseq" };
             seqResult = PHDBHandler
 					.getInstance(getContext())
 					.getReadableDatabase()
-					.query(Word.GREEK_TABLE_NAME, cols,
+					.query(Word.TABLE_NAME, cols,
 							"zunaccentedword >= ?",
 							new String[] { wordPrefix }, null, null,
                             "zunaccentedword", "1");
@@ -96,7 +98,7 @@ public class WordProvider extends ContentProvider {
             }
             else
             {
-                seq = GREEK_MAX_ID;
+                seq = LANG_MAX_ID;
             }
 
             int fullRequestSize = 0;
@@ -111,10 +113,10 @@ public class WordProvider extends ContentProvider {
 				fullRequestSize = beforePageSize + afterPageSize + 1;
 				selectedSeq = seq;
 			}
-			else if (seq + PHSimpleCursorAdapter.pageSize >= GREEK_MAX_ID)
+			else if (seq + PHSimpleCursorAdapter.pageSize >= LANG_MAX_ID)
 			{
                 beforePageSize = PHSimpleCursorAdapter.pageSize;
-                afterPageSize = GREEK_MAX_ID - seq;
+                afterPageSize = LANG_MAX_ID - seq;
                 startRequestSeq = seq - PHSimpleCursorAdapter.pageSize;
                 fullRequestSize = beforePageSize + afterPageSize + 1;
                 selectedSeq = PHSimpleCursorAdapter.pageSize + 1;
@@ -133,32 +135,13 @@ public class WordProvider extends ContentProvider {
             result = PHDBHandler
                     .getInstance(getContext())
                     .getReadableDatabase()
-                    .query(Word.GREEK_TABLE_NAME, Word.FIELDS,
+                    .query(Word.TABLE_NAME, Word.FIELDS,
                             "zseq >= ?",
                             new String[] { String.valueOf(startRequestSeq) }, null, null,
                             "zseq", String.valueOf(fullRequestSize));
 
-			result.setNotificationUri(getContext().getContentResolver(), GREEK_URI_WORDS);
+			result.setNotificationUri(getContext().getContentResolver(), URI_WORDS);
 
-		} else if (LATIN_URI_WORDS.equals(uri)) {
-			Log.e("abc", "query 3");
-			result = PHDBHandler
-					.getInstance(getContext())
-					.getReadableDatabase()
-					.query(Word.LATIN_TABLE_NAME, Word.FIELDS, null, null, null,
-							null, Word.COL_ID, null);
-			result.setNotificationUri(getContext().getContentResolver(), LATIN_URI_WORDS);
-		} else if (uri.toString().startsWith(LATIN_WORD_BASE)) {
-			Log.e("abc", "query 4");
-			final long id = Long.parseLong(uri.getLastPathSegment());
-			result = PHDBHandler
-					.getInstance(getContext())
-					.getReadableDatabase()
-					.query(Word.LATIN_TABLE_NAME, Word.FIELDS,
-							Word.COL_ID + " IS ?",
-							new String[] { String.valueOf(id) }, null, null,
-                            Word.COL_ID, null);
-			result.setNotificationUri(getContext().getContentResolver(), LATIN_URI_WORDS);
 		} else {
 			throw new UnsupportedOperationException("query Not yet implemented");
 		}

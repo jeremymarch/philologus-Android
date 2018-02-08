@@ -101,13 +101,14 @@ public class WordListFragment extends ListFragment implements OnClickListener {
 
             Word.TABLE_NAME = Word.LATIN_TABLE_NAME;
             Word.DEF_TABLE_NAME = Word.LATIN_DEF_TABLE_NAME;
+            WordProvider.LANG_MAX_ID = WordProvider.LATIN_MAX_ID;
             //Word.FIELDS = Word.LATIN_FIELDS;
             lang = Word.LANG_LATIN;
         }
         else {
             //Log.e("abc", "langg = " + lang);
             WordProvider.URI_WORDS = WordProvider.GREEK_URI_WORDS;
-
+            WordProvider.LANG_MAX_ID = WordProvider.GREEK_MAX_ID;
             Word.TABLE_NAME = Word.GREEK_TABLE_NAME;
             Word.DEF_TABLE_NAME = Word.GREEK_DEF_TABLE_NAME;
             //Word.FIELDS = Word.GREEK_FIELDS;
