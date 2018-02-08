@@ -54,8 +54,6 @@ public class PHSimpleCursorAdapter extends android.support.v4.widget.SimpleCurso
         else
         {
             viewHolder.wordTextView.setTypeface(Typeface.SANS_SERIF);
-            viewHolder.wordTextView.setText(cursor.getString(1));
         }
     }
 }
-

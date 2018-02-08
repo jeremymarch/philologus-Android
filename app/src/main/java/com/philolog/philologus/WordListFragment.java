@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.database.Cursor;
+import android.database.MatrixCursor;
 import android.inputmethodservice.Keyboard;
 import android.net.Uri;
 import android.os.Bundle;
@@ -13,6 +14,7 @@ import android.support.v4.app.LoaderManager.LoaderCallbacks;
 import android.support.v4.content.CursorLoader;
 import android.support.v4.content.Loader;
 import android.support.v4.widget.SimpleCursorAdapter;
+import android.support.v7.widget.RecyclerView;
 import android.text.Editable;
 import android.text.InputType;
 import android.text.TextWatcher;
@@ -42,8 +44,93 @@ import com.philolog.philologus.phkeyboard.PHKeyboardView;
 import com.philolog.philologus.phkeyboard.PHLocalOnKeyboardActionListener;
 import android.view.View.OnFocusChangeListener;
 import android.widget.TextView;
+import android.app.Fragment;
+import android.app.LoaderManager;
 
-public class WordListFragment extends ListFragment implements OnClickListener {
+import java.security.Provider;
+
+//https://stackoverflow.com/questions/39825125/android-recyclerview-cursorloader-contentprovider-load-more
+//https://github.com/codepath/android_guides/wiki/Endless-Scrolling-with-AdapterViews-and-RecyclerView
+//https://developer.android.com/samples/RecyclerView/src/com.example.android.recyclerview/RecyclerViewFragment.html
+//https://developer.android.com/guide/components/loaders.html
+//http://andraskindler.com/blog/2014/migrating-to-recyclerview-from-listview/
+//https://github.com/codepath/android_guides/wiki/Using-the-RecyclerView
+
+public class WordListFragment extends Fragment implements LoaderManager.LoaderCallbacks<Cursor> {
+       /*loader*/
+
+    @Override
+    public Loader<Cursor> onCreateLoader(int id, Bundle args) {
+        switch (id) {
+            case 0:
+                return new CursorLoader(this, WordProvider.urlForItems(offset * page), null, null, null, null);
+            default:
+                throw new IllegalArgumentException("no id handled!");
+        }
+    }
+
+    @Override
+    public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
+        switch (loader.getId()) {
+            case 0:
+                Log.d(TAG, "onLoadFinished: loading MORE");
+                //shortToast.setText("loading MORE " + page);
+                //shortToast.show();
+
+                Cursor cursor = ((CustomCursorRecyclerViewAdapter) mRecyclerView.getAdapter()).getCursor();
+
+                //fill all exisitng in adapter
+                MatrixCursor mx = new MatrixCursor(TableItems.Columns);
+                fillMx(cursor, mx);
+
+                //fill with additional result
+                fillMx(data, mx);
+
+                ((CustomCursorRecyclerViewAdapter) mRecyclerView.getAdapter()).swapCursor(mx);
+
+
+                handlerToWait.postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        loadingMore = false;
+                    }
+                }, 2000);
+
+                break;
+            default:
+                throw new IllegalArgumentException("no loader id handled!");
+        }
+    }
+
+    private Handler handlerToWait = new Handler();
+
+    private void fillMx(Cursor data, MatrixCursor mx) {
+        if (data == null)
+            return;
+
+        data.moveToPosition(-1);
+        while (data.moveToNext()) {
+            mx.addRow(new Object[]{
+                    data.getString(data.getColumnIndex(TableItems._ID)),
+                    data.getString(data.getColumnIndex(TableItems.TEXT))
+            });
+        }
+    }
+
+    @Override
+    public void onLoaderReset(Loader<Cursor> loader) {
+        // TODO: 2016-10-13
+    }
+
+    //
+
+    private static final String TAG = "MainActivity";
+    public final int offset = 30;
+    private int page = 0;
+
+    private RecyclerView mRecyclerView;
+    private boolean loadingMore = false;
+
     public PHKeyboardView mKeyboardView;
     public ListAdapter gla;
     //public ListAdapter lla;
@@ -472,6 +559,7 @@ public class WordListFragment extends ListFragment implements OnClickListener {
      * Turns on activate-on-click mode. When this mode is on, list items will be
      * given the 'activated' state when touched.
      */
+    /*
     public void setActivateOnItemClick(boolean activateOnItemClick) {
         // When setting CHOICE_MODE_SINGLE, ListView will automatically
         // give items the 'activated' state when touched.
@@ -489,5 +577,7 @@ public class WordListFragment extends ListFragment implements OnClickListener {
 
         mActivatedPosition = position;
     }
+*/
+
 }
 
