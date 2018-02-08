@@ -24,6 +24,8 @@ public class PHSimpleCursorAdapter extends android.support.v4.widget.SimpleCurso
     public static int pageSize = 1000;
     //private TextView mTextView;
 
+    //https://stackoverflow.com/questions/4567969/viewholder-pattern-correctly-implemented-in-custom-cursoradapter
+
     public PHSimpleCursorAdapter(final Context context, final int layout, final Cursor c, final String[] from,
                                  final int[] to, final int flags) {
         super(context, layout, c, from, to, flags);
@@ -47,10 +49,13 @@ public class PHSimpleCursorAdapter extends android.support.v4.widget.SimpleCurso
         WordHolder viewHolder = (WordHolder) view.getTag();
         if (Word.TABLE_NAME.equals(Word.GREEK_TABLE_NAME)) {
             viewHolder.wordTextView.setTypeface(mCustomFont);
+            viewHolder.wordTextView.setText(cursor.getString(1));
         }
         else
         {
             viewHolder.wordTextView.setTypeface(Typeface.SANS_SERIF);
+            viewHolder.wordTextView.setText(cursor.getString(1));
         }
     }
 }
+

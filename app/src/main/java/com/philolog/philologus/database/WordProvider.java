@@ -86,7 +86,7 @@ public class WordProvider extends ContentProvider {
 							new String[] { wordPrefix }, null, null,
                             "zunaccentedword", "1");
 
-            int seq = 1;
+            int seq;
 
             if (seqResult.getCount() > 0)
             {
@@ -99,10 +99,11 @@ public class WordProvider extends ContentProvider {
                 seq = LANG_MAX_ID;
             }
 
-            int fullRequestSize = 0;
-            int startRequestSeq = 1;
-            int beforePageSize = 0;
-            int afterPageSize = 0;
+            int beforePageSize;
+            int afterPageSize;
+            int startRequestSeq;
+            int fullRequestSize;
+
             if (seq <= PHSimpleCursorAdapter.pageSize)
 			{
                 beforePageSize = seq - 1;
