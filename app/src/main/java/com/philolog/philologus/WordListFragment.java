@@ -207,7 +207,7 @@ public class WordListFragment extends ListFragment implements OnClickListener {
                 if (WordProvider.selectedSeq > 1) {
                     int height = lv.getHeight();
                     int itemHeight = lv.getChildAt(0).getHeight();
-                    lv.setSelectionFromTop(WordProvider.selectedSeq, height / 2 - itemHeight * 2);
+                    lv.setSelectionFromTop(WordProvider.selectedSeq, height / 2 - itemHeight);
                 }
                 else
                 {
