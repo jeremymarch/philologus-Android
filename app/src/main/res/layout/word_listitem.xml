@@ -18,7 +18,6 @@
         android:layout_height="wrap_content"
         android:paddingLeft="14dp"
         android:paddingRight="8dp"
-        android:fontFamily="@"
         android:textColor="#ff000000"
         android:textSize="23sp" />
 

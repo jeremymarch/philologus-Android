@@ -31,6 +31,50 @@ public class PHSimpleCursorAdapter extends android.support.v4.widget.SimpleCurso
         super(context, layout, c, from, to, flags);
 
         mCustomFont = Typeface.createFromAsset(context.getAssets(), "fonts/newathu5.ttf");
+
+        this.setViewBinder(new ViewBinder() {
+
+            public boolean setViewValue(View aView, Cursor aCursor, int aColumnIndex) {
+
+                if (aColumnIndex == 1 && Word.TABLE_NAME.equals(Word.LATIN_TABLE_NAME)) {
+                    String word = aCursor.getString(aColumnIndex);
+                    TextView textView = (TextView) aView;
+                    textView.setText(removeMacronBreve(word));
+                    return true;
+                }
+
+                return false;
+            }
+        });
+    }
+
+    private String removeMacronBreve(String word)
+    {
+        word = word.replaceAll("ā", "a");
+        word = word.replaceAll("ē", "e");
+        word = word.replaceAll("ī", "i");
+        word = word.replaceAll("ō", "o");
+        word = word.replaceAll("ū", "u");
+
+        word = word.replaceAll("ă", "a");
+        word = word.replaceAll("ĕ", "e");
+        word = word.replaceAll("ĭ", "i");
+        word = word.replaceAll("ŏ", "o");
+        word = word.replaceAll("ŭ", "u");
+
+        word = word.replaceAll("Ā", "A");
+        word = word.replaceAll("Ē", "E");
+        word = word.replaceAll("Ī", "I");
+        word = word.replaceAll("Ō", "O");
+        word = word.replaceAll("Ū", "U");
+
+        word = word.replaceAll("Ă", "A");
+        word = word.replaceAll("Ĕ", "E");
+        word = word.replaceAll("Ĭ", "I");
+        word = word.replaceAll("Ŏ", "O");
+        word = word.replaceAll("Ŭ", "U");
+
+        return word;
     }
 
     @Override
@@ -49,12 +93,14 @@ public class PHSimpleCursorAdapter extends android.support.v4.widget.SimpleCurso
         WordHolder viewHolder = (WordHolder) view.getTag();
         if (Word.TABLE_NAME.equals(Word.GREEK_TABLE_NAME)) {
             viewHolder.wordTextView.setTypeface(mCustomFont);
-            viewHolder.wordTextView.setText(cursor.getString(1));
+            viewHolder.wordTextView.setTextSize(23);
+            //viewHolder.wordTextView.setText(cursor.getString(1));
         }
         else
         {
             viewHolder.wordTextView.setTypeface(Typeface.SANS_SERIF);
-            viewHolder.wordTextView.setText(cursor.getString(1));
+            viewHolder.wordTextView.setTextSize(21);
+            //viewHolder.wordTextView.setText(cursor.getString(1));
         }
     }
 }
