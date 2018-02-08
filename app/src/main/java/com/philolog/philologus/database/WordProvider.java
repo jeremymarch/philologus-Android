@@ -57,8 +57,6 @@ public class WordProvider extends ContentProvider {
 
 	@Override
 	public boolean onCreate() {
-
-		Log.e("abc", "create greek provider");
 		return true;
 	}
 
@@ -67,17 +65,17 @@ public class WordProvider extends ContentProvider {
 			String[] selectionArgs, String sortOrder) {
 		Cursor result = null;
         Cursor seqResult = null;
-		//Log.e("abc", "GREEK query uri: " + uri + ", " + GREEK_URI_WORDS);
-		if (GREEK_URI_WORDS.equals(uri) || LATIN_URI_WORDS.equals(uri)) {
-			Log.e("abc", "query 1");
+		if (GREEK_URI_WORDS.equals(uri) || LATIN_URI_WORDS.equals(uri))
+		{
 					result = PHDBHandler
 					.getInstance(getContext())
 					.getReadableDatabase()
 					.query(Word.TABLE_NAME, Word.FIELDS, null, null, null,
 							null, Word.COL_ID, String.valueOf(PHSimpleCursorAdapter.pageSize*2));
 			result.setNotificationUri(getContext().getContentResolver(), URI_WORDS);
-		} else if (uri.toString().startsWith(GREEK_WORD_BASE) || uri.toString().startsWith(LATIN_WORD_BASE)) {
-			Log.e("abc", "query 2");
+		}
+		else if (uri.toString().startsWith(GREEK_WORD_BASE) || uri.toString().startsWith(LATIN_WORD_BASE))
+		{
 			final String wordPrefix = uri.getLastPathSegment();
 			String[] cols = { "zseq" };
             seqResult = PHDBHandler
@@ -141,8 +139,9 @@ public class WordProvider extends ContentProvider {
                             "zseq", String.valueOf(fullRequestSize));
 
 			result.setNotificationUri(getContext().getContentResolver(), URI_WORDS);
-
-		} else {
+		}
+		else
+        {
 			throw new UnsupportedOperationException("query Not yet implemented");
 		}
 

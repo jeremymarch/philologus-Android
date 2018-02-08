@@ -4,11 +4,14 @@ import android.content.Context;
 import android.database.Cursor;
 import android.graphics.Color;
 import android.graphics.Typeface;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.philolog.philologus.database.Word;
+import com.philolog.philologus.WordListFragment.WordHolder;
 
 /**
  * Created by jeremy on 1/30/18.
@@ -24,41 +27,30 @@ public class PHSimpleCursorAdapter extends android.support.v4.widget.SimpleCurso
     public PHSimpleCursorAdapter(final Context context, final int layout, final Cursor c, final String[] from,
                                  final int[] to, final int flags) {
         super(context, layout, c, from, to, flags);
-        //mContext = context;
+
         mCustomFont = Typeface.createFromAsset(context.getAssets(), "fonts/newathu5.ttf");
+    }
+
+    @Override
+    public View newView(Context context, Cursor cursor, ViewGroup parent) {
+        View view = LayoutInflater.from(context).inflate(
+                R.layout.word_listitem, parent, false);
+        WordListFragment.WordHolder viewHolder = new WordHolder(view);
+        view.setTag(viewHolder);
+        return view;
     }
 
     @Override
     public void bindView(final View view, final Context context, final Cursor cursor) {
         super.bindView(view, context, cursor);
 
-        final TextView _TextViewTitle = (TextView) view.findViewById(R.id.word);
-        if (Word.TABLE_NAME == Word.GREEK_TABLE_NAME) {
-            _TextViewTitle.setTypeface(mCustomFont);
+        WordHolder viewHolder = (WordHolder) view.getTag();
+        if (Word.TABLE_NAME.equals(Word.GREEK_TABLE_NAME)) {
+            viewHolder.wordTextView.setTypeface(mCustomFont);
         }
         else
         {
-            _TextViewTitle.setTypeface(Typeface.SANS_SERIF);
+            viewHolder.wordTextView.setTypeface(Typeface.SANS_SERIF);
         }
     }
-/*
-    @Override
-    public View getView(int position, View convertView, ViewGroup parent) {
-        View view = View.inflate(mContext, R.layout.word_listitem, parent);
-        if (view == null)
-        {
-            return null;
-        }
-        if (position == 1000) {
-            // set your color
-            view.setBackgroundColor(Color.BLUE);
-        }
-        else
-        {
-            view.setBackgroundColor(Color.WHITE);
-        }
-
-        return view;
-    }
-*/
 }

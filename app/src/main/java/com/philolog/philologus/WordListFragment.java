@@ -31,6 +31,7 @@ import android.view.animation.LinearInterpolator;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 
@@ -40,6 +41,7 @@ import com.philolog.philologus.database.WordProvider;
 import com.philolog.philologus.phkeyboard.PHKeyboardView;
 import com.philolog.philologus.phkeyboard.PHLocalOnKeyboardActionListener;
 import android.view.View.OnFocusChangeListener;
+import android.widget.TextView;
 
 public class WordListFragment extends ListFragment implements OnClickListener {
     public PHKeyboardView mKeyboardView;
@@ -47,6 +49,15 @@ public class WordListFragment extends ListFragment implements OnClickListener {
     //public ListAdapter lla;
     public CursorLoader cc;
     int lang = 0;
+
+    static class WordHolder {
+        public TextView wordTextView;
+
+        public WordHolder(View view) {
+            wordTextView = view.findViewById(R.id.word);
+        }
+    }
+
     /**
      * The serialization (saved instance state) Bundle key representing the
      * activated item position. Only used on tablets.
@@ -129,8 +140,9 @@ public class WordListFragment extends ListFragment implements OnClickListener {
     public void onClick(View v) {
         Button b = v.findViewById(R.id.toggleButton);
         EditText s = getView().findViewById(R.id.word_search);
-        s.setText("");
-
+        if (s != null) {
+            s.setText("");
+        }
         if (lang == Word.LANG_GREEK) {
             lang = Word.LANG_LATIN;
             b.setText(R.string.latin_button);
@@ -146,11 +158,10 @@ public class WordListFragment extends ListFragment implements OnClickListener {
         cc.setUri(WordProvider.URI_WORDS);
         cc.forceLoad();
 
-
         SharedPreferences pref = getContext().getApplicationContext().getSharedPreferences("PhilologusPref", 0); // 0 - for private mode
         SharedPreferences.Editor ed = pref.edit();
         ed.putInt("lang", lang);
-        ed.commit();
+        ed.apply(); //faster than commit()?
     }
 
     @Override
