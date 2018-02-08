@@ -201,6 +201,19 @@ public class WordListFragment extends ListFragment implements OnClickListener {
             @Override
             public void onLoadFinished(Loader<Cursor> loader, Cursor c) {
                 ((SimpleCursorAdapter) getListAdapter()).swapCursor(c);
+
+                //load finished, scroll to selected item
+                ListView lv = getListView();
+                if (WordProvider.selectedSeq > 1) {
+                    int height = lv.getHeight();
+                    int itemHeight = lv.getChildAt(0).getHeight();
+                    lv.setSelectionFromTop(WordProvider.selectedSeq, height / 2 - itemHeight * 2);
+                }
+                else
+                {
+                    lv.setSelectionFromTop(0, 0);
+                }
+                //Log.e("abc", "LOAD FINISHED");
             }
 
             @Override
@@ -328,60 +341,7 @@ public class WordListFragment extends ListFragment implements OnClickListener {
                 }
                 cc.setUri(newuri);
                 cc.forceLoad();
-
-                //int selectedSeq = 0;
-                if (!wordPrefix.isEmpty()) {
-                    //selectedSeq = PHSimpleCursorAdapter.pageSize + 1;
-                    int height = lv.getHeight();
-                    int itemHeight = lv.getChildAt(0).getHeight();
-                    lv.setSelectionFromTop(WordProvider.selectedSeq, height / 2 - itemHeight * 2);
-                }
-                else
-                {
-                    lv.setSelectionFromTop(0, 0);
-                }
-
-                //delayed because first time called it doesn't scroll properly, delay fixes
-                lv.postDelayed(new Runnable() {
-                    @Override
-                    public void run() {
-                        ListView lv = getListView();
-
-                        if (!wordPrefix.isEmpty()) {
-                            int height = lv.getHeight();
-                            int itemHeight = lv.getChildAt(0).getHeight();
-                            lv.setSelectionFromTop(WordProvider.selectedSeq, height / 2 - itemHeight * 2);
-                        }
-                        else
-                        {
-                            lv.setSelectionFromTop(0, 0);
-                        }
-                    }
-                }, 100);
-
-                //getListView().setSelectionFromTop(1001, 100);
-                /*
-                getListView().post(new Runnable() {
-                    @Override
-                    public void run() {
-                        TimingLogger timings = new TimingLogger("querytime", "methodA");
-                        ListView lv = getListView();
-                        int l = lv.getLastVisiblePosition();
-                        int f = lv.getFirstVisiblePosition();
-                        timings.addSplit("work A");
-                        int seq = PHDBHandler.getInstance(getContext()).scrollTo(wordPrefix);
-                        timings.addSplit("work B");
-
-                        //to scroll approximately to the middle.
-                        seq = seq - ((l - f) / 2) + 2 - 1;
-                        if (seq < 0) {
-                            seq = 0;
-                        }
-                        lv.setSelection(seq);// .smoothScrollToPosition(5000);
-                        timings.addSplit("work C");
-                        timings.dumpToLog();
-                    }
-                }); */
+                //scroll to item in onLoadFinished
             }
         });
 

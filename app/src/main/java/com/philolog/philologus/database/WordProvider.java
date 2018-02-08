@@ -72,6 +72,7 @@ public class WordProvider extends ContentProvider {
 					.getReadableDatabase()
 					.query(Word.TABLE_NAME, Word.FIELDS, null, null, null,
 							null, Word.COL_ID, String.valueOf(PHSimpleCursorAdapter.pageSize*2));
+			selectedSeq = 1;
 			result.setNotificationUri(getContext().getContentResolver(), URI_WORDS);
 		}
 		else if (uri.toString().startsWith(GREEK_WORD_BASE) || uri.toString().startsWith(LATIN_WORD_BASE))
