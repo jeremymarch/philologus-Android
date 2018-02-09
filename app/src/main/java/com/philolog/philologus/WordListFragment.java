@@ -297,10 +297,11 @@ public class WordListFragment extends ListFragment implements OnClickListener {
                 e.clearFocus();
                 //e.setSelected(false);
                 //hideCustomKeyboard(view);
-
-                //InputMethodManager imm = (InputMethodManager) getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
-                //imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
-
+/*
+                InputMethodManager imm = (InputMethodManager) getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+                if (imm != null) {
+                    imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
+                }*/
                 return false;
             }
         });
@@ -308,7 +309,9 @@ public class WordListFragment extends ListFragment implements OnClickListener {
         EditText e = (EditText) view.findViewById(R.id.word_search);
 
         //https://stackoverflow.com/questions/13586354/android-hide-soft-keyboard-from-edittext-while-not-losing-cursor/13975236
+        //https://stackoverflow.com/questions/12870577/disable-input-method-of-edittext-but-keep-cursor-blinking
         e.setInputType(InputType.TYPE_NULL); //this is needed to hide normal soft keyboard; must be called after view created.
+
         if (android.os.Build.VERSION.SDK_INT >= 11) {
             e.setRawInputType(InputType.TYPE_CLASS_TEXT);
             e.setTextIsSelectable(true); //also needed, or android:textIsSelectable="true" in xml
@@ -372,18 +375,34 @@ public class WordListFragment extends ListFragment implements OnClickListener {
             @Override
             public void onFocusChange(View view, boolean hasFocus) {
                 getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
-                InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
-                imm.hideSoftInputFromWindow(view.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
+                InputMethodManager imm2 = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm2.hideSoftInputFromWindow(view.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
 
                 if (hasFocus) {
                     openKeyboard(view);
                     view.requestFocus();
                     EditText e = (EditText)view;
+                    InputMethodManager imm = (InputMethodManager) getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+                    if (imm != null) {
+                        imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+                    }
                     //e.setCursorVisible(true);
                     //e.setTextIsSelectable(true);
                 } else {
                     hideCustomKeyboard(view);
                 }
+            }
+        });
+        e.setOnTouchListener(new OnTouchListener() {
+
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                v.onTouchEvent(event);
+                InputMethodManager imm = (InputMethodManager)v.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+                if (imm != null) {
+                    imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
+                }
+                return true;
             }
         });
     }
