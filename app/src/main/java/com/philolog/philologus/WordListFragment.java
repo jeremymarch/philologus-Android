@@ -361,15 +361,6 @@ public class WordListFragment extends ListFragment implements OnClickListener {
         getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
         InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
         imm.hideSoftInputFromWindow(e.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
-/*
-        e.setOnTouchListener(new View.OnTouchListener(){
-            public boolean onTouch(View view, MotionEvent motionEvent) {
-                // your code here....
-                getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
-                openKeyboard(view);
-                return true;
-            }
-        });*/
 
         e.setOnFocusChangeListener(new OnFocusChangeListener() {
             @Override
@@ -393,6 +384,18 @@ public class WordListFragment extends ListFragment implements OnClickListener {
                 }
             }
         });
+
+        /*
+        e.setOnTouchListener(new View.OnTouchListener(){
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                // your code here....
+                getActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+                openKeyboard(view);
+                return true;
+            }
+        });
+        */
+        //https://stackoverflow.com/questions/13586354/android-hide-soft-keyboard-from-edittext-while-not-losing-cursor/13975236
         e.setOnTouchListener(new OnTouchListener() {
 
             @Override
