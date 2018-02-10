@@ -114,7 +114,10 @@ public class WordListFragment extends ListFragment implements OnClickListener {
 
     private void setLang(int newLanguage)
     {
-        Button b = mView.findViewById(R.id.toggleButton);
+        Button b = null;
+        if (mView != null) {
+            b = mView.findViewById(R.id.toggleButton);
+        }
 
         if (newLanguage == Word.LANG_LATIN) {
             //Log.e("abc", "langl = " + lang);
@@ -159,23 +162,22 @@ public class WordListFragment extends ListFragment implements OnClickListener {
 */
     @Override
     public void onClick(View v) {
-        Button b = v.findViewById(R.id.toggleButton);
+
         EditText s = getView().findViewById(R.id.word_search);
+
         if (s != null) {
             s.setText("");
         }
+
         if (lang == Word.LANG_GREEK) {
             lang = Word.LANG_LATIN;
-            b.setText(R.string.latin_button);
         }
         else
         {
             lang = Word.LANG_GREEK;
-            b.setText(R.string.greek_button);
         }
         setLang(lang);
 
-        //cc.setProjection(Word.FIELDS);
         cc.setUri(WordProvider.URI_WORDS);
         cc.forceLoad();
 
@@ -189,13 +191,11 @@ public class WordListFragment extends ListFragment implements OnClickListener {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setRetainInstance(true);
-        Log.e("abc", "oncreate");
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        Log.e("abc", "create view");
         final View view = inflater.inflate(R.layout.fragment_word_list, null);
 
         Button b = view.findViewById(R.id.toggleButton);
@@ -251,8 +251,6 @@ public class WordListFragment extends ListFragment implements OnClickListener {
     public void onViewCreated(final View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         mView = view;
-        Log.e("abc", "view created");
-
     }
 
     //https://stackoverflow.com/questions/32998439/saving-instance-of-fragments-listview
@@ -275,26 +273,23 @@ public class WordListFragment extends ListFragment implements OnClickListener {
     public void onActivityCreated (Bundle savedInstanceState)
     {
         super.onActivityCreated(savedInstanceState);
-        Log.e("abc", "activity created");
+
         mWordListView = (ListView) getActivity().findViewById(android.R.id.list);
         EditText e = (EditText) mView.findViewById(R.id.word_search);
 
         if (savedInstanceState != null) {
 
-            Log.e("abc", "11: " + savedInstanceState.getInt(STATE_ACTIVATED_POSITION));
             mActivatedPosition = savedInstanceState.getInt(STATE_ACTIVATED_POSITION);
-            Log.e("abc", "22");
-
 
             lang = savedInstanceState.getInt("lang");
-            Log.e("abc", "33");
+
             /*
             String wordPrefix = savedInstanceState.getString("wordPrefix");
             if (wordPrefix != null) {
                 e.setText(wordPrefix.toString());
             }
             */
-            Log.e("abc", "44");
+
             setLang(lang);
 
             mWordListInstance = savedInstanceState.getParcelable("WordListInstance");
@@ -313,14 +308,14 @@ public class WordListFragment extends ListFragment implements OnClickListener {
             int currentapiVersion = android.os.Build.VERSION.SDK_INT;
             // Get the root view to add the keyboard subview
             ViewGroup rootView;
-            Log.e("abc", "aa");
+
             if (currentapiVersion > Build.VERSION_CODES.KITKAT) {
                 // Workaround for devices with softkeys. We cant not use  getRootView() because the keyboard would be below the softkeys.
                 rootView = (ViewGroup) getActivity().findViewById(android.R.id.content);
             } else {
                 rootView = (ViewGroup) getActivity().getWindow().getDecorView().getRootView();
             }
-            Log.e("abc", "bb");
+
             // Create a dummy relative layout to align the keyboardView to the bottom
             ViewGroup relativeLayout = new RelativeLayout(getActivity());
             relativeLayout.setLayoutParams(new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.MATCH_PARENT));
@@ -328,7 +323,7 @@ public class WordListFragment extends ListFragment implements OnClickListener {
 
             params.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);     // Align to the bottom of the relativelayout
             parentViewGroup = relativeLayout;
-            Log.e("abc", "cc");
+
             mKeyboardView = (PHKeyboardView) new PHKeyboardView(getContext(), null);
             mKeyboardView.setLayoutParams(params);
             mKeyboardView.setFocusable(true);
@@ -336,22 +331,19 @@ public class WordListFragment extends ListFragment implements OnClickListener {
             mKeyboardView.setVisibility(View.GONE);
 
             parentViewGroup.addView(mKeyboardView);
-            Log.e("abc", "dd");
         }
         else
         {
             Log.e("abc", "one pane");
             mKeyboardView = (PHKeyboardView)mView.findViewById(R.id.keyboardview);
         }
-        Log.e("abc", "ee");
+
         Keyboard mKeyboard= new Keyboard(getContext(), R.xml.phkeyboardgreek);
         mKeyboardView.setKeyboard( mKeyboard );
         // Do not show the preview balloons
         mKeyboardView.setPreviewEnabled(false);
         mKeyboardView.setOnKeyboardActionListener(new PHLocalOnKeyboardActionListener((EditText)e, mKeyboardView, getContext()));
-        Log.e("abc", "ff");
         mKeyboardView.setLang(lang);
-        Log.e("abc", "gg");
 
         if(getResources().getBoolean(R.bool.portrait_only)){
             getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
@@ -361,7 +353,6 @@ public class WordListFragment extends ListFragment implements OnClickListener {
         lang = pref.getInt("lang", 0);
 
         setLang(lang);
-        Log.e("abc", "the lang: " + lang);
 
         gla = new PHSimpleCursorAdapter(getActivity(),
                 R.layout.word_listitem, null, new String[]{
@@ -383,27 +374,24 @@ public class WordListFragment extends ListFragment implements OnClickListener {
             @Override
             public void onLoadFinished(Loader<Cursor> loader, Cursor c) {
                 ((SimpleCursorAdapter) getListAdapter()).swapCursor(c);
-                Log.e("abc", "load finished 1");
-                //load finished, scroll to selected item
-                ListView lv = getListView();
-                if (lv == null)
-                {
-                    Log.e("abc", "load finished 1.5 lv is null");
-                }
-                Log.e("abc", "load finished 2: " + WordProvider.selectedSeq);
-                if (WordProvider.selectedSeq > 1) {
-                    Log.e("abc", "load finished 3");
 
-                    int height = 300;lv.getMeasuredHeight();
-                    int itemHeight = 20;//lv.getChildAt(0).getMeasuredHeight();
-                    Log.e("abc", "load finished 4");
-                    lv.setSelectionFromTop(WordProvider.selectedSeq, height / 2 - (itemHeight*2));
+                //load finished, scroll to selected item
+
+                if (WordProvider.selectedSeq > 1) {
+                    int listHeight = 0;
+                    int itemHeight = 0;
+
+                    try {
+                        listHeight = mWordListView.getMeasuredHeight();
+                        itemHeight = mWordListView.getChildAt(0).getMeasuredHeight();
+                    } catch (Exception ex) { }
+
+                    mWordListView.setSelectionFromTop(WordProvider.selectedSeq, listHeight / 2 - (itemHeight*2));
                 }
                 else
                 {
-                    lv.setSelectionFromTop(0, 0);
+                    mWordListView.setSelectionFromTop(0, 0);
                 }
-                //Log.e("abc", "LOAD FINISHED");
             }
 
             @Override
@@ -462,7 +450,7 @@ public class WordListFragment extends ListFragment implements OnClickListener {
                 EditText e = mView.findViewById(R.id.word_search);
                 final String wordPrefix = e.getText().toString();
 
-                Log.e("abc", "ontextchanged: " + wordPrefix);
+                //Log.e("abc", "ontextchanged: " + wordPrefix);
                 Uri newuri;
                 if (wordPrefix.isEmpty()) {
                     newuri = WordProvider.GREEK_URI_WORDS;
