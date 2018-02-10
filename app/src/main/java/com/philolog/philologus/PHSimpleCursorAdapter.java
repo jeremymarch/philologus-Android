@@ -17,6 +17,16 @@ import com.philolog.philologus.WordListFragment.WordHolder;
  * Created by jeremy on 1/30/18.
  */
 
+//NEXT STEPS - FIX ME
+    //https://developer.android.com/reference/android/arch/paging/PositionalDataSource.html
+    //https://medium.com/@husayn.hakeem/android-by-example-googles-recent-android-paging-library-pokedex-d9ec1d4986e9
+    //https://github.com/codepath/android_guides/wiki/Endless-Scrolling-with-AdapterViews-and-RecyclerView
+    //https://stackoverflow.com/questions/39825125/android-recyclerview-cursorloader-contentprovider-load-more
+    //http://andraskindler.com/blog/2014/migrating-to-recyclerview-from-listview/
+    //https://github.com/codepath/android_guides/wiki/Using-the-RecyclerView
+    //https://gist.github.com/nesquena/d09dc68ff07e845cc622
+    //https://github.com/codepath/android_guides/wiki/Endless-Scrolling-with-AdapterViews-and-RecyclerView
+
 public class PHSimpleCursorAdapter extends android.support.v4.widget.SimpleCursorAdapter
 {
     private Typeface mCustomFont;
