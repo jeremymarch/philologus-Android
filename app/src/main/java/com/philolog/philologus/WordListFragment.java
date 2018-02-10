@@ -359,14 +359,14 @@ public class WordListFragment extends ListFragment implements OnClickListener {
         */
         setListAdapter(gla);
 
-        cc = new CursorLoader(getActivity(),
-                WordProvider.URI_WORDS, Word.FIELDS, null, null,
-                null);
-
         // Load the content
         getLoaderManager().initLoader(0, null, new LoaderCallbacks<Cursor>() {
             @Override
             public Loader<Cursor> onCreateLoader(int id, Bundle args) {
+
+                cc = new CursorLoader(getActivity(),
+                        WordProvider.URI_WORDS, Word.FIELDS, null, null,
+                        null);
                 return cc;
             }
 
@@ -544,6 +544,15 @@ public class WordListFragment extends ListFragment implements OnClickListener {
             mWordListView.onRestoreInstanceState(mWordListInstance);
             mWordListInstance = null;
         }
+    }
+    @Override
+    public void onPause() {
+        super.onResume();
+        //cc = null;
+        //gla = null;
+        //loadData(); // make sure data has been reloaded into adapter first
+        // ONLY call this part once the data items have been loaded back into the adapter
+        // for example, inside a success callback from the network
     }
 
     @Override
