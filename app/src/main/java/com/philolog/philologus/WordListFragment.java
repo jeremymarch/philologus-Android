@@ -114,6 +114,8 @@ public class WordListFragment extends ListFragment implements OnClickListener {
 
     private void setLang(int newLanguage)
     {
+        Button b = mView.findViewById(R.id.toggleButton);
+
         if (newLanguage == Word.LANG_LATIN) {
             //Log.e("abc", "langl = " + lang);
             WordProvider.URI_WORDS = WordProvider.LATIN_URI_WORDS;
@@ -123,6 +125,10 @@ public class WordListFragment extends ListFragment implements OnClickListener {
             WordProvider.LANG_MAX_ID = WordProvider.LATIN_MAX_ID;
             //Word.FIELDS = Word.LATIN_FIELDS;
             lang = Word.LANG_LATIN;
+            if (b != null)
+            {
+                b.setText(R.string.latin_button);
+            }
         }
         else {
             //Log.e("abc", "langg = " + lang);
@@ -132,18 +138,25 @@ public class WordListFragment extends ListFragment implements OnClickListener {
             Word.DEF_TABLE_NAME = Word.GREEK_DEF_TABLE_NAME;
             //Word.FIELDS = Word.GREEK_FIELDS;
             lang = Word.LANG_GREEK;
+            if (b != null)
+            {
+                b.setText(R.string.greek_button);
+            }
         }
         if (mKeyboardView != null) {
             mKeyboardView.setLang(newLanguage);
         }
     }
 
+    /*
+    this is done in the activity
+
     public void clearSearch(View v)
     {
         EditText s = v.findViewById(R.id.word_search);
         s.setText("");
     }
-
+*/
     @Override
     public void onClick(View v) {
         Button b = v.findViewById(R.id.toggleButton);
@@ -348,15 +361,12 @@ public class WordListFragment extends ListFragment implements OnClickListener {
         lang = pref.getInt("lang", 0);
 
         setLang(lang);
+        Log.e("abc", "the lang: " + lang);
 
         gla = new PHSimpleCursorAdapter(getActivity(),
                 R.layout.word_listitem, null, new String[]{
                 Word.COL_WORD}, new int[]{R.id.word}, 0);
 
-        /*lla = new PHSimpleCursorAdapter(getActivity(),
-                R.layout.word_listitem, null, new String[]{
-                Word.COL_WORD}, new int[]{R.id.word}, 0);
-        */
         setListAdapter(gla);
 
         // Load the content
@@ -384,8 +394,8 @@ public class WordListFragment extends ListFragment implements OnClickListener {
                 if (WordProvider.selectedSeq > 1) {
                     Log.e("abc", "load finished 3");
 
-                        int height = 300;lv.getMeasuredHeight();
-                        int itemHeight = 20;//lv.getChildAt(0).getMeasuredHeight();
+                    int height = 300;lv.getMeasuredHeight();
+                    int itemHeight = 20;//lv.getChildAt(0).getMeasuredHeight();
                     Log.e("abc", "load finished 4");
                     lv.setSelectionFromTop(WordProvider.selectedSeq, height / 2 - (itemHeight*2));
                 }
@@ -547,7 +557,7 @@ public class WordListFragment extends ListFragment implements OnClickListener {
     }
     @Override
     public void onPause() {
-        super.onResume();
+        super.onPause();
         //cc = null;
         //gla = null;
         //loadData(); // make sure data has been reloaded into adapter first
