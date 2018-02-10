@@ -20,6 +20,7 @@ import com.philolog.philologus.R;
  * Created by jeremy on 5/13/17.
  */
 
+//https://www.codota.com/android/methods/android.view.inputmethod.InputConnection/commitText
 public class PHLocalOnKeyboardActionListener implements KeyboardView.OnKeyboardActionListener {
     public final static int CodeDelete   = -5; // Keyboard.KEYCODE_DELETE
     public final static int CodeCancel   = -3; // Keyboard.KEYCODE_CANCEL

@@ -26,8 +26,8 @@ import java.util.List;
 public class PHKeyboardView extends KeyboardView {
 
     public boolean mMFPressed = false;
-    public boolean caps = false;
 
+    //https://stackoverflow.com/questions/7752580/creating-a-softkeyboard-with-multiple-alternate-characters-per-key
     public PHKeyboardView(Context context, AttributeSet attrs)
     {
         super(context, attrs);
