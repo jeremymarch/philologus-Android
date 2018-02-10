@@ -10,7 +10,8 @@
     android:paddingBottom="8dp"
     android:paddingLeft="0dp"
     android:paddingRight="0dp"
-    tools:context=".WordListActivity" >
+    tools:context=".WordListActivity"
+    android:id="@+id/word_list_item">
 
     <TextView
         android:id="@+id/word"

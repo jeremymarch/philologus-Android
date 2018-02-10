@@ -6,7 +6,8 @@
     android:divider="?android:attr/dividerHorizontal"
     android:orientation="horizontal"
     android:showDividers="middle"
-    tools:context=".WordListActivity" >
+    tools:context=".WordListActivity"
+    android:id="@+id/word_list_two_pane">
 
     <!--
     This layout is a two-pane layout for the Persons
@@ -25,8 +26,7 @@
         android:layout_width="0dp"
         android:layout_height="match_parent"
         android:layout_weight="1"
-        tools:layout="@layout/fragment_word_list"
-        android:translationZ="999dp"/>
+        tools:layout="@layout/fragment_word_list" />
 
     <FrameLayout
         android:id="@+id/word_detail_container"

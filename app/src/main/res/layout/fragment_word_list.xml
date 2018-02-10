@@ -2,7 +2,8 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:translationZ="999dp"
-    android:background="#ffffffff">
+    android:background="#ffffffff"
+    android:id="@+id/word_list_fragment">
     <RelativeLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"

@@ -6,6 +6,7 @@ import android.content.pm.ActivityInfo;
 import android.inputmethodservice.Keyboard;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
@@ -22,8 +23,18 @@ public class WordListActivity extends FragmentActivity implements
      * Whether or not the activity is in two-pane mode, i.e. running on a tablet
      * device.
      */
-    public PHKeyboardView mKeyboardView;
-    private boolean mTwoPane;
+    //public PHKeyboardView mKeyboardView;
+    public boolean mTwoPane;
+
+    public void onSaveInstanceState(Bundle outState){
+        super.onSaveInstanceState(outState);
+        //getFragmentManager().putFragment(outState,"myfragment",myfragment);
+        outState.putBoolean("twoPane", mTwoPane);
+    }
+    public void onRestoreInstanceState(Bundle inState){
+        //myFragment = getFragmentManager().getFragment(inState,"myfragment");
+        mTwoPane = inState.getBoolean("twoPane");
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +47,8 @@ public class WordListActivity extends FragmentActivity implements
             // res/values-sw600dp). If this view is present, then the
             // activity should be in two-pane mode.
             mTwoPane = true;
+
+            //Log.e("abc", "two pane for real: " + mTwoPane);
 
             // In two-pane mode, list items should be given the
             // 'activated' state when touched.
