@@ -1,9 +1,11 @@
 package com.philolog.philologus;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.inputmethodservice.Keyboard;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
@@ -13,8 +15,11 @@ import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 
+import com.philolog.philologus.database.PHDBHandler;
 import com.philolog.philologus.phkeyboard.PHKeyboardView;
 import com.philolog.philologus.phkeyboard.PHLocalOnKeyboardActionListener;
+
+import java.io.File;
 
 public class WordListActivity extends FragmentActivity implements
         WordListFragment.Callbacks {
@@ -36,10 +41,50 @@ public class WordListActivity extends FragmentActivity implements
         mTwoPane = inState.getBoolean("twoPane");
     }
 
+    //used to show a message while copying over database on first load
+    private class LoadDatabaseTask extends AsyncTask<Context, Void, Void> {
+        Context mContext;
+        ProgressDialog mDialog;
+
+        // Provide a constructor so we can get a Context to use to create
+        // the ProgressDialog.
+        public LoadDatabaseTask(Context context) {
+            super();
+            mContext = context;
+        }
+
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            mDialog = new ProgressDialog(mContext);
+            mDialog.setMessage("Loading database...");
+            mDialog.show();
+        }
+
+        @Override
+        protected Void doInBackground(Context... contexts) {
+            // Copy database.
+            PHDBHandler.getInstance(contexts[0]).getReadableDatabase();
+            return null;
+        }
+
+        @Override
+        protected void onPostExecute(Void result) {
+            super.onPostExecute(result);
+            mDialog.dismiss();
+        }
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_word_list);
+
+        // Install databases if necessary.
+        File database = getDatabasePath("philolog_us.db");
+        if (!database.exists()) {
+            new LoadDatabaseTask(this).execute(this, null, null);
+        }
 
         if (findViewById(R.id.word_detail_container) != null) {
             // The detail container view will be present only in the
