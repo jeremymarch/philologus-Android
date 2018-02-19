@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginTop="0dp"
-    android:background="#ffffffff"
+    android:background="@drawable/row_selector"
     android:descendantFocusability="blocksDescendants"
     android:orientation="vertical"
     android:paddingBottom="8dp"
@@ -19,7 +19,8 @@
         android:layout_height="wrap_content"
         android:paddingLeft="14dp"
         android:paddingRight="8dp"
-        android:textColor="#ff000000"
-        android:textSize="23sp" />
+        android:textColor="@color/listitem_color"
+        android:textSize="23sp"
+        android:duplicateParentState="true"/>
 
 </LinearLayout>

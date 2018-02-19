@@ -81,7 +81,8 @@
             android:paddingRight="0dp"
             android:divider="@null"
             android:dividerHeight="0dp"
-            android:drawSelectorOnTop="true" />
+            android:drawSelectorOnTop="true"
+            android:choiceMode="singleChoice"/>
     </LinearLayout>
     <com.philolog.philologus.phkeyboard.PHKeyboardView
         android:id="@+id/keyboardview"

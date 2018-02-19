@@ -275,6 +275,10 @@ public class WordListFragment extends ListFragment implements OnClickListener {
         super.onActivityCreated(savedInstanceState);
 
         mWordListView = (ListView) getActivity().findViewById(android.R.id.list);
+
+        //mWordListView.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
+        //mWordListView.setSelector(android.R.color.holo_red_dark);
+
         EditText e = (EditText) mView.findViewById(R.id.word_search);
 
         if (savedInstanceState != null) {
@@ -386,10 +390,14 @@ public class WordListFragment extends ListFragment implements OnClickListener {
                         itemHeight = mWordListView.getChildAt(0).getMeasuredHeight();
                     } catch (Exception ex) { }
 
+                    //checking item sets color
+                    mWordListView.setItemChecked(WordProvider.selectedSeq - 1, true);
                     mWordListView.setSelectionFromTop(WordProvider.selectedSeq, listHeight / 2 - (itemHeight*2));
+
                 }
                 else
                 {
+                    mWordListView.clearChoices(); //this clears color
                     mWordListView.setSelectionFromTop(0, 0);
                 }
             }
