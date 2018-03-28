@@ -26,6 +26,6 @@ android {
     }
 }
 dependencies {
-    compile 'com.android.support:support-v4:27.0.2'
-    compile 'com.readystatesoftware.sqliteasset:sqliteassethelper:+'
+    implementation 'com.android.support:support-v4:27.0.2'
+    implementation 'com.readystatesoftware.sqliteasset:sqliteassethelper:+'
 }
