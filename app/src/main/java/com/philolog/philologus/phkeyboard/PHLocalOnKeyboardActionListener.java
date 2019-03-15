@@ -1,3 +1,23 @@
+/*
+  Copyright © 2017 Jeremy March. All rights reserved.
+
+This file is part of philologus-Android.
+
+    philologus-Android is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    Foobar is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with Foobar.  If not, see <https://www.gnu.org/licenses/>.
+
+ */
+
 package com.philolog.philologus.phkeyboard;
 
 import android.app.Activity;
@@ -19,6 +39,10 @@ import com.philolog.philologus.R;
 /**
  * Created by jeremy on 5/13/17.
  */
+
+import android.inputmethodservice.KeyboardView;
+
+import com.philolog.philologus.phkeyboard.PHKeyboardView;
 
 //https://www.codota.com/android/methods/android.view.inputmethod.InputConnection/commitText
 public class PHLocalOnKeyboardActionListener implements KeyboardView.OnKeyboardActionListener {
