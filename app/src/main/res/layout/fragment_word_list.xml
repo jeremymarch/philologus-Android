@@ -2,16 +2,17 @@
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
     android:translationZ="999dp"
-    android:background="#ffffffff"
+    android:background="?attr/phBGColor"
     android:id="@+id/word_list_fragment">
+    <!--Search bar-->
     <RelativeLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:id="@+id/tvLOL"
         android:layout_margin="5dp"
         android:background="@drawable/search_frame">
-        <!--fake focusable, so EditText doesn't get focus on load-->
 
+        <!--fake focusable, so EditText doesn't get focus on load-->
         <LinearLayout
 
             android:focusable="true"
@@ -26,7 +27,8 @@
             android:layout_alignParentLeft="true"
             android:paddingLeft="8dp"
             android:paddingRight="6dp"
-            android:text="@string/greek_button"
+            android:text="Greek:"
+            android:textColor="?attr/phTextColor"
             android:textSize="21sp"
             android:paddingTop="6dp"
             android:paddingBottom="0dp"
@@ -51,6 +53,7 @@
             android:layout_marginBottom="0dp"
             android:background="@android:color/transparent"
             android:textCursorDrawable="@drawable/phcursor"
+            android:textColor="?attr/phTextColor"
             android:textIsSelectable="true"/>
         <Button
             android:id="@+id/clear"
@@ -67,6 +70,7 @@
             android:minHeight="10dp"
             android:minWidth="10dp"/>
     </RelativeLayout>
+    <!--End search bar-->
     <LinearLayout
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
@@ -76,7 +80,7 @@
             android:id="@id/android:list"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="#ffffff"
+            android:background="?attr/phBGColor"
             android:paddingLeft="0dp"
             android:paddingRight="0dp"
             android:divider="@null"

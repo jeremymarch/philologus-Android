@@ -30,16 +30,15 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Parcelable;
-import android.support.v4.app.ListFragment;
-import android.support.v4.app.LoaderManager.LoaderCallbacks;
-import android.support.v4.content.CursorLoader;
-import android.support.v4.content.Loader;
-import android.support.v4.widget.SimpleCursorAdapter;
+import androidx.fragment.app.ListFragment;
+import androidx.loader.app.LoaderManager.LoaderCallbacks;
+import androidx.loader.content.CursorLoader;
+import androidx.loader.content.Loader;
+import androidx.cursoradapter.widget.SimpleCursorAdapter;
 import android.text.Editable;
 import android.text.InputType;
 import android.text.TextWatcher;
 import android.util.Log;
-import android.util.TimingLogger;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
@@ -53,11 +52,9 @@ import android.view.animation.LinearInterpolator;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.ImageView;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 
-import com.philolog.philologus.database.PHDBHandler;
 import com.philolog.philologus.database.Word;
 import com.philolog.philologus.database.WordProvider;
 import com.philolog.philologus.phkeyboard.PHKeyboardView;
@@ -65,8 +62,6 @@ import com.philolog.philologus.phkeyboard.PHLocalOnKeyboardActionListener;
 import android.view.View.OnFocusChangeListener;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-
-import java.util.List;
 
 public class WordListFragment extends ListFragment implements OnClickListener {
     public PHKeyboardView mKeyboardView;
@@ -380,7 +375,7 @@ public class WordListFragment extends ListFragment implements OnClickListener {
 
         gla = new PHSimpleCursorAdapter(getActivity(),
                 R.layout.word_listitem, null, new String[]{
-                Word.COL_WORD}, new int[]{R.id.word}, 0);
+                Word.COL_WORD}, new int[]{R.id.word});
 
         setListAdapter(gla);
 

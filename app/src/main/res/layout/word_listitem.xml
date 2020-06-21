@@ -19,7 +19,7 @@
         android:layout_height="wrap_content"
         android:paddingLeft="14dp"
         android:paddingRight="8dp"
-        android:textColor="@color/listitem_color"
+        android:textColor="?attr/phTextColor"
         android:textSize="23sp"
         android:duplicateParentState="true"/>
 

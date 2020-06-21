@@ -32,7 +32,7 @@ import android.inputmethodservice.KeyboardView;
 import android.preference.PreferenceManager;
 import android.util.AttributeSet;
 import android.view.animation.Animation;
-import android.support.v4.content.ContextCompat;
+import androidx.core.content.ContextCompat;
 
 import com.philolog.philologus.R;
 import com.philolog.philologus.database.Word;

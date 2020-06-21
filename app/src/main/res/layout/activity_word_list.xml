@@ -5,4 +5,5 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".WordListActivity"
-    tools:layout="@layout/fragment_word_list" />
+    tools:layout="@layout/fragment_word_list"
+    android:background="?attr/phBGColor"/>

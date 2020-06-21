@@ -22,13 +22,13 @@ package com.philolog.philologus;
 
 import android.content.Context;
 import android.database.Cursor;
-import android.graphics.Color;
 import android.graphics.Typeface;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
+
+import androidx.cursoradapter.widget.SimpleCursorAdapter;
 
 import com.philolog.philologus.database.Word;
 import com.philolog.philologus.WordListFragment.WordHolder;
@@ -47,7 +47,7 @@ import com.philolog.philologus.WordListFragment.WordHolder;
     //https://gist.github.com/nesquena/d09dc68ff07e845cc622
     //https://github.com/codepath/android_guides/wiki/Endless-Scrolling-with-AdapterViews-and-RecyclerView
 
-public class PHSimpleCursorAdapter extends android.support.v4.widget.SimpleCursorAdapter
+public class PHSimpleCursorAdapter extends SimpleCursorAdapter
 {
     private Typeface mCustomFont;
     private Context mContext;
@@ -57,8 +57,8 @@ public class PHSimpleCursorAdapter extends android.support.v4.widget.SimpleCurso
     //https://stackoverflow.com/questions/4567969/viewholder-pattern-correctly-implemented-in-custom-cursoradapter
 
     public PHSimpleCursorAdapter(final Context context, final int layout, final Cursor c, final String[] from,
-                                 final int[] to, final int flags) {
-        super(context, layout, c, from, to, flags);
+                                 final int[] to) {
+        super(context, layout, c, from, to);
 
         mCustomFont = Typeface.createFromAsset(context.getAssets(), "fonts/newathu5.ttf");
 

@@ -1,21 +1,27 @@
 <resources>
+    <style name="PHLight" parent="@style/Theme.AppCompat.DayNight.NoActionBar">
+        <item name="phThemeName">PHLight</item>
+        <item name="windowNoTitle">true</item>
+        <item name="windowActionBar">false</item>
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:windowContentOverlay">@null</item>
 
-    <!--
-        Base application theme, dependent on API level. This theme is replaced
-        by AppBaseTheme from res/values-vXX/styles.xml on newer devices.
-    -->
-    <style name="AppBaseTheme" parent="android:Theme.Light">
-        <!--
-            Theme customizations available in newer API levels can go in
-            res/values-vXX/styles.xml, while customizations related to
-            backward-compatibility can go here.
-        -->
+        <item name="phTextColor">#FF000000</item>
+        <item name="phBGColor">#FFFFFFFF</item>
     </style>
 
-    <!-- Application theme. -->
-    <style name="AppTheme" parent="AppBaseTheme">
-        <!-- All customizations that are NOT specific to a particular API-level can go here. -->
-        <item name="android:windowNoTitle">true</item>
+    <style name="PHDark" parent="@style/Theme.AppCompat.DayNight.NoActionBar">
+        <item name="phThemeName">PHDark</item>
+        <item name="windowNoTitle">true</item>
+        <item name="windowActionBar">false</item>
+        <item name="android:windowFullscreen">true</item>
+        <item name="android:windowContentOverlay">@null</item>
+
+        <item name="phTextColor">#FFFFFFFF</item>
+        <item name="phBGColor">#FF000000</item>
     </style>
 
+    <style name="PHDayNight" parent="PHLight">
+    </style>
 </resources>
+

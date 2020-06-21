@@ -23,21 +23,15 @@ package com.philolog.philologus;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.ActivityInfo;
-import android.inputmethodservice.Keyboard;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
-import android.util.Log;
+import androidx.fragment.app.FragmentActivity;
+
 import android.view.MenuItem;
 import android.view.View;
-import android.view.WindowManager;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 
 import com.philolog.philologus.database.PHDBHandler;
-import com.philolog.philologus.phkeyboard.PHKeyboardView;
-import com.philolog.philologus.phkeyboard.PHLocalOnKeyboardActionListener;
 
 import java.io.File;
 

@@ -2,14 +2,14 @@
     android:id="@+id/wordDetailScrollView"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="#ffffffff">
+    android:background="?attr/phBGColor">
 
     <WebView
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         android:layout_marginLeft="0dp"
         android:fontFamily="sans-serif-light"
-        android:textColor="#ff707070"
+        android:textColor="?attr/phTextColor"
         android:id="@+id/definition"
         android:textSize="18sp" />
 

@@ -22,8 +22,8 @@ package com.philolog.philologus;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.NavUtils;
+import androidx.fragment.app.FragmentActivity;
+import androidx.core.app.NavUtils;
 import android.view.MenuItem;
 
 /**

@@ -21,8 +21,12 @@ This file is part of philologus-Android.
 package com.philolog.philologus;
 
 import android.content.pm.ActivityInfo;
+import android.content.res.Resources;
 import android.os.Bundle;
-import android.support.v4.app.Fragment;
+import androidx.fragment.app.Fragment;
+
+import android.util.Log;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -58,9 +62,15 @@ public class WordDetailFragment extends Fragment {
     public WordDetailFragment() {
     }
 
+    String themeName;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        TypedValue typedValue = new TypedValue();
+        Resources.Theme theme = getActivity().getTheme();
+        theme.resolveAttribute(R.attr.phThemeName, typedValue, true);
+        themeName = typedValue.string.toString();
 
         if (getArguments().containsKey(ARG_ITEM_ID)) {
             // Should use the contentprovider here ideally
@@ -79,31 +89,47 @@ public class WordDetailFragment extends Fragment {
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_word_detail, container, false);
 
-        if (def != "") {
+        if (!def.equals("")) {
             definitionView = ((WebView) rootView.findViewById(R.id.definition));
+
+            String bg = "white";
+            String text = "black";
+            String author = "red";
+            String foreign = "blue";
+            String quote = "blue";
+            String bibl = "green";
+            String title = "orange";
+            if (themeName.equals("PHDark")) {
+                bg = "black";
+                text = "white";
+                foreign = "#03a5fc";
+                quote = "#03a5fc";
+            }
             String html = "<html><head><style> " +
-                    ".l1 { margin-left: 18px;position:relative;text-indent:-18px; } " +
-                    ".l2 { margin-left: 18px;position:relative;text-indent:-18px; } " +
-                    ".l3 { margin-left: 18px;position:relative;text-indent:-18px; } " +
-                    ".l4 { margin-left: 18px;position:relative;text-indent:-18px; } " +
-                    ".l5 { margin-left: 18px;position:relative;text-indent:-18px; } " +
-                    "@font-face {" +
-                    "font-family: 'newathu5'; " +
-                    "src: url('fonts/newathu5.ttf'); } " +
-                    ".body {font-family: 'newathu5';line-height:1.2;margin:8px 8px;font-size:14pt;} " +
-                    ".fo {color:blue;} " +
-                    ".qu {color:blue;} " +
-                    ".qu:before { content: '\"'; } " +
-                    ".qu:after { content: '\"'; }  " +
-                    ".tr {font-weight:bold;} " +
-                    ".au {color:red;} " +
-                    ".bi {color:green;} " +
-                    ".ti {color:orange;} " +
-                    ".label {font-weight:bold;padding-right:0px;text-indent:0px;} " +
-                    ".label:after { content: ' '; } " +
-                    ".orth {font-weight:bold; } " +
-                    "</style></head><BODY>" +
-                    def + "</body></html>";
+                        ".l1 { margin-left: 18px;position:relative;text-indent:-18px; } " +
+                        ".l2 { margin-left: 18px;position:relative;text-indent:-18px; } " +
+                        ".l3 { margin-left: 18px;position:relative;text-indent:-18px; } " +
+                        ".l4 { margin-left: 18px;position:relative;text-indent:-18px; } " +
+                        ".l5 { margin-left: 18px;position:relative;text-indent:-18px; } " +
+                        "@font-face {" +
+                        "font-family: 'newathu5'; " +
+                        "src: url('fonts/newathu5.ttf'); } " +
+                        "BODY {color:" + text + ";background-color:" + bg + ";} " +
+                        ".body {font-family: 'newathu5';line-height:1.2;margin:8px 8px;font-size:14pt;} " +
+                        ".fo {color:" + foreign + ";} " +
+                        ".qu {color:" + quote + ";} " +
+                        ".qu:before { content: '\"'; } " +
+                        ".qu:after { content: '\"'; }  " +
+                        ".tr {font-weight:bold;} " +
+                        ".au {color:" + author + ";} " +
+                        ".bi {color:" + bibl + ";} " +
+                        ".ti {color:" + title + ";} " +
+                        ".label {font-weight:bold;padding-right:0px;text-indent:0px;} " +
+                        ".label:after { content: ' '; } " +
+                        ".orth {font-weight:bold; } " +
+                        "</style></head><BODY>" +
+                        def + "</body></html>";
+
             definitionView.loadDataWithBaseURL("file:///android_asset/",html, "text/html", "UTF-8", "");
         }
 

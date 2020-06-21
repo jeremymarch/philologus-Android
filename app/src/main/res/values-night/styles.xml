@@ -1,0 +1,5 @@
+<resources>
+    <style name="PHDayNight" parent="PHDark">
+    </style>
+</resources>
+
