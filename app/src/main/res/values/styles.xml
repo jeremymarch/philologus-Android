@@ -20,6 +20,7 @@
         <item name="phDeleteKeyTextColorDown">#FFFFFFFF</item>
 
         <item name="phkeyboardBgColor">#FFCCCCCC</item>
+        <item name="phCursorColor">#FF4464FF</item>
         <item name="phSelectedRow">@color/colorPrimaryLight</item>
     </style>
 
@@ -44,7 +45,7 @@
         <item name="phDeleteKeyTextColorDown">#FFFFFFFF</item>
 
         <item name="phSelectedRow">@color/colorPrimary</item>
-
+        <item name="phCursorColor">#FF4464FF</item>
         <item name="phkeyboardBgColor">#FF000000</item>
     </style>
 
