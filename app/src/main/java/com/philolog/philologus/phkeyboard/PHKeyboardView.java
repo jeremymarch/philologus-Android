@@ -22,6 +22,7 @@ package com.philolog.philologus.phkeyboard;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.content.res.Resources;
 import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
@@ -31,6 +32,7 @@ import android.inputmethodservice.Keyboard;
 import android.inputmethodservice.KeyboardView;
 import android.preference.PreferenceManager;
 import android.util.AttributeSet;
+import android.util.TypedValue;
 import android.view.animation.Animation;
 import androidx.core.content.ContextCompat;
 
@@ -46,11 +48,23 @@ import java.util.List;
 public class PHKeyboardView extends KeyboardView {
 
     public boolean mMFPressed = false;
+    private int keyTextColor = 0;
+    private int keyTextColorDown = 0;
+    private int keyboardBGColor = 0;
 
     //https://stackoverflow.com/questions/7752580/creating-a-softkeyboard-with-multiple-alternate-characters-per-key
     public PHKeyboardView(Context context, AttributeSet attrs)
     {
         super(context, attrs);
+
+        TypedValue typedValue = new TypedValue();
+        Resources.Theme theme = context.getTheme();
+        theme.resolveAttribute(R.attr.phKeyTextColor, typedValue, true);
+        keyTextColor = typedValue.data;
+        theme.resolveAttribute(R.attr.phKeyTextColorDown, typedValue, true);
+        keyTextColorDown = typedValue.data;
+        theme.resolveAttribute(R.attr.phkeyboardBgColor, typedValue, true);
+        keyboardBGColor = typedValue.data;
     }
 
     public void setLang(int lang)
@@ -79,7 +93,7 @@ public class PHKeyboardView extends KeyboardView {
         //background color:
         int width = this.getWidth();
         int height = this.getHeight();
-        paint.setColor(Color.rgb(200, 200, 200));
+        paint.setColor(keyboardBGColor);
         paint.setStyle(Paint.Style.FILL); //fill the background with blue color
         canvas.drawRect(0, 0, width, height, paint);
 
@@ -89,27 +103,23 @@ public class PHKeyboardView extends KeyboardView {
         Typeface tf = Typeface.createFromAsset(context.getAssets(),"fonts/newathu5.ttf");
 
         for (Keyboard.Key key : keys) {
-            if (key.codes[0] == 38) {
+            if (key.codes[0] == 38) { //delete
                 Drawable dr;
                 if (key.pressed) {
                     dr = ContextCompat.getDrawable(context, R.drawable.normalbuttondown);
-                    paint.setColor(Color.WHITE);
                 }
                 else {
                     dr = ContextCompat.getDrawable(context, R.drawable.greybutton);
-                    paint.setColor(Color.BLACK);
                 }
                 dr.setBounds(key.x, key.y, key.x + key.width, key.y + key.height);
                 dr.draw(canvas);
 
                 if (key.pressed) {
                     dr = ContextCompat.getDrawable(context, R.drawable.deleteicond);
-                    paint.setColor(Color.WHITE);
                 }
                 else
                 {
                     dr = ContextCompat.getDrawable(context, R.drawable.deleteicon);
-                    paint.setColor(Color.WHITE);
                 }
                 //Log.e("abc", key.width + " " + key.height);
                 double a = ((key.width < key.height) ? key.width : key.height) * 0.66;
@@ -133,11 +143,11 @@ public class PHKeyboardView extends KeyboardView {
                 Drawable dr;
                 if (key.pressed) {
                     dr = ContextCompat.getDrawable(context, R.drawable.normalbuttondown);
-                    paint.setColor(Color.WHITE);
+                    paint.setColor(keyTextColorDown);
                 }
                 else {
                     dr = ContextCompat.getDrawable(context, R.drawable.normalbutton);
-                    paint.setColor(Color.BLACK);
+                    paint.setColor(keyTextColor);
                 }
                 dr.setBounds(key.x, key.y, key.x + key.width, key.y + key.height);
                 dr.draw(canvas);

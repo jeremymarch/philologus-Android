@@ -126,7 +126,7 @@ public class WordListActivity extends FragmentActivity implements
 
         //testing
         SharedPreferences.Editor editor1 = sharedPref.edit();
-        editor1.putString("PHTheme","PHDark");
+        editor1.putString("PHTheme","PHDayNight");
         editor1.commit();
 
 

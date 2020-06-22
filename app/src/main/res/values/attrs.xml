@@ -2,5 +2,16 @@
 <resources>
     <attr name="phTextColor" format="reference|color" />
     <attr name="phBGColor" format="reference|color" />
+    <attr name="phKeyBgColor" format="reference|color" />
+    <attr name="phKeyTextColor" format="reference|color" />
+    <attr name="phKeyBgColorDown" format="reference|color" />
+    <attr name="phKeyTextColorDown" format="reference|color" />
+
+    <attr name="phDeleteKeyBgColor" format="reference|color" />
+    <attr name="phDeleteKeyTextColor" format="reference|color" />
+    <attr name="phDeleteKeyBgColorDown" format="reference|color" />
+    <attr name="phDeleteKeyTextColorDown" format="reference|color" />
+
+    <attr name="phkeyboardBgColor" format="reference|color" />
     <attr name="phThemeName" format="string"/>
 </resources>

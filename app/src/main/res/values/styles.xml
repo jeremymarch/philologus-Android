@@ -8,6 +8,18 @@
 
         <item name="phTextColor">#FF000000</item>
         <item name="phBGColor">#FFFFFFFF</item>
+
+        <item name="phKeyBgColor">#FFFFFFFF</item>
+        <item name="phKeyTextColor">#FF000000</item>
+        <item name="phKeyBgColorDown">#FF000000</item>
+        <item name="phKeyTextColorDown">#FFFFFFFF</item>
+
+        <item name="phDeleteKeyBgColor">#FF999999</item>
+        <item name="phDeleteKeyTextColor">#FFFFFFFF</item>
+        <item name="phDeleteKeyBgColorDown">#FF000000</item>
+        <item name="phDeleteKeyTextColorDown">#FFFFFFFF</item>
+
+        <item name="phkeyboardBgColor">#FFCCCCCC</item>
     </style>
 
     <style name="PHDark" parent="@style/Theme.AppCompat.DayNight.NoActionBar">
@@ -19,6 +31,18 @@
 
         <item name="phTextColor">#FFFFFFFF</item>
         <item name="phBGColor">#FF000000</item>
+
+        <item name="phKeyBgColor">#FF333333</item>
+        <item name="phKeyTextColor">#FFFFFFFF</item>
+        <item name="phKeyBgColorDown">#FF000000</item>
+        <item name="phKeyTextColorDown">#FFFFFFFF</item>
+
+        <item name="phDeleteKeyBgColor">#FF777777</item>
+        <item name="phDeleteKeyTextColor">#FFFFFFFF</item>
+        <item name="phDeleteKeyBgColorDown">#FF000000</item>
+        <item name="phDeleteKeyTextColorDown">#FFFFFFFF</item>
+
+        <item name="phkeyboardBgColor">#FF000000</item>
     </style>
 
     <style name="PHDayNight" parent="PHLight">
