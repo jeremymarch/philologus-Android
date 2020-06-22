@@ -115,6 +115,15 @@ public class WordListActivity extends FragmentActivity implements
         }
     }
 
+
+    public void openSettings(View view) {
+        // Do something in response to button
+        Intent intent = new Intent(this, SettingsActivity.class);
+        //EditText editText = (EditText) findViewById(R.id.edit_message);
+        //String message = "practice";//editText.getText().toString();
+        //intent.putExtra(EXTRA_MESSAGE, message);
+        startActivity(intent);
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         PreferenceManager.setDefaultValues(this, R.xml.settings, false);
@@ -131,7 +140,7 @@ public class WordListActivity extends FragmentActivity implements
 
         prefListener = new SharedPreferences.OnSharedPreferenceChangeListener() {
             public void onSharedPreferenceChanged(SharedPreferences prefs, String key) {
-            if (key.equals("HCTheme")) {
+            if (key.equals("PHTheme")) {
                 recreate();
             }
         };

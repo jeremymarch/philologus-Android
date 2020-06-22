@@ -77,6 +77,9 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/tvLOL"
         android:orientation="vertical" >
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
         <ListView
             android:id="@id/android:list"
             android:layout_width="match_parent"
@@ -88,6 +91,16 @@
             android:dividerHeight="0dp"
             android:drawSelectorOnTop="true"
             android:choiceMode="singleChoice"/>
+        <Button
+            android:id="@+id/settingsButton"
+            android:background="@drawable/ic_info_24px"
+            android:layout_width="28dp"
+            android:layout_height="28dp"
+            android:layout_gravity="bottom|right"
+            android:layout_margin="4dp"
+            android:onClick="openSettings"
+            />
+        </FrameLayout>
     </LinearLayout>
     <com.philolog.philologus.phkeyboard.PHKeyboardView
         android:id="@+id/keyboardview"

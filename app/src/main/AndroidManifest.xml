@@ -30,6 +30,9 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.philolog.philologus.WordListActivity" />
         </activity>
+        <activity
+            android:name="com.philolog.philologus.SettingsActivity"
+            android:label="Settings"/>
 
         <provider
             android:name="com.philolog.philologus.database.WordProvider"
