@@ -117,18 +117,17 @@ public class WordListActivity extends FragmentActivity implements
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        PreferenceManager.setDefaultValues(this, R.xml.settings, false);
+        SharedPreferences sharedPref = androidx.preference.PreferenceManager.getDefaultSharedPreferences(this);
+/*
+        //testing
+        SharedPreferences.Editor editor1 = sharedPref.edit();
+        editor1.putString("PHTheme","PHDark");
+        editor1.commit();
+        */
         localSetTheme(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_word_list);
-
-        PreferenceManager.setDefaultValues(this, R.xml.settings, false);
-        SharedPreferences sharedPref = androidx.preference.PreferenceManager.getDefaultSharedPreferences(this);
-
-        //testing
-        SharedPreferences.Editor editor1 = sharedPref.edit();
-        editor1.putString("PHTheme","PHDayNight");
-        editor1.commit();
-
 
         prefListener = new SharedPreferences.OnSharedPreferenceChangeListener() {
             public void onSharedPreferenceChanged(SharedPreferences prefs, String key) {

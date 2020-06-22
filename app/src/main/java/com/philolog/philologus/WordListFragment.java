@@ -213,6 +213,9 @@ public class WordListFragment extends ListFragment implements OnClickListener {
                              Bundle savedInstanceState) {
         final View view = inflater.inflate(R.layout.fragment_word_list, null);
 
+        EditText e = view.findViewById(R.id.word_search);
+        e.setShowSoftInputOnFocus(false); //prevent default keyboard from showing
+
         Button b = view.findViewById(R.id.toggleButton);
         if (lang == Word.LANG_GREEK)
         {
