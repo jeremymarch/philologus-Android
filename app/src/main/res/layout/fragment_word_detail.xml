@@ -10,6 +10,7 @@
         android:layout_marginLeft="0dp"
         android:fontFamily="sans-serif-light"
         android:textColor="?attr/phTextColor"
+        android:background="?attr/phBGColor"
         android:id="@+id/definition"
         android:textSize="18sp" />
 

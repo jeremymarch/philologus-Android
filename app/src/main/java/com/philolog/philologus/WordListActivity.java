@@ -23,10 +23,12 @@ package com.philolog.philologus;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import androidx.fragment.app.FragmentActivity;
 
+import android.preference.PreferenceManager;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
@@ -44,6 +46,30 @@ public class WordListActivity extends FragmentActivity implements
      */
     //public PHKeyboardView mKeyboardView;
     public boolean mTwoPane;
+    private SharedPreferences.OnSharedPreferenceChangeListener prefListener;
+
+    public static void localSetTheme(Context context)
+    {
+        SharedPreferences sharedPref = androidx.preference.PreferenceManager.getDefaultSharedPreferences(context);
+        String themeName = sharedPref.getString("PHTheme", "PHDayNight");
+        if (themeName == null)
+        {
+            themeName = "PHDayNight";
+        }
+
+        switch(themeName)
+        {
+            case "PHDark":
+                context.setTheme(R.style.PHDark);
+                break;
+            case "PHLight":
+                context.setTheme(R.style.PHLight);
+                break;
+            default:
+                context.setTheme(R.style.PHDayNight);
+                break;
+        }
+    }
 
     public void onSaveInstanceState(Bundle outState){
         super.onSaveInstanceState(outState);
@@ -91,8 +117,28 @@ public class WordListActivity extends FragmentActivity implements
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        localSetTheme(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_word_list);
+
+        PreferenceManager.setDefaultValues(this, R.xml.settings, false);
+        SharedPreferences sharedPref = androidx.preference.PreferenceManager.getDefaultSharedPreferences(this);
+
+        //testing
+        SharedPreferences.Editor editor1 = sharedPref.edit();
+        editor1.putString("PHTheme","PHDark");
+        editor1.commit();
+
+
+        prefListener = new SharedPreferences.OnSharedPreferenceChangeListener() {
+            public void onSharedPreferenceChanged(SharedPreferences prefs, String key) {
+            if (key.equals("HCTheme")) {
+                recreate();
+            }
+        };
+    };
+
+        sharedPref.registerOnSharedPreferenceChangeListener(prefListener);
 
         // Install databases if necessary.
         File database = getDatabasePath("philolog_us.db");

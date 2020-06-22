@@ -39,6 +39,7 @@ public class WordDetailActivity extends FragmentActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        WordListActivity.localSetTheme(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_word_detail);
 

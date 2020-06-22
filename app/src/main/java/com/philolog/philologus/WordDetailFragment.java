@@ -22,6 +22,7 @@ package com.philolog.philologus;
 
 import android.content.pm.ActivityInfo;
 import android.content.res.Resources;
+import android.graphics.Color;
 import android.os.Bundle;
 import androidx.fragment.app.Fragment;
 
@@ -65,6 +66,7 @@ public class WordDetailFragment extends Fragment {
     String themeName;
     @Override
     public void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
 
         TypedValue typedValue = new TypedValue();
@@ -100,6 +102,9 @@ public class WordDetailFragment extends Fragment {
             String bibl = "green";
             String title = "orange";
             if (themeName.equals("PHDark")) {
+                //fixes white flashing of webview
+                definitionView.setBackgroundColor(Color.BLACK);
+
                 bg = "black";
                 text = "white";
                 foreign = "#03a5fc";

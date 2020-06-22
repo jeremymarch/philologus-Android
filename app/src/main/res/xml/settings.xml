@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <PreferenceCategory
+        android:key="pref_key_storage_settings">
+        <ListPreference
+            android:key="PHTheme"
+            android:title="Dark Mode"
+            android:entries="@array/themeentries"
+            android:entryValues="@array/themevalues"
+            android:defaultValue="PHDayNight"/>
+    </PreferenceCategory>
+
+</PreferenceScreen>
