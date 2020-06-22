@@ -109,7 +109,11 @@ public class PHSimpleCursorAdapter extends SimpleCursorAdapter
 
     @Override
     public View newView(Context context, Cursor cursor, ViewGroup parent) {
-        View view = LayoutInflater.from(context).inflate(
+        //View view = LayoutInflater.from(context).inflate(
+        //        R.layout.word_listitem, parent, false);
+
+        LayoutInflater mInflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        View view = mInflater.inflate(
                 R.layout.word_listitem, parent, false);
         WordListFragment.WordHolder viewHolder = new WordHolder(view);
         view.setTag(viewHolder);

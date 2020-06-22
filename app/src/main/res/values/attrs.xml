@@ -13,5 +13,8 @@
     <attr name="phDeleteKeyTextColorDown" format="reference|color" />
 
     <attr name="phkeyboardBgColor" format="reference|color" />
+
+    <attr name="phSelectedRow" format="reference|color" />
     <attr name="phThemeName" format="string"/>
+
 </resources>

@@ -20,6 +20,7 @@
         <item name="phDeleteKeyTextColorDown">#FFFFFFFF</item>
 
         <item name="phkeyboardBgColor">#FFCCCCCC</item>
+        <item name="phSelectedRow">@color/colorPrimaryLight</item>
     </style>
 
     <style name="PHDark" parent="@style/Theme.AppCompat.DayNight.NoActionBar">
@@ -41,6 +42,8 @@
         <item name="phDeleteKeyTextColor">#FFFFFFFF</item>
         <item name="phDeleteKeyBgColorDown">#FF000000</item>
         <item name="phDeleteKeyTextColorDown">#FFFFFFFF</item>
+
+        <item name="phSelectedRow">@color/colorPrimary</item>
 
         <item name="phkeyboardBgColor">#FF000000</item>
     </style>
