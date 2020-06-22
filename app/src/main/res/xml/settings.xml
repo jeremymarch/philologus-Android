@@ -9,6 +9,14 @@
             android:entries="@array/themeentries"
             android:entryValues="@array/themevalues"
             android:defaultValue="PHDayNight"/>
+        <SwitchPreference
+            android:key="PHSoundOn"
+            android:title="Key Click"
+            android:defaultValue="false" />
+        <SwitchPreference
+            android:key="PHVibrateOn"
+            android:title="Key Vibrate"
+            android:defaultValue="false" />
     </PreferenceCategory>
 
 </PreferenceScreen>

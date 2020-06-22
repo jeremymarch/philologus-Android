@@ -25,7 +25,10 @@ import android.content.Context;
 import android.content.ContextWrapper;
 import android.content.SharedPreferences;
 import android.inputmethodservice.KeyboardView;
-import android.preference.PreferenceManager;
+import android.media.AudioManager;
+import android.os.Build;
+import android.os.VibrationEffect;
+import android.os.Vibrator;
 import android.text.Editable;
 import android.view.KeyEvent;
 import android.view.View;
@@ -42,7 +45,12 @@ import com.philolog.philologus.R;
 
 import android.inputmethodservice.KeyboardView;
 
+import androidx.preference.PreferenceManager;
+
 import com.philolog.philologus.phkeyboard.PHKeyboardView;
+
+import static android.content.Context.AUDIO_SERVICE;
+import static android.content.Context.VIBRATOR_SERVICE;
 
 //https://www.codota.com/android/methods/android.view.inputmethod.InputConnection/commitText
 public class PHLocalOnKeyboardActionListener implements KeyboardView.OnKeyboardActionListener {
@@ -90,6 +98,9 @@ public class PHLocalOnKeyboardActionListener implements KeyboardView.OnKeyboardA
     }
 
     @Override public void onKey(int primaryCode, int[] keyCodes) {
+        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(c);
+        boolean soundOn = sharedPref.getBoolean("PHSoundOn", false);
+        boolean vibrateOn = sharedPref.getBoolean("PHVibrateOn", false);
 
         Editable editable = e.getText();
         int start = e.getSelectionStart();
@@ -209,8 +220,38 @@ public class PHLocalOnKeyboardActionListener implements KeyboardView.OnKeyboardA
             }
         }
 
+        if (soundOn)
+        {
+            playClick(primaryCode);
+        }
+        if (vibrateOn)
+        {
+            vibrate();
+        }
+
         if (!s.equals("")) {
             editable.insert(start, s);
+        }
+    }
+
+    private void playClick(int keyCode){
+        AudioManager am = (AudioManager)c.getSystemService(AUDIO_SERVICE);
+        if (am != null) {
+            switch (keyCode) {
+                case 38: //delete
+                    am.playSoundEffect(AudioManager.FX_KEYPRESS_DELETE);
+                    break;
+                default:
+                    am.playSoundEffect(AudioManager.FX_KEYPRESS_STANDARD);
+            }
+        }
+    }
+
+    private void vibrate() {
+        if (Build.VERSION.SDK_INT >= 26) {
+            ((Vibrator) c.getSystemService(VIBRATOR_SERVICE)).vibrate(VibrationEffect.createOneShot(20, VibrationEffect.DEFAULT_AMPLITUDE));
+        } else {
+            ((Vibrator) c. getSystemService(VIBRATOR_SERVICE)).vibrate(20);
         }
     }
 
