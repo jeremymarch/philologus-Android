@@ -4,4 +4,5 @@
     <string name="title_word_detail">Word Detail</string>
     <string name="greek_button">Greek:</string>
     <string name="latin_button">Latin:</string>
+    <!--<item type="string" name="databaseVersion" format="integer">500</item>-->
 </resources>

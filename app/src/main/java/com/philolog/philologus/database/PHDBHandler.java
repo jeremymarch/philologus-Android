@@ -24,8 +24,10 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.DatabaseUtils;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
-import com.readystatesoftware.sqliteasset.SQLiteAssetHelper;
+//import com.readystatesoftware.sqliteasset.SQLiteAssetHelper;
+import com.philolog.philologus.SQLiteAssetHelper.SQLiteAssetHelper;
 
 /**
  * Created by jeremy on 1/30/18.
@@ -34,25 +36,35 @@ import com.readystatesoftware.sqliteasset.SQLiteAssetHelper;
 public class PHDBHandler extends SQLiteAssetHelper {
 
     private static final String DATABASE_NAME = "philolog_us.db";
-    private static final int DATABASE_VERSION = 1;
+    private static final int DATABASE_VERSION = 2; //increment this each time we need to copy db from assets again
 
     private static PHDBHandler singleton;
 
     public static PHDBHandler getInstance(final Context context) {
         if (singleton == null) {
             singleton = new PHDBHandler(context);
+            Log.e("jwm", "version1: " + singleton.getWritableDatabase().getVersion());
+            //singleton.getWritableDatabase().setVersion((3));
+            //Log.e("jwm", "version2: " + singleton.getWritableDatabase().getVersion());
         }
         return singleton;
     }
 
     public PHDBHandler(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
+        setForcedUpgrade();
+        Log.e("jwm", "PHDBHandler: version " + DATABASE_VERSION);
     }
 
-    public int scrollTo(String wordPrefix)
-    {
-        String[] selectionArgs = { wordPrefix };
-        String[] columns = {"ZSEQ"};
+    @Override
+    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+        //getNewPoems(mContext, db); //<<<<<<<<<< get the new poems when upgraded
+        Log.e("jwm", "PHDBHandler: upgrade old " + oldVersion + " to new " + newVersion);
+    }
+
+    public int scrollTo(String wordPrefix) {
+        String[] selectionArgs = {wordPrefix};
+        String[] columns = { "ZSEQ" };
         String groupBy = null;
         String having = null;
         String orderBy = "zunaccentedword";
@@ -68,7 +80,7 @@ public class PHDBHandler extends SQLiteAssetHelper {
             return seq;
         }
         else
-        {
+            {
             //past last word, return the last + 1 because positions are zero-indexed
             long count = DatabaseUtils.queryNumEntries(singleton.getReadableDatabase(), Word.TABLE_NAME);
             return ((int)count + 1);

@@ -110,6 +110,7 @@ public class WordDetailFragment extends Fragment {
                 foreign = "#03a5fc";
                 quote = "#03a5fc";
             }
+            boolean trItalics = true; //false for bold
             String html = "<html><head><style> " +
                         ".l1 { margin-left: 18px;position:relative;text-indent:-18px; } " +
                         ".l2 { margin-left: 18px;position:relative;text-indent:-18px; } " +
@@ -125,7 +126,7 @@ public class WordDetailFragment extends Fragment {
                         ".qu {color:" + quote + ";} " +
                         ".qu:before { content: '\"'; } " +
                         ".qu:after { content: '\"'; }  " +
-                        ".tr {font-weight:bold;} " +
+                    ((trItalics) ? ".tr {font-style:italic;} " : ".tr {font-weight:bold;} ") +
                         ".au {color:" + author + ";} " +
                         ".bi {color:" + bibl + ";} " +
                         ".ti {color:" + title + ";} " +
