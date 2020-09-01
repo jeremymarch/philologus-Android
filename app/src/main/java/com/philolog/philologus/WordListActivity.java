@@ -44,6 +44,9 @@ import com.philolog.philologus.SQLiteAssetHelper.Utils;
 import com.philolog.philologus.database.PHDBHandler;
 
 import java.io.File;
+import java.io.IOException;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipFile;
 
 public class WordListActivity extends FragmentActivity implements
         WordListFragment.Callbacks {
@@ -93,11 +96,35 @@ public class WordListActivity extends FragmentActivity implements
         mTwoPane = inState.getBoolean("twoPane");
     }
 
+    //https://stackoverflow.com/questions/12372759/android-get-compressed-size-of-a-file-in-a-zipfile
+    //https://stackoverflow.com/questions/36045421/java-zipentry-getsize-returns-1
+    public long getDBSizeFromZip(String name) {
+        ZipFile zipfile = null;
+        try {
+            zipfile = new ZipFile("myFile.zip");
+        } catch (IOException e) {
+            e.printStackTrace();
+            return -1;
+        }
+        java.util.Enumeration zipEnum = zipfile.entries();
+
+        while ( zipEnum.hasMoreElements() )
+        {
+            ZipEntry entry = (ZipEntry) zipEnum.nextElement();
+            if ( !entry.isDirectory () && entry.getName().equals(name))
+            {
+                return entry.getSize(); //entry.getCompressedSize();
+            }
+        }
+        return -1;
+    }
+
     //used to show a message while copying over database on first load
     //params, progress, result
     private class LoadDatabaseTask extends AsyncTask<Context, Long, Void> {
         Context mContext;
         boolean barShown = false;
+        long totalFileBytes = 188469248;
         //ProgressDialog mDialog;
 
         // Provide a constructor so we can get a Context to use to create
@@ -139,13 +166,13 @@ public class WordListActivity extends FragmentActivity implements
                 l.setVisibility(View.VISIBLE);
                 FrameLayout l2 = (FrameLayout) findViewById(R.id.hideduringcopy);
                 l2.setVisibility(View.GONE);
+                barShown = true;
             }
 
-            double prog = (double)values[0] / 188469248 * 100;
-            long prog2 = Math.round(prog);
-            //txtView.setText("Loading database: " + prog2 + "%");
-            pgsBar.setProgress((int)prog2);
-            //188469248
+            double percent = (double)values[0] / totalFileBytes * 100;
+            long percentLong = Math.round(percent);
+            //txtView.setText("Loading database: " + prog2 + "%"); //very slow
+            pgsBar.setProgress((int)percentLong);
         }
 
         @Override
@@ -158,7 +185,6 @@ public class WordListActivity extends FragmentActivity implements
             l2.setVisibility(View.VISIBLE);
         }
     }
-
 
     public void openSettings(View view) {
         // Do something in response to button
