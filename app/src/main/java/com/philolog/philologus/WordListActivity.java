@@ -28,11 +28,19 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import androidx.fragment.app.FragmentActivity;
 
+import android.os.Handler;
 import android.preference.PreferenceManager;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.FrameLayout;
+import android.widget.LinearLayout;
+import android.widget.ProgressBar;
+import android.widget.TextView;
 
+import com.philolog.philologus.SQLiteAssetHelper.SQLiteAssetHelper;
+import com.philolog.philologus.SQLiteAssetHelper.Utils;
 import com.philolog.philologus.database.PHDBHandler;
 
 import java.io.File;
@@ -45,6 +53,10 @@ public class WordListActivity extends FragmentActivity implements
      * device.
      */
     //public PHKeyboardView mKeyboardView;
+    ProgressBar pgsBar;
+    TextView txtView;
+    int i = 0;
+    Handler hdlr = new Handler();
     public boolean mTwoPane;
     private SharedPreferences.OnSharedPreferenceChangeListener prefListener;
 
@@ -82,9 +94,11 @@ public class WordListActivity extends FragmentActivity implements
     }
 
     //used to show a message while copying over database on first load
-    private class LoadDatabaseTask extends AsyncTask<Context, Void, Void> {
+    //params, progress, result
+    private class LoadDatabaseTask extends AsyncTask<Context, Long, Void> {
         Context mContext;
-        ProgressDialog mDialog;
+        boolean barShown = false;
+        //ProgressDialog mDialog;
 
         // Provide a constructor so we can get a Context to use to create
         // the ProgressDialog.
@@ -96,22 +110,52 @@ public class WordListActivity extends FragmentActivity implements
         @Override
         protected void onPreExecute() {
             super.onPreExecute();
-            mDialog = new ProgressDialog(mContext);
-            mDialog.setMessage("Loading database...");
-            mDialog.show();
+            pgsBar = (ProgressBar) findViewById(R.id.dbprogressbar);
+            //txtView = (TextView) findViewById(R.id.dbprogresstext);
+            //txtView.setText("Loading database...");
         }
 
         @Override
         protected Void doInBackground(Context... contexts) {
             // Copy database.
+            Utils.ProgListener p = new Utils.ProgListener() {
+                @Override
+                public void onProgress(long progress) {
+                    //Log.w("jwm", "DB Copy Progress: " + progress);
+                    publishProgress(progress);
+                }
+            };
+            PHDBHandler.mProgListener = p;
             PHDBHandler.getInstance(contexts[0]).getReadableDatabase();
             return null;
+        }
+        @Override
+        protected void onProgressUpdate(Long... values) {
+            //Log.w("jwm", "DB2 Copy Progress: " + values[0]);
+
+            if (!barShown)
+            {
+                LinearLayout l = (LinearLayout) findViewById(R.id.progressContainer);
+                l.setVisibility(View.VISIBLE);
+                FrameLayout l2 = (FrameLayout) findViewById(R.id.hideduringcopy);
+                l2.setVisibility(View.GONE);
+            }
+
+            double prog = (double)values[0] / 188469248 * 100;
+            long prog2 = Math.round(prog);
+            //txtView.setText("Loading database: " + prog2 + "%");
+            pgsBar.setProgress((int)prog2);
+            //188469248
         }
 
         @Override
         protected void onPostExecute(Void result) {
             super.onPostExecute(result);
-            mDialog.dismiss();
+            //mDialog.dismiss();
+            LinearLayout l = (LinearLayout) findViewById(R.id.progressContainer);
+            l.setVisibility(View.GONE);
+            FrameLayout l2 = (FrameLayout) findViewById(R.id.hideduringcopy);
+            l2.setVisibility(View.VISIBLE);
         }
     }
 
@@ -152,6 +196,7 @@ public class WordListActivity extends FragmentActivity implements
         File database = getDatabasePath("philolog_us.db");
         if (!database.exists()) {
             new LoadDatabaseTask(this).execute(this, null, null);
+            //PHDBHandler.getInstance(this).getReadableDatabase();
         }
 
         if (findViewById(R.id.word_detail_container) != null) {

@@ -77,10 +77,35 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/tvLOL"
         android:orientation="vertical" >
+    <LinearLayout
+        android:id="@+id/progressContainer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:visibility="gone">
+        <ProgressBar
+            android:id="@+id/dbprogressbar"
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:progress="0"
+            android:indeterminate="false"
+            android:max="100"
+            style="?android:attr/progressBarStyleHorizontal" />
+        <TextView
+            android:id="@+id/dbprogresstext"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Loading database..."
+            android:gravity="center"
+            android:textSize="28sp"/>
+    </LinearLayout>
         <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_height="match_parent"
+            android:visibility="visible"
+            android:id="@+id/hideduringcopy">
         <ListView
+
             android:id="@id/android:list"
             android:layout_width="match_parent"
             android:layout_height="match_parent"

@@ -16,12 +16,21 @@ package com.philolog.philologus.SQLiteAssetHelper;
  * limitations under the License.
  */
 
+//https://github.com/jgilfelt/android-sqlite-asset-helper
+
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteDatabase.CursorFactory;
 import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.os.AsyncTask;
 import android.util.Log;
+import android.widget.ProgressBar;
+import android.widget.TextView;
+
+import com.philolog.philologus.R;
+import com.philolog.philologus.database.PHDBHandler;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -74,6 +83,12 @@ public class SQLiteAssetHelper extends SQLiteOpenHelper {
     private String mUpgradePathFormat;
 
     private int mForcedUpgradeVersion = 0;
+
+    public static int hide;
+    public static int show;
+    public static int prog;
+
+    public static Utils.ProgListener mProgListener = null;
 
     /**
      * Create a helper object to create, open, and/or manage a database in
@@ -417,6 +432,9 @@ public class SQLiteAssetHelper extends SQLiteOpenHelper {
     private void copyDatabaseFromAssets() throws SQLiteAssetException {
         Log.w(TAG, "copying database from assets...");
 
+        //pgsBar = (ProgressBar) mContext.findViewById(hide);
+        //txtView = (TextView) mContext.findViewById(R.id.dbprogresstext);
+
         String path = mAssetPath;
         String dest = mDatabasePath + "/" + mName;
         InputStream is;
@@ -450,9 +468,9 @@ public class SQLiteAssetHelper extends SQLiteOpenHelper {
                 if (zis == null) {
                     throw new SQLiteAssetException("Archive is missing a SQLite database file");
                 }
-                Utils.writeExtractedFileToDisk(zis, new FileOutputStream(dest));
+                Utils.writeExtractedFileToDisk(zis, new FileOutputStream(dest), mProgListener);
             } else {
-                Utils.writeExtractedFileToDisk(is, new FileOutputStream(dest));
+                Utils.writeExtractedFileToDisk(is, new FileOutputStream(dest), mProgListener);
             }
 
             Log.w(TAG, "database copy complete");

@@ -1,5 +1,6 @@
 package com.philolog.philologus.SQLiteAssetHelper;
 
+import android.os.FileUtils;
 import android.util.Log;
 
 import java.io.IOException;
@@ -11,7 +12,7 @@ import java.util.Scanner;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
-class Utils {
+public class Utils {
 
     private static final String TAG = SQLiteAssetHelper.class.getSimpleName();
 
@@ -39,11 +40,16 @@ class Utils {
         return statements;
     }
 
-    public static void writeExtractedFileToDisk(InputStream in, OutputStream outs) throws IOException {
+    public static void writeExtractedFileToDisk(InputStream in, OutputStream outs, ProgListener listener) throws IOException {
         byte[] buffer = new byte[1024];
         int length;
-        while ((length = in.read(buffer))>0){
+        int totalRead = 0;
+        while ( -1 != (length = in.read(buffer)) ){
+            totalRead += length;
             outs.write(buffer, 0, length);
+            if (listener != null) {
+                listener.onProgress(totalRead);
+            }
         }
         outs.flush();
         outs.close();
@@ -64,5 +70,9 @@ class Utils {
         return new Scanner(is).useDelimiter("\\A").next();
     }
 
+    public interface ProgListener {
+        public void onProgress(long progress);
+    }
 }
+
 
