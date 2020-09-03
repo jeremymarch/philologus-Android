@@ -98,10 +98,12 @@ public class WordListActivity extends FragmentActivity implements
 
     //https://stackoverflow.com/questions/12372759/android-get-compressed-size-of-a-file-in-a-zipfile
     //https://stackoverflow.com/questions/36045421/java-zipentry-getsize-returns-1
-    public long getDBSizeFromZip(String name) {
+    public long getDBSizeFromZip(Context c, String dbFileName) {
         ZipFile zipfile = null;
         try {
-            zipfile = new ZipFile("myFile.zip");
+            String path = c.getDatabasePath(dbFileName).getPath();
+            //c.getAssets().p
+            zipfile = new ZipFile(path);
         } catch (IOException e) {
             e.printStackTrace();
             return -1;
@@ -111,7 +113,7 @@ public class WordListActivity extends FragmentActivity implements
         while ( zipEnum.hasMoreElements() )
         {
             ZipEntry entry = (ZipEntry) zipEnum.nextElement();
-            if ( !entry.isDirectory () && entry.getName().equals(name))
+            if ( !entry.isDirectory () && entry.getName().equals(dbFileName))
             {
                 return entry.getSize(); //entry.getCompressedSize();
             }
@@ -219,11 +221,11 @@ public class WordListActivity extends FragmentActivity implements
         sharedPref.registerOnSharedPreferenceChangeListener(prefListener);
 
         // Install databases if necessary.
-        File database = getDatabasePath("philolog_us.db");
-        if (!database.exists()) {
+        //File database = getDatabasePath("philolog_us.db");
+        //if (!database.exists()) {
             new LoadDatabaseTask(this).execute(this, null, null);
             //PHDBHandler.getInstance(this).getReadableDatabase();
-        }
+        //}
 
         if (findViewById(R.id.word_detail_container) != null) {
             // The detail container view will be present only in the

@@ -376,7 +376,7 @@ public class WordListFragment extends ListFragment implements OnClickListener {
         lang = pref.getInt("lang", 0);
 
         setLang(lang);
-
+        Log.e("jwm", "fragment setup cursor");
         gla = new PHSimpleCursorAdapter(getActivity(),
                 R.layout.word_listitem, null, new String[]{
                 Word.COL_WORD}, new int[]{R.id.word});
@@ -384,6 +384,7 @@ public class WordListFragment extends ListFragment implements OnClickListener {
         setListAdapter(gla);
 
         // Load the content
+        //getSupportLoaderManager().initLoader(0, null, this);
         getLoaderManager().initLoader(0, null, new LoaderCallbacks<Cursor>() {
             @Override
             public Loader<Cursor> onCreateLoader(int id, Bundle args) {

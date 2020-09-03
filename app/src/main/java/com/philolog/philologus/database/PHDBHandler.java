@@ -36,7 +36,7 @@ import com.philolog.philologus.SQLiteAssetHelper.SQLiteAssetHelper;
 public class PHDBHandler extends SQLiteAssetHelper {
 
     private static final String DATABASE_NAME = "philolog_us.db";
-    private static final int DATABASE_VERSION = 2; //increment this each time we need to copy db from assets again
+    private static final int DATABASE_VERSION = 6; //increment this each time we need to copy db from assets again
 
     private static PHDBHandler singleton;
 

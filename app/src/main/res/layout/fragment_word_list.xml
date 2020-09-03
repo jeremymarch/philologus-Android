@@ -90,12 +90,14 @@
             android:progress="0"
             android:indeterminate="false"
             android:max="100"
+            android:progressTint="?attr/phTextColor"
             style="?android:attr/progressBarStyleHorizontal" />
         <TextView
             android:id="@+id/dbprogresstext"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Loading database..."
+            android:textColor="?attr/phTextColor"
+            android:text="Updating database..."
             android:gravity="center"
             android:textSize="28sp"/>
     </LinearLayout>
