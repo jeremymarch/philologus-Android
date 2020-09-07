@@ -20,6 +20,7 @@ This file is part of philologus-Android.
 
 package com.philolog.philologus;
 
+import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.content.res.Resources;
 import android.graphics.Color;
@@ -97,6 +98,9 @@ public class WordDetailFragment extends Fragment {
         if (!def.equals("")) {
             definitionView = ((WebView) rootView.findViewById(R.id.definition));
 
+            //SharedPreferences pref = getContext().getApplicationContext().getSharedPreferences("PhilologusPref", 0); // 0 - for private mode
+            //deepIndent = pref.getInt("deepIndent", 0);
+
             String bg = "white";
             String text = "black";
             String author = "red";
@@ -114,34 +118,37 @@ public class WordDetailFragment extends Fragment {
                 quote = "#03a5fc";
             }
             boolean trItalics = true; //false for bold
-            boolean deepIndent = true;
             int indentPx = 40;
-            int indentMult[] = (deepIndent) ? new int[]{1, 2, 3, 4, 5, 0} : new int[]{1, 1, 1, 1, 1, 0};
-            String html = "<html lang=\"en\"><head><meta http-equiv=\"Content-Type\" content=\"text/html;charset=utf-8\" /><style> " +
-                        ".l1 { margin-left: " + (indentPx * indentMult[0]) + "px;position:relative; } " +
-                        ".l2 { margin-left: " + (indentPx * indentMult[1]) + "px;position:relative; } " +
-                        ".l3 { margin-left: " + (indentPx * indentMult[2]) + "px;position:relative; } " +
-                        ".l4 { margin-left: " + (indentPx * indentMult[3]) + "px;position:relative; } " +
-                        ".l5 { margin-left: " + (indentPx * indentMult[4]) + "px;position:relative; } " +
-                        "@font-face {" +
-                        "font-family: 'newathu5'; " +
-                        "src: url('fonts/newathu5.ttf'); } " +
-                        "BODY {color:" + text + ";background-color:" + bg + ";} " +
-                        ".body {font-family: 'newathu5';line-height:1.2;margin:8px 8px;font-size:14pt;} " +
-                        ".fo {color:" + foreign + ";} " +
-                        ".qu {color:" + quote + ";} " +
-                        ".qu:before { content: '\"'; } " +
-                        ".qu:after { content: '\"'; }  " +
-                    ((trItalics) ? ".tr {font-style:italic;} " : ".tr {font-weight:bold;} ") +
-                        ".au {color:" + author + ";} " +
-                        ".bi {color:" + bibl + ";} " +
-                        ".ti {color:" + title + ";} " +
-                        ".label {font-weight:bold;padding-right:0px;position:absolute;left:-40px;} " +
-                        //".label:after { content: ' '; } " +
-                        ".orth {font-weight:bold; } " +
-                    "BODY { margin-top:16px;} " +
-                        "</style></head><BODY>" +
-                        def + "</br></body></html>";
+            int minWidthForDeepIndent = 430;
+            String html = "<!DOCTYPE html>\n<html lang=\"en\"><head><title>philolog.us</title><meta http-equiv=\"Content-Type\" content=\"text/html;charset=utf-8\" /><style> " +
+                    ".l1 { margin-left: " + (indentPx ) + "px;position:relative; } " +
+                    ".l2 { margin-left: " + (indentPx ) + "px;position:relative; } " +
+                    ".l3 { margin-left: " + (indentPx ) + "px;position:relative; } " +
+                    ".l4 { margin-left: " + (indentPx ) + "px;position:relative; } " +
+                    ".l5 { margin-left: " + (indentPx ) + "px;position:relative; } " +
+                    "@media (min-width : " + minWidthForDeepIndent + "px) { " +
+                    ".l1 { margin-left: " + (indentPx) + "px;position:relative; } " +
+                    ".l2 { margin-left: " + (indentPx * 2) + "px;position:relative; } " +
+                    ".l3 { margin-left: " + (indentPx * 3) + "px;position:relative; } " +
+                    ".l4 { margin-left: " + (indentPx * 4) + "px;position:relative; } " +
+                    ".l5 { margin-left: " + (indentPx * 5) + "px;position:relative; } " +
+                    " } " +
+                    ".label {font-weight:bold;padding-right:0px;position:absolute;left:-"+ indentPx + "px;} " +
+                    //".label:after { content: ' '; } " +
+                    "@font-face {font-family: 'newathu5'; src: url('fonts/newathu5.ttf'); } " +
+                    "BODY {color:" + text + ";background-color:" + bg + "; margin-top:16px;} " +
+                    ".body {font-family: 'newathu5';line-height:1.2;margin:8px 8px;font-size:14pt;} " +
+                    ".fo {color:" + foreign + ";} " +
+                    ".qu {color:" + quote + ";} " +
+                    ".qu:before { content: '\"'; } " +
+                    ".qu:after { content: '\"'; }  " +
+                ((trItalics) ? ".tr {font-style:italic;} " : ".tr {font-weight:bold;} ") +
+                    ".au {color:" + author + ";} " +
+                    ".bi {color:" + bibl + ";} " +
+                    ".ti {color:" + title + ";} " +
+                    ".orth {font-weight:bold; } " +
+                    "</style></head><BODY>" +
+                    def + "</br></body></html>";
             //Log.e("jwm", html.substring(18500));
             //definitionView.setLayerType(View.LAYER_TYPE_HARDWARE, null); //this crashes on gero?
             definitionView.getSettings().setCacheMode(WebSettings.LOAD_NO_CACHE);
