@@ -31,10 +31,13 @@ import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.webkit.WebSettings;
 import android.webkit.WebView;
 
 import com.philolog.philologus.database.PHDBHandler;
 import com.philolog.philologus.database.Word;
+
+import java.util.Arrays;
 
 /**
  * A fragment representing a single Word detail screen.
@@ -111,12 +114,15 @@ public class WordDetailFragment extends Fragment {
                 quote = "#03a5fc";
             }
             boolean trItalics = true; //false for bold
-            String html = "<html><head><style> " +
-                        ".l1 { margin-left: 18px;position:relative;text-indent:-18px; } " +
-                        ".l2 { margin-left: 18px;position:relative;text-indent:-18px; } " +
-                        ".l3 { margin-left: 18px;position:relative;text-indent:-18px; } " +
-                        ".l4 { margin-left: 18px;position:relative;text-indent:-18px; } " +
-                        ".l5 { margin-left: 18px;position:relative;text-indent:-18px; } " +
+            boolean deepIndent = true;
+            int indentPx = 40;
+            int indentMult[] = (deepIndent) ? new int[]{1, 2, 3, 4, 5, 0} : new int[]{1, 1, 1, 1, 1, 0};
+            String html = "<html lang=\"en\"><head><meta http-equiv=\"Content-Type\" content=\"text/html;charset=utf-8\" /><style> " +
+                        ".l1 { margin-left: " + (indentPx * indentMult[0]) + "px;position:relative; } " +
+                        ".l2 { margin-left: " + (indentPx * indentMult[1]) + "px;position:relative; } " +
+                        ".l3 { margin-left: " + (indentPx * indentMult[2]) + "px;position:relative; } " +
+                        ".l4 { margin-left: " + (indentPx * indentMult[3]) + "px;position:relative; } " +
+                        ".l5 { margin-left: " + (indentPx * indentMult[4]) + "px;position:relative; } " +
                         "@font-face {" +
                         "font-family: 'newathu5'; " +
                         "src: url('fonts/newathu5.ttf'); } " +
@@ -130,13 +136,20 @@ public class WordDetailFragment extends Fragment {
                         ".au {color:" + author + ";} " +
                         ".bi {color:" + bibl + ";} " +
                         ".ti {color:" + title + ";} " +
-                        ".label {font-weight:bold;padding-right:0px;text-indent:0px;} " +
-                        ".label:after { content: ' '; } " +
+                        ".label {font-weight:bold;padding-right:0px;position:absolute;left:-40px;} " +
+                        //".label:after { content: ' '; } " +
                         ".orth {font-weight:bold; } " +
+                    "BODY { margin-top:16px;} " +
                         "</style></head><BODY>" +
-                        def + "</body></html>";
+                        def + "</br></body></html>";
+            //Log.e("jwm", html.substring(18500));
+            //definitionView.setLayerType(View.LAYER_TYPE_HARDWARE, null); //this crashes on gero?
+            definitionView.getSettings().setCacheMode(WebSettings.LOAD_NO_CACHE);
+            definitionView.getSettings().setJavaScriptEnabled(false);
+            definitionView.setScrollBarStyle(WebView.SCROLLBARS_OUTSIDE_OVERLAY);
+            definitionView.setScrollbarFadingEnabled(true);
 
-            definitionView.loadDataWithBaseURL("file:///android_asset/",html, "text/html", "UTF-8", "");
+            definitionView.loadDataWithBaseURL("file:///android_asset/", html, "text/html", "utf-8", null);
         }
 
         return rootView;

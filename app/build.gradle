@@ -1,6 +1,16 @@
 apply plugin: 'com.android.application'
 
 android {
+    signingConfigs {
+        debug {
+/*            //https://stackoverflow.com/questions/27872959/android-error-app-has-same-packaged-different-signature
+            storeFile file('/Users/jeremy/AndroidStudioProjects/keystore.jks')
+            storePassword ''
+            keyAlias = ''
+            keyPassword ''
+*/
+        }
+    }
     compileSdkVersion 29
     buildToolsVersion "29.0.3"
     defaultConfig {
