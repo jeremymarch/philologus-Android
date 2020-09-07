@@ -4,7 +4,7 @@
         android:title="Acknowledgements"
         android:key="ack">
         <Preference
-            android:summary="Texts of Lewis and Short's &quot;A Latin Dictionary&quot; and Liddell, Scott, and Jones' &quot;A Greek-English Lexicon&quot; are used the Creative Commons License. Thanks to the Perseus Digital Library for producing these digital texts and also to Helma Dik and Logeion for providing many additional improvements and corrections."
+            android:summary="Texts of Lewis and Short's &quot;A Latin Dictionary&quot; and Liddell, Scott, and Jones' &quot;A Greek-English Lexicon&quot; are used under the Creative Commons License. Thanks to the Perseus Digital Library for producing these digital texts and also to Helma Dik and Logeion for providing many additional improvements and corrections."
             />
     </PreferenceCategory>
     <PreferenceCategory
