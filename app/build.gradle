@@ -3,32 +3,33 @@ apply plugin: 'com.android.application'
 android {
     signingConfigs {
         debug {
-/*            //https://stackoverflow.com/questions/27872959/android-error-app-has-same-packaged-different-signature
+            /*
+            //https://stackoverflow.com/questions/27872959/android-error-app-has-same-packaged-different-signature
             storeFile file('/Users/jeremy/AndroidStudioProjects/keystore.jks')
             storePassword ''
             keyAlias = ''
             keyPassword ''
-*/
+            */
         }
     }
-    compileSdkVersion 29
-    buildToolsVersion "29.0.3"
+    compileSdkVersion 30
+    buildToolsVersion "30.0.2"
     defaultConfig {
         applicationId "com.philolog.philologus"
         minSdkVersion 23
-        targetSdkVersion 29
-        versionCode 6
-        versionName '1.2'
+        targetSdkVersion 30
+        versionCode 7
+        versionName '1.2.1'
     }
     buildTypes {
         debug {
-            minifyEnabled false
+            minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'),
                     'proguard-rules.pro'
         }
         release {
             minifyEnabled true
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.txt'
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
     productFlavors {

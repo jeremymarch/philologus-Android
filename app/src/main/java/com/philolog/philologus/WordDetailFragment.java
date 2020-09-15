@@ -99,7 +99,7 @@ public class WordDetailFragment extends Fragment {
             definitionView = ((WebView) rootView.findViewById(R.id.definition));
 
             //SharedPreferences pref = getContext().getApplicationContext().getSharedPreferences("PhilologusPref", 0); // 0 - for private mode
-            //deepIndent = pref.getInt("deepIndent", 0);
+            //Boolean deepIndent = pref.getBoolean("PHMultiLevelIndent", true);
 
             String bg = "white";
             String text = "black";
@@ -118,8 +118,10 @@ public class WordDetailFragment extends Fragment {
                 quote = "#03a5fc";
             }
             boolean trItalics = true; //false for bold
-            int indentPx = 40;
-            int minWidthForDeepIndent = 430;
+            int indentPx = 38;
+            int minWidthForDeepIndent = 393;
+            //pixel 3a width = 411
+            //pixel 3XL width =
             String html = "<!DOCTYPE html>\n<html lang=\"en\"><head><title>philolog.us</title><meta http-equiv=\"Content-Type\" content=\"text/html;charset=utf-8\" /><style> " +
                     ".l1 { margin-left: " + (indentPx ) + "px;position:relative; } " +
                     ".l2 { margin-left: " + (indentPx ) + "px;position:relative; } " +

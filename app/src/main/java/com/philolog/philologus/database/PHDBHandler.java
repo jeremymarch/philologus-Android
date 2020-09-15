@@ -48,7 +48,7 @@ public class PHDBHandler extends SQLiteAssetHelper {
     public static PHDBHandler getInstance(final Context context) {
         if (singleton == null) {
             singleton = new PHDBHandler(context);
-            Log.e("jwm", "version1: " + singleton.getWritableDatabase().getVersion());
+            //Log.e("jwm", "version1: " + singleton.getWritableDatabase().getVersion());
             //singleton.getWritableDatabase().setVersion((3));
             //Log.e("jwm", "version2: " + singleton.getWritableDatabase().getVersion());
         }

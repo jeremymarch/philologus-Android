@@ -439,7 +439,9 @@ public class WordListFragment extends ListFragment implements OnClickListener {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 EditText e = (EditText) getView().findViewById(R.id.word_search);
-                e.clearFocus();
+                if (e != null) {
+                    e.clearFocus();
+                }
                 //e.setSelected(false);
                 //hideCustomKeyboard(view);
 /*

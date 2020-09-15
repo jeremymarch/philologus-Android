@@ -24,6 +24,11 @@
             android:key="PHVibrateOn"
             android:title="Key Vibrate"
             android:defaultValue="false" />
+        <!--<SwitchPreference
+            android:key="PHMultiLevelIndent"
+            android:title="Multi-Level Indent"
+            android:defaultValue="true" />-->
+
     </PreferenceCategory>
 
 </PreferenceScreen>
