@@ -31,6 +31,7 @@ import androidx.fragment.app.FragmentActivity;
 import android.os.Handler;
 import android.preference.PreferenceManager;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
@@ -196,6 +197,47 @@ public class WordListActivity extends FragmentActivity implements
         //intent.putExtra(EXTRA_MESSAGE, message);
         startActivity(intent);
     }
+/*
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        switch (keyCode) {
+            case KeyEvent.KEYCODE_D:
+                //moveShip(MOVE_LEFT);
+                return true;
+            case KeyEvent.KEYCODE_F:
+                //moveShip(MOVE_RIGHT);
+                return true;
+            case KeyEvent.KEYCODE_J:
+                //fireMachineGun();
+                return true;
+            case KeyEvent.KEYCODE_K:
+                //fireMissile();
+                return true;
+            default:
+                return true;//super.onKeyDown(keyCode, event);
+        }
+    }
+
+    @Override
+    public boolean onKeyUp(int keyCode, KeyEvent event) {
+        switch (keyCode) {
+            case KeyEvent.KEYCODE_D:
+                //moveShip(MOVE_LEFT);
+                return true;
+            case KeyEvent.KEYCODE_F:
+                //moveShip(MOVE_RIGHT);
+                return true;
+            case KeyEvent.KEYCODE_J:
+                //fireMachineGun();
+                return true;
+            case KeyEvent.KEYCODE_K:
+                //fireMissile();
+                return true;
+            default:
+                return true;//super.onKeyUp(keyUpCode, event);
+        }
+    }
+*/
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         PreferenceManager.setDefaultValues(this, R.xml.settings, false);

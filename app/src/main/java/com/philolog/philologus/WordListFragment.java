@@ -179,7 +179,7 @@ public class WordListFragment extends ListFragment implements OnClickListener {
     @Override
     public void onClick(View v) {
 
-        EditText s = getView().findViewById(R.id.word_search);
+        HCGreekEditText s = getView().findViewById(R.id.word_search);
 
         if (s != null) {
             s.setText("");

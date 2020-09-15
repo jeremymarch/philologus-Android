@@ -38,7 +38,7 @@
             android:minHeight="0dp"
             android:minWidth="0dp"
             android:textAllCaps="false"/>
-        <EditText
+        <com.philolog.philologus.HCGreekEditText
             android:id="@+id/word_search"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
@@ -55,7 +55,8 @@
             android:background="@android:color/transparent"
             android:textCursorDrawable="@drawable/phcursor"
             android:textColor="?attr/phTextColor"
-            android:textIsSelectable="true"/>
+            android:textIsSelectable="true"
+            android:inputType="textNoSuggestions"/>
         <Button
             android:id="@+id/clear"
             android:layout_width="40dp"
