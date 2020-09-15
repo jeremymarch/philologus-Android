@@ -99,7 +99,19 @@ public class WordDetailFragment extends Fragment {
             definitionView = ((WebView) rootView.findViewById(R.id.definition));
 
             //SharedPreferences pref = getContext().getApplicationContext().getSharedPreferences("PhilologusPref", 0); // 0 - for private mode
-            //Boolean deepIndent = pref.getBoolean("PHMultiLevelIndent", true);
+            SharedPreferences pref = androidx.preference.PreferenceManager.getDefaultSharedPreferences(getContext());
+            boolean deepIndent = pref.getBoolean("PHMultiLevelIndent", true);
+            int indentPx = 38;
+            int[] indents;
+            int[] deepIndents = {indentPx, indentPx * 2, indentPx * 3, indentPx * 4, indentPx * 5};
+            int[] flatIndents = {indentPx, indentPx, indentPx, indentPx, indentPx};
+
+            if (deepIndent) {
+                indents = deepIndents;
+            }
+            else {
+                indents = flatIndents;
+            }
 
             String bg = "white";
             String text = "black";
@@ -118,23 +130,16 @@ public class WordDetailFragment extends Fragment {
                 quote = "#03a5fc";
             }
             boolean trItalics = true; //false for bold
-            int indentPx = 38;
-            int minWidthForDeepIndent = 393;
+
+            //int minWidthForDeepIndent = 393;
             //pixel 3a width = 411
             //pixel 3XL width =
             String html = "<!DOCTYPE html>\n<html lang=\"en\"><head><title>philolog.us</title><meta http-equiv=\"Content-Type\" content=\"text/html;charset=utf-8\" /><style> " +
-                    ".l1 { margin-left: " + (indentPx ) + "px;position:relative; } " +
-                    ".l2 { margin-left: " + (indentPx ) + "px;position:relative; } " +
-                    ".l3 { margin-left: " + (indentPx ) + "px;position:relative; } " +
-                    ".l4 { margin-left: " + (indentPx ) + "px;position:relative; } " +
-                    ".l5 { margin-left: " + (indentPx ) + "px;position:relative; } " +
-                    "@media (min-width : " + minWidthForDeepIndent + "px) { " +
-                    ".l1 { margin-left: " + (indentPx) + "px;position:relative; } " +
-                    ".l2 { margin-left: " + (indentPx * 2) + "px;position:relative; } " +
-                    ".l3 { margin-left: " + (indentPx * 3) + "px;position:relative; } " +
-                    ".l4 { margin-left: " + (indentPx * 4) + "px;position:relative; } " +
-                    ".l5 { margin-left: " + (indentPx * 5) + "px;position:relative; } " +
-                    " } " +
+                    ".l1 { margin-left: " + indents[0]  + "px;position:relative; } " +
+                    ".l2 { margin-left: " + indents[1] + "px;position:relative; } " +
+                    ".l3 { margin-left: " + indents[2] + "px;position:relative; } " +
+                    ".l4 { margin-left: " + indents[3] + "px;position:relative; } " +
+                    ".l5 { margin-left: " + indents[4] + "px;position:relative; } " +
                     ".label {font-weight:bold;padding-right:0px;position:absolute;left:-"+ indentPx + "px;} " +
                     //".label:after { content: ' '; } " +
                     "@font-face {font-family: 'newathu5'; src: url('fonts/newathu5.ttf'); } " +
