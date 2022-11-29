@@ -29,6 +29,8 @@ import android.util.Log;
 //import com.readystatesoftware.sqliteasset.SQLiteAssetHelper;
 import com.philolog.philologus.SQLiteAssetHelper.SQLiteAssetHelper;
 
+import java.io.UnsupportedEncodingException;
+
 /**
  * Created by jeremy on 1/30/18.
  */
@@ -39,18 +41,20 @@ public class PHDBHandler extends SQLiteAssetHelper {
 
     /**
      * increment DATABASE_VERSION each time we need to copy db from assets again
+     * To set it in sqlite: PRAGMA user_version = 3;
      * v1.1 = 1
      * v1.2 = 2
+     * v1.3 = 3
      */
-    private static final int DATABASE_VERSION = 2;
+    private static final int DATABASE_VERSION = 3;
 
     private static PHDBHandler singleton;
     public static PHDBHandler getInstance(final Context context) {
         if (singleton == null) {
             singleton = new PHDBHandler(context);
-            //Log.e("jwm", "version1: " + singleton.getWritableDatabase().getVersion());
+            //Log.e("jwm", "db user_version 1: " + singleton.getWritableDatabase().getVersion());
             //singleton.getWritableDatabase().setVersion((3));
-            //Log.e("jwm", "version2: " + singleton.getWritableDatabase().getVersion());
+            Log.e("jwm", "db user_version: " + singleton.getWritableDatabase().getVersion());
         }
         return singleton;
     }
@@ -69,13 +73,13 @@ public class PHDBHandler extends SQLiteAssetHelper {
 
     public int scrollTo(String wordPrefix) {
         String[] selectionArgs = {wordPrefix};
-        String[] columns = { "ZSEQ" };
+        String[] columns = { "_id" };
         String groupBy = null;
         String having = null;
-        String orderBy = "zunaccentedword";
+        String orderBy = "sortword";
         String limit = "1";
 
-        Cursor cursor = singleton.getReadableDatabase().query(Word.TABLE_NAME, columns, "zunaccentedword>=?", selectionArgs, groupBy, having, orderBy, limit);
+        Cursor cursor = singleton.getReadableDatabase().query(Word.TABLE_NAME, columns, "sortword>=?", selectionArgs, groupBy, having, orderBy, limit);
 
         if (cursor.getCount() > 0)
         {
@@ -110,18 +114,26 @@ public class PHDBHandler extends SQLiteAssetHelper {
     }
 
     public synchronized String getDef(final long id) {
-        String[] cols = { "ZDEF" };
+        String[] cols = { "def" };
         final SQLiteDatabase db = singleton.getReadableDatabase();
-        final Cursor cursor = db.query(Word.DEF_TABLE_NAME, cols,
-                "ZWORDID" + " IS ?", new String[] { String.valueOf(id) },
+        final Cursor cursor = db.query(Word.TABLE_NAME, cols,
+                "_id" + " IS ?", new String[] { String.valueOf(id) },
                 null, null, null, "1");
 
         //Word item = null;
-        String def = "";
+        byte[] def_blob = new byte[0];
         if (cursor != null && cursor.moveToFirst()) {
-            def = cursor.getString(0);
+            def_blob = cursor.getBlob(0);
             //Log.e("abc", "def: " + def);
         }
+        String def = "";
+        try {
+            def = new String(def_blob, "UTF-8");
+        } catch (UnsupportedEncodingException e) {
+            // TODO Auto-generated catch block
+            //e.printStackTrace();
+        }
+
         cursor.close();
         return def;
     }

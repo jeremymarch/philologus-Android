@@ -45,8 +45,8 @@ public class WordProvider extends ContentProvider {
 	public static final Uri LATIN_URI_WORDS = Uri.parse(LATIN_WORDS);
 	public static final String LATIN_WORD_BASE = LATIN_WORDS + "/";
 
-    public static final int GREEK_MAX_ID = 116497;
-    public static final int LATIN_MAX_ID = 51595;
+    public static final int GREEK_MAX_ID = 116655;
+    public static final int LATIN_MAX_ID = 51675;
     public static int LANG_MAX_ID = GREEK_MAX_ID;
 
 	public static Uri URI_WORDS = GREEK_URI_WORDS;
@@ -98,14 +98,14 @@ public class WordProvider extends ContentProvider {
 		else if (uri.toString().startsWith(GREEK_WORD_BASE) || uri.toString().startsWith(LATIN_WORD_BASE))
 		{
 			final String wordPrefix = uri.getLastPathSegment();
-			String[] cols = { "zseq" };
+			String[] cols = { "_id" };
             seqResult = PHDBHandler
 					.getInstance(getContext())
 					.getReadableDatabase()
 					.query(Word.TABLE_NAME, cols,
-							"zunaccentedword >= ?",
+							"sortword >= ?",
 							new String[] { wordPrefix }, null, null,
-                            "zunaccentedword", "1");
+                            "sortword", "1");
 
             int seq;
 
@@ -156,9 +156,9 @@ public class WordProvider extends ContentProvider {
                     .getInstance(getContext())
                     .getReadableDatabase()
                     .query(Word.TABLE_NAME, Word.FIELDS,
-                            "zseq >= ?",
+                            "_id >= ?",
                             new String[] { String.valueOf(startRequestSeq) }, null, null,
-                            "zseq", String.valueOf(fullRequestSize));
+                            "_id", String.valueOf(fullRequestSize));
 
 			result.setNotificationUri(getContext().getContentResolver(), URI_WORDS);
 		}

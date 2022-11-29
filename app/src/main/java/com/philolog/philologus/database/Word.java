@@ -28,18 +28,18 @@ public class Word {
 	public static final int LANG_GREEK = 0;
 	public static final int LANG_LATIN = 1;
 
-	public static final String LATIN_TABLE_NAME = "ZLATINWORDS";
-	public static final String GREEK_TABLE_NAME = "ZGREEKWORDS";
-    public static final String LATIN_DEF_TABLE_NAME = "ZLATINDEFS";
-    public static final String GREEK_DEF_TABLE_NAME = "ZGREEKDEFS";
+	public static final String LATIN_TABLE_NAME = "ZLATIN";
+	public static final String GREEK_TABLE_NAME = "ZGREEK";
+    public static final String LATIN_DEF_TABLE_NAME = "ZLATIN";
+    public static final String GREEK_DEF_TABLE_NAME = "ZGREEK";
     public static String TABLE_NAME = GREEK_TABLE_NAME;
     public static String DEF_TABLE_NAME = GREEK_DEF_TABLE_NAME;
 	// Naming the id column with an underscore is good to be consistent
 	// with other Android things. This is ALWAYS needed
 	//must be called _id : https://stackoverflow.com/questions/5812030/java-lang-illegalargumentexception-column-id-does-not-exist
 	public static final String COL_ID = "_id";
-	public static final String COL_WORD = "ZWORD";
-	public static final String COL_UNACCENTED_WORD = "ZUNACCENTEDWORD";
+	public static final String COL_WORD = "word";
+	public static final String COL_UNACCENTED_WORD = "sortword";
 
 	// For database projection so order is consistent
 	public static final String[] GREEK_FIELDS = { COL_ID, COL_WORD };
