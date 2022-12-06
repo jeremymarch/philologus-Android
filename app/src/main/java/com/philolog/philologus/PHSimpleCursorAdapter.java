@@ -64,16 +64,21 @@ public class PHSimpleCursorAdapter extends SimpleCursorAdapter
 
         this.setViewBinder(new ViewBinder() {
 
-            public boolean setViewValue(View aView, Cursor aCursor, int aColumnIndex) {
-
-                if (aColumnIndex == 1 && Word.TABLE_NAME.equals(Word.LATIN_TABLE_NAME)) {
-                    String word = aCursor.getString(aColumnIndex);
-                    TextView textView = (TextView) aView;
-                    textView.setText(removeMacronBreve(word));
+            public boolean setViewValue(View view, Cursor cursor, int columnIndex) {
+                    String word = cursor.getString(columnIndex);
+                    TextView textView = (TextView) view;
+                    //strip numbers from string
+                    textView.setText(word.replaceAll("\\d", ""));
                     return true;
-                }
 
-                return false;
+//                if (aColumnIndex == 1 && Word.TABLE_NAME.equals(Word.LATIN_TABLE_NAME)) {
+//                    String word = aCursor.getString(aColumnIndex);
+//                    TextView textView = (TextView) aView;
+//                    textView.setText(removeMacronBreve(word));
+//                    return true;
+//                }
+
+                //return false;
             }
         });
     }
