@@ -13,12 +13,12 @@ android {
         }
     }
 
-    compileSdk 35
+    compileSdk 36
     defaultConfig {
         applicationId "com.philolog.philologus"
         minSdkVersion 23
-        targetSdkVersion 35
-        versionCode 11
+        targetSdkVersion 36
+        versionCode 12
         versionName '1.4.0'
     }
     buildTypes {
