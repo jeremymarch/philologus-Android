@@ -2,7 +2,8 @@
     android:id="@+id/wordDetailScrollView"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:background="?attr/phBGColor">
+    android:background="?attr/phBGColor"
+    android:fitsSystemWindows="true">
 
     <WebView
         android:layout_width="fill_parent"

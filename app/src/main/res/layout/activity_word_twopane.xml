@@ -6,7 +6,8 @@
     android:orientation="horizontal"
     android:showDividers="middle"
     tools:context=".WordListActivity"
-    android:id="@+id/word_list_two_pane">
+    android:id="@+id/word_list_two_pane"
+    android:fitsSystemWindows="true">
 
     <!--
     This layout is a two-pane layout for the Persons

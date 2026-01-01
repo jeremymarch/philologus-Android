@@ -3,7 +3,8 @@
     android:layout_height="fill_parent"
     android:translationZ="999dp"
     android:background="?attr/phBGColor"
-    android:id="@+id/word_list_fragment">
+    android:id="@+id/word_list_fragment"
+    android:fitsSystemWindows="true">
     <!--Search bar-->
     <RelativeLayout
         android:layout_width="fill_parent"
