@@ -85,6 +85,7 @@ public class PHLocalOnKeyboardActionListener implements KeyboardView.OnKeyboardA
         c = co;
     }
 
+    @SuppressWarnings("deprecation")
     @Override public void onKey(int primaryCode, int[] keyCodes) {
         SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(c);
         boolean soundOn = sharedPref.getBoolean("PHSoundOn", false);
@@ -235,33 +236,43 @@ public class PHLocalOnKeyboardActionListener implements KeyboardView.OnKeyboardA
     }
 
     private void vibrate() {
-        if (Build.VERSION.SDK_INT >= 26) {
-            ((Vibrator) c.getSystemService(VIBRATOR_SERVICE)).vibrate(VibrationEffect.createOneShot(20, VibrationEffect.DEFAULT_AMPLITUDE));
-        } else {
-            ((Vibrator) c. getSystemService(VIBRATOR_SERVICE)).vibrate(20);
+        Vibrator vibrator = (Vibrator) c.getSystemService(VIBRATOR_SERVICE);
+        if (vibrator != null) {
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+                vibrator.vibrate(VibrationEffect.createOneShot(20, VibrationEffect.DEFAULT_AMPLITUDE));
+            } else {
+                vibrator.vibrate(20);
+            }
         }
     }
 
+    @SuppressWarnings("deprecation")
     @Override public void onPress(int arg0) {
         //this removes the yellow preview when key is pressed.
         kv.setPreviewEnabled(false);
     }
 
+    @SuppressWarnings("deprecation")
     @Override public void onRelease(int primaryCode) {
     }
 
+    @SuppressWarnings("deprecation")
     @Override public void onText(CharSequence text) {
     }
 
+    @SuppressWarnings("deprecation")
     @Override public void swipeDown() {
     }
 
+    @SuppressWarnings("deprecation")
     @Override public void swipeLeft() {
     }
 
+    @SuppressWarnings("deprecation")
     @Override public void swipeRight() {
     }
 
+    @SuppressWarnings("deprecation")
     @Override public void swipeUp() {
     }
 

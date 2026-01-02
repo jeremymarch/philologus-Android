@@ -81,6 +81,7 @@ public class PHKeyboardView extends KeyboardView {
     }
 
     //http://stackoverflow.com/questions/3972445/how-to-put-text-in-a-drawable
+    @SuppressWarnings("deprecation")
     @Override
     public void onDraw(Canvas canvas) {
         super.onDraw(canvas);
