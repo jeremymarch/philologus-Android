@@ -20,33 +20,27 @@ This file is part of philologus-Android.
 
 package com.philolog.philologus;
 
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.os.AsyncTask;
 import android.os.Bundle;
-import androidx.fragment.app.FragmentActivity;
-
 import android.os.Handler;
-import android.preference.PreferenceManager;
-import android.util.Log;
+import android.os.Looper;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.ProgressBar;
-import android.widget.TextView;
 
-import com.philolog.philologus.SQLiteAssetHelper.SQLiteAssetHelper;
-import com.philolog.philologus.SQLiteAssetHelper.Utils;
+import androidx.annotation.NonNull;
+import androidx.fragment.app.FragmentActivity;
+import androidx.preference.PreferenceManager;
+
 import com.philolog.philologus.database.PHDBHandler;
 
-import java.io.File;
-import java.io.IOException;
-import java.util.zip.ZipEntry;
-import java.util.zip.ZipFile;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 public class WordListActivity extends FragmentActivity implements
         WordListFragment.Callbacks {
@@ -57,20 +51,16 @@ public class WordListActivity extends FragmentActivity implements
      */
     //public PHKeyboardView mKeyboardView;
     ProgressBar pgsBar;
-    TextView txtView;
-    int i = 0;
-    Handler hdlr = new Handler();
     public boolean mTwoPane;
-    private SharedPreferences.OnSharedPreferenceChangeListener prefListener;
+    private final ExecutorService executor = Executors.newSingleThreadExecutor();
+    private final Handler handler = new Handler(Looper.getMainLooper());
+    private boolean barShown = false;
+
 
     public static void localSetTheme(Context context)
     {
-        SharedPreferences sharedPref = androidx.preference.PreferenceManager.getDefaultSharedPreferences(context);
+        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(context);
         String themeName = sharedPref.getString("PHTheme", "PHDayNight");
-        if (themeName == null)
-        {
-            themeName = "PHDayNight";
-        }
 
         switch(themeName)
         {
@@ -86,106 +76,66 @@ public class WordListActivity extends FragmentActivity implements
         }
     }
 
-    public void onSaveInstanceState(Bundle outState){
+    public void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
-        //getFragmentManager().putFragment(outState,"myfragment",myfragment);
         outState.putBoolean("twoPane", mTwoPane);
     }
-    public void onRestoreInstanceState(Bundle inState){
-        //myFragment = getFragmentManager().getFragment(inState,"myfragment");
+
+    public void onRestoreInstanceState(Bundle inState) {
         mTwoPane = inState.getBoolean("twoPane");
     }
 
     //https://stackoverflow.com/questions/12372759/android-get-compressed-size-of-a-file-in-a-zipfile
     //https://stackoverflow.com/questions/36045421/java-zipentry-getsize-returns-1
-    public long getDBSizeFromZip(Context c, String dbFileName) {
-        ZipFile zipfile = null;
-        try {
-            String path = c.getDatabasePath(dbFileName).getPath();
-            //c.getAssets().p
-            zipfile = new ZipFile(path);
-        } catch (IOException e) {
-            e.printStackTrace();
-            return -1;
-        }
-        java.util.Enumeration zipEnum = zipfile.entries();
-
-        while ( zipEnum.hasMoreElements() )
-        {
-            ZipEntry entry = (ZipEntry) zipEnum.nextElement();
-            if ( !entry.isDirectory () && entry.getName().equals(dbFileName))
-            {
-                return entry.getSize(); //entry.getCompressedSize();
-            }
-        }
-        return -1;
-    }
+//    public long getDBSizeFromZip(Context c, String dbFileName) {
+//        String path = c.getDatabasePath(dbFileName).getPath();
+//        try (ZipFile zipfile = new ZipFile(path)) {
+//            return zipfile.stream()
+//                    .filter(entry -> !entry.isDirectory() && entry.getName().equals(dbFileName))
+//                    .findFirst()
+//                    .map(ZipEntry::getSize)
+//                    .orElse(-1L);
+//        } catch (IOException e) {
+//            //e.printStackTrace();
+//            Log.e("jwm", "error: " + e.getMessage());
+//            return -1;
+//        }
+//    }
 
     //used to show a message while copying over database on first load
-    //params, progress, result
-    private class LoadDatabaseTask extends AsyncTask<Context, Long, Void> {
-        Context mContext;
-        boolean barShown = false;
-        long totalFileBytes = 188469248;
-        //ProgressDialog mDialog;
+    private void loadDatabase() {
+        pgsBar = findViewById(R.id.dbprogressbar);
+        barShown = false;
+        long totalFileBytes = 188469248; // This seems to be a hardcoded value for progress calculation
 
-        // Provide a constructor so we can get a Context to use to create
-        // the ProgressDialog.
-        public LoadDatabaseTask(Context context) {
-            super();
-            mContext = context;
-        }
+        executor.execute(() -> {
+            // Background work
+            PHDBHandler.mProgListener = progress -> {
+                // Update progress
+                handler.post(() -> {
+                    if (!barShown) {
+                        LinearLayout l = findViewById(R.id.progressContainer);
+                        l.setVisibility(View.VISIBLE);
+                        FrameLayout l2 = findViewById(R.id.hideduringcopy);
+                        l2.setVisibility(View.GONE);
+                        barShown = true;
+                    }
 
-        @Override
-        protected void onPreExecute() {
-            super.onPreExecute();
-            pgsBar = (ProgressBar) findViewById(R.id.dbprogressbar);
-            //txtView = (TextView) findViewById(R.id.dbprogresstext);
-            //txtView.setText("Loading database...");
-        }
-
-        @Override
-        protected Void doInBackground(Context... contexts) {
-            // Copy database.
-            Utils.ProgListener p = new Utils.ProgListener() {
-                @Override
-                public void onProgress(long progress) {
-                    //Log.w("jwm", "DB Copy Progress: " + progress);
-                    publishProgress(progress);
-                }
+                    double percent = (double) progress / totalFileBytes * 100;
+                    long percentLong = Math.round(percent);
+                    pgsBar.setProgress((int) percentLong);
+                });
             };
-            PHDBHandler.mProgListener = p;
-            PHDBHandler.getInstance(contexts[0]).getReadableDatabase();
-            return null;
-        }
-        @Override
-        protected void onProgressUpdate(Long... values) {
-            //Log.w("jwm", "DB2 Copy Progress: " + values[0]);
+            PHDBHandler.getInstance(this).getReadableDatabase();
 
-            if (!barShown)
-            {
-                LinearLayout l = (LinearLayout) findViewById(R.id.progressContainer);
-                l.setVisibility(View.VISIBLE);
-                FrameLayout l2 = (FrameLayout) findViewById(R.id.hideduringcopy);
-                l2.setVisibility(View.GONE);
-                barShown = true;
-            }
-
-            double percent = (double)values[0] / totalFileBytes * 100;
-            long percentLong = Math.round(percent);
-            //txtView.setText("Loading database: " + prog2 + "%"); //very slow
-            pgsBar.setProgress((int)percentLong);
-        }
-
-        @Override
-        protected void onPostExecute(Void result) {
-            super.onPostExecute(result);
-            //mDialog.dismiss();
-            LinearLayout l = (LinearLayout) findViewById(R.id.progressContainer);
-            l.setVisibility(View.GONE);
-            FrameLayout l2 = (FrameLayout) findViewById(R.id.hideduringcopy);
-            l2.setVisibility(View.VISIBLE);
-        }
+            // Post-execution
+            handler.post(() -> {
+                LinearLayout l = findViewById(R.id.progressContainer);
+                l.setVisibility(View.GONE);
+                FrameLayout l2 = findViewById(R.id.hideduringcopy);
+                l2.setVisibility(View.VISIBLE);
+            });
+        });
     }
 
     public void openSettings(View view) {
@@ -199,7 +149,7 @@ public class WordListActivity extends FragmentActivity implements
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         PreferenceManager.setDefaultValues(this, R.xml.settings, false);
-        SharedPreferences sharedPref = androidx.preference.PreferenceManager.getDefaultSharedPreferences(this);
+        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
 /*
         //testing
         SharedPreferences.Editor editor1 = sharedPref.edit();
@@ -210,22 +160,16 @@ public class WordListActivity extends FragmentActivity implements
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_word_list);
 
-        prefListener = new SharedPreferences.OnSharedPreferenceChangeListener() {
-            public void onSharedPreferenceChanged(SharedPreferences prefs, String key) {
-            if (key.equals("PHTheme")) {
+        SharedPreferences.OnSharedPreferenceChangeListener prefListener = (prefs, key) -> {
+            if (key != null && key.equals("PHTheme")) {
                 recreate();
             }
         };
-    };
 
         sharedPref.registerOnSharedPreferenceChangeListener(prefListener);
 
         // Install databases if necessary.
-        //File database = getDatabasePath("philolog_us.db");
-        //if (!database.exists()) {
-            new LoadDatabaseTask(this).execute(this, null, null);
-            //PHDBHandler.getInstance(this).getReadableDatabase();
-        //}
+        loadDatabase();
 
         if (findViewById(R.id.word_detail_container) != null) {
             // The detail container view will be present only in the
@@ -238,8 +182,10 @@ public class WordListActivity extends FragmentActivity implements
 
             // In two-pane mode, list items should be given the
             // 'activated' state when touched.
-            ((WordListFragment) getSupportFragmentManager().findFragmentById(
-                    R.id.word_list)).setActivateOnItemClick(true);
+            WordListFragment w = (WordListFragment) getSupportFragmentManager().findFragmentById(R.id.word_list);
+            if (w != null) {
+                w.setActivateOnItemClick(true);
+            }
         }
 
         // TODO: If exposing deep links into your app, handle intents here.
@@ -301,18 +247,8 @@ public class WordListActivity extends FragmentActivity implements
         }
         */
     @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        boolean result = false;
-		/*
-		if (R.id.newWord == item.getItemId()) {
-			result = true;
-
-			Word p = new Word();
-			DatabaseHandler.getInstance(this).putWord(p);
-			// Open a new fragment with the new id
-			onItemSelected(p.id);
-		}
-		*/
-        return result;
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        // No menu items are handled here, so we call super
+        return super.onOptionsItemSelected(item);
     }
 }

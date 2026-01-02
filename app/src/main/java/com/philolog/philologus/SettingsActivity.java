@@ -1,13 +1,12 @@
 package com.philolog.philologus;
 
-import android.app.Activity;
 import android.content.pm.ActivityInfo;
 import android.os.Bundle;
-import android.app.FragmentManager;
-import android.app.FragmentTransaction;
-import android.preference.PreferenceFragment;
 
-public class SettingsActivity extends Activity {
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.preference.PreferenceFragmentCompat;
+
+public class SettingsActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,22 +18,17 @@ public class SettingsActivity extends Activity {
         }
 
         // Display the fragment as the main content.
-        FragmentManager mFragmentManager = getFragmentManager();
-        FragmentTransaction mFragmentTransaction = mFragmentManager
-                .beginTransaction();
-        PrefsFragment mPrefsFragment = new PrefsFragment();
-        mFragmentTransaction.replace(android.R.id.content, mPrefsFragment);
-        mFragmentTransaction.commit();
+        getSupportFragmentManager()
+                .beginTransaction()
+                .replace(android.R.id.content, new PrefsFragment())
+                .commit();
     }
 
-    public static class PrefsFragment extends PreferenceFragment {
+    public static class PrefsFragment extends PreferenceFragmentCompat {
 
         @Override
-        public void onCreate(Bundle savedInstanceState) {
-            super.onCreate(savedInstanceState);
-
-            // Load the preferences from an XML resource
-            addPreferencesFromResource(R.xml.settings);
+        public void onCreatePreferences(Bundle savedInstanceState, String rootKey) {
+            setPreferencesFromResource(R.xml.settings, rootKey);
         }
     }
 }

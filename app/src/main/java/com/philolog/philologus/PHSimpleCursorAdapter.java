@@ -49,16 +49,14 @@ import com.philolog.philologus.WordListFragment.WordHolder;
 
 public class PHSimpleCursorAdapter extends SimpleCursorAdapter
 {
-    private Typeface mCustomFont;
-    private Context mContext;
+    final Typeface mCustomFont;
     public static int pageSize = 1000;
-    //private TextView mTextView;
 
     //https://stackoverflow.com/questions/4567969/viewholder-pattern-correctly-implemented-in-custom-cursoradapter
 
     public PHSimpleCursorAdapter(final Context context, final int layout, final Cursor c, final String[] from,
                                  final int[] to) {
-        super(context, layout, c, from, to);
+        super(context, layout, c, from, to, 0);
 
         mCustomFont = Typeface.createFromAsset(context.getAssets(), "fonts/newathu5.ttf");
 
@@ -83,34 +81,34 @@ public class PHSimpleCursorAdapter extends SimpleCursorAdapter
         });
     }
 
-    private String removeMacronBreve(String word)
-    {
-        word = word.replaceAll("ā", "a");
-        word = word.replaceAll("ē", "e");
-        word = word.replaceAll("ī", "i");
-        word = word.replaceAll("ō", "o");
-        word = word.replaceAll("ū", "u");
-
-        word = word.replaceAll("ă", "a");
-        word = word.replaceAll("ĕ", "e");
-        word = word.replaceAll("ĭ", "i");
-        word = word.replaceAll("ŏ", "o");
-        word = word.replaceAll("ŭ", "u");
-
-        word = word.replaceAll("Ā", "A");
-        word = word.replaceAll("Ē", "E");
-        word = word.replaceAll("Ī", "I");
-        word = word.replaceAll("Ō", "O");
-        word = word.replaceAll("Ū", "U");
-
-        word = word.replaceAll("Ă", "A");
-        word = word.replaceAll("Ĕ", "E");
-        word = word.replaceAll("Ĭ", "I");
-        word = word.replaceAll("Ŏ", "O");
-        word = word.replaceAll("Ŭ", "U");
-
-        return word;
-    }
+//    private String removeMacronBreve(String word)
+//    {
+//        word = word.replaceAll("ā", "a");
+//        word = word.replaceAll("ē", "e");
+//        word = word.replaceAll("ī", "i");
+//        word = word.replaceAll("ō", "o");
+//        word = word.replaceAll("ū", "u");
+//
+//        word = word.replaceAll("ă", "a");
+//        word = word.replaceAll("ĕ", "e");
+//        word = word.replaceAll("ĭ", "i");
+//        word = word.replaceAll("ŏ", "o");
+//        word = word.replaceAll("ŭ", "u");
+//
+//        word = word.replaceAll("Ā", "A");
+//        word = word.replaceAll("Ē", "E");
+//        word = word.replaceAll("Ī", "I");
+//        word = word.replaceAll("Ō", "O");
+//        word = word.replaceAll("Ū", "U");
+//
+//        word = word.replaceAll("Ă", "A");
+//        word = word.replaceAll("Ĕ", "E");
+//        word = word.replaceAll("Ĭ", "I");
+//        word = word.replaceAll("Ŏ", "O");
+//        word = word.replaceAll("Ŭ", "U");
+//
+//        return word;
+//    }
 
     @Override
     public View newView(Context context, Cursor cursor, ViewGroup parent) {
@@ -143,4 +141,3 @@ public class PHSimpleCursorAdapter extends SimpleCursorAdapter
         }
     }
 }
-
