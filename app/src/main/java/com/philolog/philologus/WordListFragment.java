@@ -176,9 +176,7 @@ public class WordListFragment extends ListFragment implements View.OnClickListen
         //clear search when changing language
         View view = getView();
         if (view != null) {
-            EditText search_textbox = null;
-            search_textbox = getView().findViewById(R.id.word_search);
-
+            EditText search_textbox = view.findViewById(R.id.word_search);
             if (search_textbox != null) {
                 search_textbox.setText("");
             }
@@ -304,7 +302,6 @@ public class WordListFragment extends ListFragment implements View.OnClickListen
         RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
 
         // Select a parent for the keyboard. First search for a R.id.keyboardContainer viewgroup. If not found, use the rootWindow as parent
-        ViewGroup keyboardContainer = null;
         ViewGroup parentViewGroup;
         if (wla.mTwoPane)
         {
@@ -439,7 +436,6 @@ public class WordListFragment extends ListFragment implements View.OnClickListen
             if (hasFocus) {
                 openKeyboard(v);
                 v.requestFocus();
-                EditText e = (EditText)v;
                 Context context1 = getContext();
                 if (context1 != null) {
                     InputMethodManager imm3 = (InputMethodManager) context1.getSystemService(Context.INPUT_METHOD_SERVICE);
