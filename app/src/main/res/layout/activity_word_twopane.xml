@@ -25,14 +25,14 @@
         android:name="com.philolog.philologus.WordListFragment"
         android:layout_width="0dp"
         android:layout_height="match_parent"
-        android:layout_weight="1"
+        android:layout_weight="0.9"
         tools:layout="@layout/fragment_word_list" />
 
     <FrameLayout
         android:id="@+id/word_detail_container"
         android:layout_width="0dp"
         android:layout_height="match_parent"
-        android:layout_weight="2"
+        android:layout_weight="2.1"
         android:background="?attr/phBGColor"/>
 
 </LinearLayout>
