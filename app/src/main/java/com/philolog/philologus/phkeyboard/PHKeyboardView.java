@@ -30,7 +30,7 @@ import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.inputmethodservice.Keyboard;
 import android.inputmethodservice.KeyboardView;
-import android.preference.PreferenceManager;
+import androidx.preference.PreferenceManager;
 import android.util.AttributeSet;
 import android.util.TypedValue;
 import android.view.animation.Animation;
@@ -41,18 +41,17 @@ import com.philolog.philologus.database.Word;
 
 import java.util.List;
 
-/**
- * Created by jeremy on 3/27/16.
- * http://stackoverflow.com/questions/18224520/how-to-set-different-background-of-keys-for-android-custom-keyboard
- */
 public class PHKeyboardView extends KeyboardView {
 
     public boolean mMFPressed = false;
-    private int keyTextColor = 0;
-    private int keyTextColorDown = 0;
-    private int keyboardBGColor = 0;
+    private final int keyTextColor;
+    private final int keyTextColorDown;
+    private final int keyboardBGColor;
+    private final Paint mPaint;
+    private final Typeface mGreekTypeface;
+    private final float mScale;
 
-    //https://stackoverflow.com/questions/7752580/creating-a-softkeyboard-with-multiple-alternate-characters-per-key
+    @SuppressWarnings("deprecation")
     public PHKeyboardView(Context context, AttributeSet attrs) {
         super(context, attrs);
 
@@ -64,180 +63,120 @@ public class PHKeyboardView extends KeyboardView {
         keyTextColorDown = typedValue.data;
         theme.resolveAttribute(R.attr.phkeyboardBgColor, typedValue, true);
         keyboardBGColor = typedValue.data;
+
+        mPaint = new Paint();
+        mGreekTypeface = Typeface.createFromAsset(context.getAssets(), "fonts/newathu5.ttf");
+        mScale = context.getResources().getDisplayMetrics().density;
     }
 
+    @SuppressWarnings("deprecation")
     public void setLang(int lang) {
         Keyboard keyboard;
 
         if (lang == Word.LANG_GREEK) {
             keyboard = new Keyboard(getContext(), R.xml.phkeyboardgreek);
-        }
-        else {
+        } else {
             keyboard = new Keyboard(getContext(), R.xml.phkeyboardlatin);
         }
         this.setKeyboard(keyboard);
-        //this.setOnKeyboardActionListener(this);
         this.invalidateAllKeys();
     }
 
-    //http://stackoverflow.com/questions/3972445/how-to-put-text-in-a-drawable
     @SuppressWarnings("deprecation")
     @Override
     public void onDraw(Canvas canvas) {
         super.onDraw(canvas);
 
-        Paint paint = new Paint();
+        final Keyboard keyboard = getKeyboard();
+        if (keyboard == null) {
+            return;
+        }
 
-        //background color:
-        int width = this.getWidth();
-        int height = this.getHeight();
-        paint.setColor(keyboardBGColor);
-        paint.setStyle(Paint.Style.FILL); //fill the background with blue color
-        canvas.drawRect(0, 0, width, height, paint);
+        final List<Keyboard.Key> keys = keyboard.getKeys();
+        if (keys == null || keys.isEmpty()) {
+            return;
+        }
 
-        Context context = getContext();
-        List<Keyboard.Key> keys = getKeyboard().getKeys();
+        // Draw background
+        mPaint.reset();
+        mPaint.setColor(keyboardBGColor);
+        mPaint.setStyle(Paint.Style.FILL);
+        canvas.drawRect(0, 0, getWidth(), getHeight(), mPaint);
 
-        Typeface tf = Typeface.createFromAsset(context.getAssets(),"fonts/newathu5.ttf");
+        final Context context = getContext();
 
         for (Keyboard.Key key : keys) {
-            if (key.codes[0] == 38) { //delete
-                Drawable dr;
-                if (key.pressed) {
-                    dr = ContextCompat.getDrawable(context, R.drawable.normalbuttondown);
-                }
-                else {
-                    dr = ContextCompat.getDrawable(context, R.drawable.greybutton);
-                }
-                dr.setBounds(key.x, key.y, key.x + key.width, key.y + key.height);
-                dr.draw(canvas);
-
-                if (key.pressed) {
-                    dr = ContextCompat.getDrawable(context, R.drawable.deleteicond);
-                }
-                else
-                {
-                    dr = ContextCompat.getDrawable(context, R.drawable.deleteicon);
-                }
-                //Log.e("abc", key.width + " " + key.height);
-                double a = (Math.min(key.width, key.height)) * 0.66;
-                if (key.width < key.height)
-                {
-                    double y = key.y + ((key.height - a) / 2);
-                    double x = key.x + ((key.width - a) / 2);
-                    dr.setBounds((int)x, (int) y, (int)(x + a), (int) (y + a));
-                }
-                else
-                {
-                    double y = key.y + ((key.height - a) / 2);
-                    double x = key.x + ((key.width - a) / 2);
-
-                    dr.setBounds((int)x, (int)y, (int)(x + a), (int)(y + a));
-                }
-
-                dr.draw(canvas);
-            }
-            else {
-                Drawable dr;
-                if (key.pressed) {
-                    dr = ContextCompat.getDrawable(context, R.drawable.normalbuttondown);
-                    paint.setColor(keyTextColorDown);
-                }
-                else {
-                    dr = ContextCompat.getDrawable(context, R.drawable.normalbutton);
-                    paint.setColor(keyTextColor);
-                }
-                dr.setBounds(key.x, key.y, key.x + key.width, key.y + key.height);
-                dr.draw(canvas);
-            }
-            paint.setTextAlign(Paint.Align.CENTER);
-            float FONT_SIZE;
-            // Convert the dips to pixels
-            if ( key.codes[0] == 28 || key.codes[0] == 27) {
-                FONT_SIZE = 38.0f; //or 26.0?
-                paint.setTypeface(tf);
-            }
-            else if (key.codes[0] == 29 || key.codes[0] == 34)
-            {
-                FONT_SIZE = 44.0f; //or 26.0?
-                paint.setTypeface(tf);
-            }
-            else if (key.codes[0] == 32)
-            {
-                FONT_SIZE = 23.0f; //or 26.0?
-                //paint.setTypeface(tf);
-            }
-            else if (key.codes[0] == 33 && mMFPressed)
-            {
-                FONT_SIZE = 32.0f; //or 26.0?
-                paint.setTypeface(tf);
-            }
-            else if (key.codes[0] == 35)
-            {
-                FONT_SIZE = 23.0f; //or 26.0?
-            }
-            else
-            {
-                FONT_SIZE = 23.0f; //or 26.0?
-                paint.setTypeface(Typeface.DEFAULT);
-            }
-
-            if (key.codes[0] == 39)
-            {
-                paint.setColor(Color.GRAY);
-            }
-
-            final float scale = context.getResources().getDisplayMetrics().density;
-            final int fontSizeInPx = (int) (FONT_SIZE * scale + 0.5f);
-            paint.setTextSize(fontSizeInPx);//was 72px
-
-            paint.setAntiAlias(true);
-            paint.setFakeBoldText(true);
-            paint.setStyle(Paint.Style.FILL);
-
-            String s;
-            int offset;
-            if (key.label != null) {
-                if (key.codes[0] == 27) {
-                    s = "῾";
-                    offset = 20;
-                }
-                else if (key.codes[0] == 28) {
-                    s = "᾿";
-                    offset = 20;
-                }
-                else if (key.codes[0] == 29) {
-                    s = "´";//"´";
-                    offset = 19;
-                }
-                else if (key.codes[0] == 34) {
-                    s = "`";//"´";
-                    offset = 21;
-                }
-                else if (key.codes[0] == 30) {
-                    s = key.label.toString();
-                    offset = 2;
-                }
-                else if (key.codes[0] == 33) {
-                    s = "—";//key.label.toString();
-                    offset = 4;
-                }
-                else if (key.codes[0] == 32) {
-                    s = "ι";//"ι";//"ͺ";
-                    offset = 14;
-                }
-                else if (key.codes[0] == 33 && mMFPressed) {
-                    s = ",";
-                    offset = 5;
-                }
-                else {
-                    s = key.label.toString();
-                    offset = 9;
-                }
-                offset = (int) (offset * scale + 0.5f); //convert dp to px
-                canvas.drawText(s, key.x + ((float) key.width / 2),
-                        key.y + ((float) key.height / 2) + offset, paint);
+            // Draw key background
+            Drawable dr;
+            if (key.codes[0] == 38) { // Delete key
+                dr = ContextCompat.getDrawable(context, key.pressed ? R.drawable.normalbuttondown : R.drawable.greybutton);
             } else {
+                dr = ContextCompat.getDrawable(context, key.pressed ? R.drawable.normalbuttondown : R.drawable.normalbutton);
+            }
+            if (dr != null) {
+                dr.setBounds(key.x, key.y, key.x + key.width, key.y + key.height);
+                dr.draw(canvas);
+            }
+
+            // Setup paint for text/icon
+            mPaint.setTextAlign(Paint.Align.CENTER);
+            mPaint.setAntiAlias(true);
+            mPaint.setFakeBoldText(true);
+            mPaint.setColor(key.pressed ? keyTextColorDown : keyTextColor);
+            if (key.codes[0] == 39) {
+                mPaint.setColor(Color.GRAY);
+            }
+
+            // Draw delete icon
+            if (key.codes[0] == 38) {
+                Drawable icon = ContextCompat.getDrawable(context, key.pressed ? R.drawable.deleteicond : R.drawable.deleteicon);
+                if (icon != null) {
+                    double a = (Math.min(key.width, key.height)) * 0.66;
+                    double y = key.y + ((key.height - a) / 2);
+                    double x = key.x + ((key.width - a) / 2);
+                    icon.setBounds((int) x, (int) y, (int) (x + a), (int) (y + a));
+                    icon.draw(canvas);
+                }
+            }
+            // Draw key label
+            else if (key.label != null) {
+                float FONT_SIZE;
+                // Determine font size and typeface
+                if (key.codes[0] == 28 || key.codes[0] == 27 || key.codes[0] == 29 || key.codes[0] == 34) {
+                    FONT_SIZE = (key.codes[0] == 29 || key.codes[0] == 34) ? 44.0f : 38.0f;
+                    mPaint.setTypeface(mGreekTypeface);
+                } else if (key.codes[0] == 32) {
+                    FONT_SIZE = 23.0f;
+                } else if (key.codes[0] == 33 && mMFPressed) {
+                    FONT_SIZE = 32.0f;
+                    mPaint.setTypeface(mGreekTypeface);
+                } else {
+                    FONT_SIZE = 23.0f;
+                    mPaint.setTypeface(Typeface.DEFAULT);
+                }
+
+                final int fontSizeInPx = (int) (FONT_SIZE * mScale + 0.5f);
+                mPaint.setTextSize(fontSizeInPx);
+
+                // Determine label text and offset
+                String s;
+                int offset;
+                if (key.codes[0] == 27) { s = "῾"; offset = 20; }
+                else if (key.codes[0] == 28) { s = "᾿"; offset = 20; }
+                else if (key.codes[0] == 29) { s = "´"; offset = 19; }
+                else if (key.codes[0] == 34) { s = "`"; offset = 21; }
+                else if (key.codes[0] == 30) { s = key.label.toString(); offset = 2; }
+                else if (key.codes[0] == 33) { s = "—"; offset = 4; }
+                else if (key.codes[0] == 32) { s = "ι"; offset = 14; }
+                else if (key.codes[0] == 33 && mMFPressed) { s = ","; offset = 5; }
+                else { s = key.label.toString(); offset = 9; }
+
+                int finalOffset = (int) (offset * mScale + 0.5f);
+                canvas.drawText(s, key.x + ((float) key.width / 2), key.y + ((float) key.height / 2) + finalOffset, mPaint);
+
+            }
+            // Fallback to draw other icons
+            else if (key.icon != null) {
                 key.icon.setBounds(key.x, key.y, key.x + key.width, key.y + key.height);
                 key.icon.draw(canvas);
             }
@@ -262,13 +201,13 @@ public class PHKeyboardView extends KeyboardView {
 
             @Override
             public void onAnimationEnd(Animation animation) {
-                //setVisibility(View.VISIBLE);
                 postDelayed(onComplete, 200);
             }
         });
 
         setAnimation(animation);
     }
+
     public void hideKBWithAnimation(Animation animation, final Runnable onComplete) {
     }
 }

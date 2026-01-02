@@ -380,7 +380,6 @@ public class WordListFragment extends ListFragment implements View.OnClickListen
             if (hasFocus) {
                 openKeyboard(v);
                 v.requestFocus();
-                EditText e = (EditText)v;
                 Context context1 = getContext();
                 if (context1 != null) {
                     InputMethodManager imm3 = (InputMethodManager) context1.getSystemService(Context.INPUT_METHOD_SERVICE);
