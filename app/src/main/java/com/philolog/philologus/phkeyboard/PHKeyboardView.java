@@ -181,11 +181,6 @@ public class PHKeyboardView extends KeyboardView {
         }
     }
 
-//    public int getUnicodeMode() {
-//        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(getContext());
-//        return Integer.parseInt(sharedPref.getString("UnicodeMode", "0"));
-//    }
-
     public void showWithAnimation(Animation animation, final Runnable onComplete) {
         animation.setAnimationListener(new Animation.AnimationListener() {
 

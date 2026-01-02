@@ -49,12 +49,12 @@ public class WordListActivity extends FragmentActivity implements
      * Whether or not the activity is in two-pane mode, i.e. running on a tablet
      * device.
      */
-    //public PHKeyboardView mKeyboardView;
     ProgressBar pgsBar;
     public boolean mTwoPane;
     private final ExecutorService executor = Executors.newSingleThreadExecutor();
     private final Handler handler = new Handler(Looper.getMainLooper());
     private boolean barShown = false;
+    private SharedPreferences.OnSharedPreferenceChangeListener prefListener;
 
 
     public static void localSetTheme(Context context)
@@ -85,24 +85,6 @@ public class WordListActivity extends FragmentActivity implements
         mTwoPane = inState.getBoolean("twoPane");
     }
 
-    //https://stackoverflow.com/questions/12372759/android-get-compressed-size-of-a-file-in-a-zipfile
-    //https://stackoverflow.com/questions/36045421/java-zipentry-getsize-returns-1
-//    public long getDBSizeFromZip(Context c, String dbFileName) {
-//        String path = c.getDatabasePath(dbFileName).getPath();
-//        try (ZipFile zipfile = new ZipFile(path)) {
-//            return zipfile.stream()
-//                    .filter(entry -> !entry.isDirectory() && entry.getName().equals(dbFileName))
-//                    .findFirst()
-//                    .map(ZipEntry::getSize)
-//                    .orElse(-1L);
-//        } catch (IOException e) {
-//            //e.printStackTrace();
-//            Log.e("jwm", "error: " + e.getMessage());
-//            return -1;
-//        }
-//    }
-
-    //used to show a message while copying over database on first load
     private void loadDatabase() {
         pgsBar = findViewById(R.id.dbprogressbar);
         barShown = false;
@@ -139,28 +121,19 @@ public class WordListActivity extends FragmentActivity implements
     }
 
     public void openSettings(View view) {
-        // Do something in response to button
         Intent intent = new Intent(this, SettingsActivity.class);
-        //EditText editText = (EditText) findViewById(R.id.edit_message);
-        //String message = "practice";//editText.getText().toString();
-        //intent.putExtra(EXTRA_MESSAGE, message);
         startActivity(intent);
     }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         PreferenceManager.setDefaultValues(this, R.xml.settings, false);
         SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(this);
-/*
-        //testing
-        SharedPreferences.Editor editor1 = sharedPref.edit();
-        editor1.putString("PHTheme","PHDark");
-        editor1.commit();
-        */
+
         localSetTheme(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_word_list);
 
-        SharedPreferences.OnSharedPreferenceChangeListener prefListener = (prefs, key) -> {
+        prefListener = (prefs, key) -> {
             if (key != null && key.equals("PHTheme")) {
                 recreate();
             }
@@ -174,16 +147,7 @@ public class WordListActivity extends FragmentActivity implements
         WordListFragment wordListFragment = (WordListFragment) getSupportFragmentManager().findFragmentById(R.id.word_list);
 
         if (findViewById(R.id.word_detail_container) != null) {
-            // The detail container view will be present only in the
-            // large-screen layouts (res/values-large and
-            // res/values-sw600dp). If this view is present, then the
-            // activity should be in two-pane mode.
             mTwoPane = true;
-
-            //Log.e("abc", "two pane for real: " + mTwoPane);
-
-            // In two-pane mode, list items should be given the
-            // 'activated' state when touched.
 
             if (wordListFragment != null) {
                 wordListFragment.setActivateOnItemClick(true);
@@ -193,39 +157,16 @@ public class WordListActivity extends FragmentActivity implements
         if (wordListFragment != null) {
             wordListFragment.onTwoPaneChanged(mTwoPane);
         }
-
-        // TODO: If exposing deep links into your app, handle intents here.
-        /*
-        Keyboard mKeyboard= new Keyboard(getContext(), R.xml.phkeyboardgreek);
-        mKeyboardView = (PHKeyboardView)view.findViewById(R.id.keyboardview);
-        mKeyboardView.setKeyboard( mKeyboard );
-        // Do not show the preview balloons
-        mKeyboardView.setPreviewEnabled(false);
-        mKeyboardView.setOnKeyboardActionListener(new PHLocalOnKeyboardActionListener((EditText)e, mKeyboardView, getContext()));
-
-        //mKeyboardView.setLang(lang);
-
-        //http://debugreport.blogspot.com/2012/09/how-to-hide-android-soft-keyboard.html
-        getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
-        //InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-        //imm.hideSoftInputFromWindow(.getWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
-        */
     }
     public void clearSearch(View v)
     {
         EditText s = findViewById(R.id.word_search);
         s.setText("");
     }
-    /**
-     * Callback method from {@link WordListFragment.Callbacks} indicating that
-     * the item with the given ID was selected.
-     */
+
     @Override
     public void onItemSelected(long id) {
         if (mTwoPane) {
-            // In two-pane mode, show the detail view in this activity by
-            // adding or replacing the detail fragment using a
-            // fragment transaction.
             Bundle arguments = new Bundle();
             arguments.putLong(WordDetailFragment.ARG_ITEM_ID, id);
             WordDetailFragment fragment = new WordDetailFragment();
@@ -234,27 +175,20 @@ public class WordListActivity extends FragmentActivity implements
                     .replace(R.id.word_detail_container, fragment).commit();
 
         } else {
-            // In single-pane mode, simply start the detail activity
-            // for the selected item ID.
             Intent detailIntent = new Intent(this, WordDetailActivity.class);
             detailIntent.putExtra(WordDetailFragment.ARG_ITEM_ID, id);
             startActivity(detailIntent);
         }
     }
-    /*
-        @Override
-        public boolean onCreateOptionsMenu(Menu menu) {
 
-            MenuInflater inflater = getMenuInflater();
-            //inflater.inflate(R.menu.list_activity, menu);
-            inflater.inflate(R.menu.options_menu, menu);
-
-            return true;
-        }
-        */
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
-        // No menu items are handled here, so we call super
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        PreferenceManager.getDefaultSharedPreferences(this).unregisterOnSharedPreferenceChangeListener(prefListener);
     }
 }
