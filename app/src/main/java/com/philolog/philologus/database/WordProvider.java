@@ -24,9 +24,9 @@ package com.philolog.philologus.database;
 import android.content.ContentProvider;
 import android.content.ContentValues;
 import android.database.Cursor;
-import android.database.MergeCursor;
 import android.net.Uri;
-import android.util.Log;
+
+import androidx.annotation.NonNull;
 
 import com.philolog.philologus.PHSimpleCursorAdapter;
 
@@ -57,20 +57,20 @@ public class WordProvider extends ContentProvider {
 	}
 
 	@Override
-	public int delete(Uri uri, String selection, String[] selectionArgs) {
+	public int delete(@NonNull Uri uri, String selection, String[] selectionArgs) {
 		// Implement this to handle requests to delete one or more rows.
 		throw new UnsupportedOperationException("Delete Not yet implemented");
 	}
 
 	@Override
-	public String getType(Uri uri) {
+	public String getType(@NonNull Uri uri) {
 		// TODO: Implement this to handle requests for the MIME type of the data
 		// at the given URI.
 		throw new UnsupportedOperationException("getType Not yet implemented");
 	}
 
 	@Override
-	public Uri insert(Uri uri, ContentValues values) {
+	public Uri insert(@NonNull Uri uri, ContentValues values) {
 		// TODO: Implement this to handle requests to insert a new row.
 		throw new UnsupportedOperationException("Insert Not yet implemented");
 	}
@@ -81,8 +81,8 @@ public class WordProvider extends ContentProvider {
 	}
 
 	@Override
-	public Cursor query(Uri uri, String[] projection, String selection,
-			String[] selectionArgs, String sortOrder) {
+	public Cursor query(@NonNull Uri uri, String[] projection, String selection,
+                        String[] selectionArgs, String sortOrder) {
 		Cursor result = null;
         Cursor seqResult = null;
 		if (GREEK_URI_WORDS.equals(uri) || LATIN_URI_WORDS.equals(uri))
@@ -93,7 +93,7 @@ public class WordProvider extends ContentProvider {
 					.query(Word.TABLE_NAME, Word.FIELDS, null, null, null,
 							null, Word.COL_ID, String.valueOf(PHSimpleCursorAdapter.pageSize*2));
 			selectedSeq = 1;
-			result.setNotificationUri(getContext().getContentResolver(), URI_WORDS);
+			result.setNotificationUri(requireContext().getContentResolver(), URI_WORDS);
 		}
 		else if (uri.toString().startsWith(GREEK_WORD_BASE) || uri.toString().startsWith(LATIN_WORD_BASE))
 		{
@@ -160,7 +160,7 @@ public class WordProvider extends ContentProvider {
                             new String[] { String.valueOf(startRequestSeq) }, null, null,
                             "_id", String.valueOf(fullRequestSize));
 
-			result.setNotificationUri(getContext().getContentResolver(), URI_WORDS);
+			result.setNotificationUri(requireContext().getContentResolver(), URI_WORDS);
 		}
 		else
         {
@@ -171,8 +171,8 @@ public class WordProvider extends ContentProvider {
 	}
 
 	@Override
-	public int update(Uri uri, ContentValues values, String selection,
-			String[] selectionArgs) {
+	public int update(@NonNull Uri uri, ContentValues values, String selection,
+                      String[] selectionArgs) {
 		// TODO: Implement this to handle requests to update one or more rows.
 		throw new UnsupportedOperationException("Not yet implemented");
 	}
