@@ -202,13 +202,13 @@ public class WordListFragment extends ListFragment implements View.OnClickListen
             ed.apply(); //faster than commit()?
         }
     }
-/*
+
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        //setRetainInstance(true);
+        setRetainInstance(true);
     }
-    */
+
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
