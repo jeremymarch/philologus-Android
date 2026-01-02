@@ -25,11 +25,8 @@ import android.database.Cursor;
 import android.database.DatabaseUtils;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
-
-//import com.readystatesoftware.sqliteasset.SQLiteAssetHelper;
 import com.philolog.philologus.SQLiteAssetHelper.SQLiteAssetHelper;
-
-import java.io.UnsupportedEncodingException;
+import java.nio.charset.StandardCharsets;
 
 /**
  * Created by jeremy on 1/30/18.
@@ -71,70 +68,18 @@ public class PHDBHandler extends SQLiteAssetHelper {
         Log.e("jwm", "PHDBHandler: upgrade old " + oldVersion + " to new " + newVersion);
     }
 
-    public int scrollTo(String wordPrefix) {
-        String[] selectionArgs = {wordPrefix};
-        String[] columns = { "_id" };
-        String groupBy = null;
-        String having = null;
-        String orderBy = "sortword";
-        String limit = "1";
-
-        Cursor cursor = singleton.getReadableDatabase().query(Word.TABLE_NAME, columns, "sortword>=?", selectionArgs, groupBy, having, orderBy, limit);
-
-        if (cursor.getCount() > 0)
-        {
-            cursor.moveToFirst();
-            int seq = cursor.getInt(0);
-            //Log.e("seq", String.valueOf(seq));
-            return seq;
-        }
-        else
-            {
-            //past last word, return the last + 1 because positions are zero-indexed
-            long count = DatabaseUtils.queryNumEntries(singleton.getReadableDatabase(), Word.TABLE_NAME);
-            return ((int)count + 1);
-        }
-    }
-
-    public synchronized Word getWord(final long id) {
-        final SQLiteDatabase db = this.getReadableDatabase();
-        final Cursor cursor = db.query(Word.TABLE_NAME, Word.FIELDS,
-                Word.COL_ID + " IS ?", new String[] { String.valueOf(id) },
-                null, null, null, null);
-        if (cursor == null || cursor.isAfterLast()) {
-            return null;
-        }
-
-        Word item = null;
-        if (cursor.moveToFirst()) {
-            item = new Word(cursor);
-        }
-        cursor.close();
-        return item;
-    }
-
     public synchronized String getDef(final long id) {
         String[] cols = { "def" };
         final SQLiteDatabase db = singleton.getReadableDatabase();
-        final Cursor cursor = db.query(Word.TABLE_NAME, cols,
+        try (Cursor cursor = db.query(Word.TABLE_NAME, cols,
                 "_id" + " IS ?", new String[] { String.valueOf(id) },
-                null, null, null, "1");
+                null, null, null, "1")) {
 
-        //Word item = null;
-        byte[] def_blob = new byte[0];
-        if (cursor != null && cursor.moveToFirst()) {
-            def_blob = cursor.getBlob(0);
-            //Log.e("abc", "def: " + def);
+            byte[] def_blob = new byte[0];
+            if (cursor.moveToFirst()) {
+                def_blob = cursor.getBlob(0);
+            }
+            return new String(def_blob, StandardCharsets.UTF_8);
         }
-        String def = "";
-        try {
-            def = new String(def_blob, "UTF-8");
-        } catch (UnsupportedEncodingException e) {
-            // TODO Auto-generated catch block
-            //e.printStackTrace();
-        }
-
-        cursor.close();
-        return def;
     }
 }
