@@ -3,8 +3,8 @@
 # min_api: 24
 # common_typos_disable
 # {"id":"com.android.tools.r8.mapping","version":"2.2"}
-# pg_map_id: ceb29d0626e72c3fc2a4fe91db09eeb900514a7c698327279412e635a0800ed1
-# pg_map_hash: SHA-256 ceb29d0626e72c3fc2a4fe91db09eeb900514a7c698327279412e635a0800ed1
+# pg_map_id: fcecd70a5f738f90758eb7b56ce060e323b4efe7b02898effb5f2cdad18243c2
+# pg_map_hash: SHA-256 fcecd70a5f738f90758eb7b56ce060e323b4efe7b02898effb5f2cdad18243c2
 android.app.AppComponentFactory -> android.app.AppComponentFactory:
 # {"id":"com.android.tools.r8.synthesized"}
     void <clinit>() -> <clinit>
@@ -36196,12 +36196,13 @@ com.philolog.philologus.WordListFragment -> com.philolog.philologus.WordListFrag
       # {"id":"com.android.tools.r8.synthesized"}
     0:0:void $r8$lambda$kiLHau2Wsv8prJ8gPQIb2NxZS1o(long) -> $r8$lambda$kiLHau2Wsv8prJ8gPQIb2NxZS1o
       # {"id":"com.android.tools.r8.synthesized"}
-    117:117:void <clinit>() -> <clinit>
-    71:71:void <init>() -> <init>
-    94:94:void <init>() -> <init>
-    99:99:void <init>() -> <init>
+    116:116:void <clinit>() -> <clinit>
+    70:70:void <init>() -> <init>
+    93:93:void <init>() -> <init>
+    98:98:void <init>() -> <init>
+    123:123:void <init>() -> <init>
     124:124:void <init>() -> <init>
-    125:125:void <init>() -> <init>
+    258:258:void hideCustomKeyboard(android.view.View) -> hideCustomKeyboard
     259:259:void hideCustomKeyboard(android.view.View) -> hideCustomKeyboard
     260:260:void hideCustomKeyboard(android.view.View) -> hideCustomKeyboard
     261:261:void hideCustomKeyboard(android.view.View) -> hideCustomKeyboard
@@ -36209,199 +36210,221 @@ com.philolog.philologus.WordListFragment -> com.philolog.philologus.WordListFrag
     263:263:void hideCustomKeyboard(android.view.View) -> hideCustomKeyboard
     264:264:void hideCustomKeyboard(android.view.View) -> hideCustomKeyboard
     265:265:void hideCustomKeyboard(android.view.View) -> hideCustomKeyboard
-    266:266:void hideCustomKeyboard(android.view.View) -> hideCustomKeyboard
-    271:271:void hideCustomKeyboard(android.view.View) -> hideCustomKeyboard
-    434:434:boolean lambda$onViewCreated$1(android.view.View,android.view.MotionEvent) -> lambda$onViewCreated$1
-    435:435:boolean lambda$onViewCreated$1(android.view.View,android.view.MotionEvent) -> lambda$onViewCreated$1
-    436:436:boolean lambda$onViewCreated$1(android.view.View,android.view.MotionEvent) -> lambda$onViewCreated$1
-    437:437:boolean lambda$onViewCreated$1(android.view.View,android.view.MotionEvent) -> lambda$onViewCreated$1
-    438:438:boolean lambda$onViewCreated$1(android.view.View,android.view.MotionEvent) -> lambda$onViewCreated$1
-    441:441:boolean lambda$onViewCreated$1(android.view.View,android.view.MotionEvent) -> lambda$onViewCreated$1
-    488:488:void lambda$onViewCreated$2(android.view.View,boolean) -> lambda$onViewCreated$2
-    489:489:void lambda$onViewCreated$2(android.view.View,boolean) -> lambda$onViewCreated$2
-    490:490:void lambda$onViewCreated$2(android.view.View,boolean) -> lambda$onViewCreated$2
-    491:491:void lambda$onViewCreated$2(android.view.View,boolean) -> lambda$onViewCreated$2
-    492:492:void lambda$onViewCreated$2(android.view.View,boolean) -> lambda$onViewCreated$2
-    493:493:void lambda$onViewCreated$2(android.view.View,boolean) -> lambda$onViewCreated$2
-    494:494:void lambda$onViewCreated$2(android.view.View,boolean) -> lambda$onViewCreated$2
-    495:495:void lambda$onViewCreated$2(android.view.View,boolean) -> lambda$onViewCreated$2
-    496:496:void lambda$onViewCreated$2(android.view.View,boolean) -> lambda$onViewCreated$2
-    497:497:void lambda$onViewCreated$2(android.view.View,boolean) -> lambda$onViewCreated$2
-    498:498:void lambda$onViewCreated$2(android.view.View,boolean) -> lambda$onViewCreated$2
-    499:499:void lambda$onViewCreated$2(android.view.View,boolean) -> lambda$onViewCreated$2
-    504:504:void lambda$onViewCreated$2(android.view.View,boolean) -> lambda$onViewCreated$2
-    505:505:void lambda$onViewCreated$2(android.view.View,boolean) -> lambda$onViewCreated$2
-    507:507:void lambda$onViewCreated$2(android.view.View,boolean) -> lambda$onViewCreated$2
-    511:511:boolean lambda$onViewCreated$3(android.view.View,android.view.MotionEvent) -> lambda$onViewCreated$3
-    512:512:boolean lambda$onViewCreated$3(android.view.View,android.view.MotionEvent) -> lambda$onViewCreated$3
-    513:513:boolean lambda$onViewCreated$3(android.view.View,android.view.MotionEvent) -> lambda$onViewCreated$3
-    514:514:boolean lambda$onViewCreated$3(android.view.View,android.view.MotionEvent) -> lambda$onViewCreated$3
-    516:516:boolean lambda$onViewCreated$3(android.view.View,android.view.MotionEvent) -> lambda$onViewCreated$3
-    118:118:void lambda$static$0(long) -> lambda$static$0
-    537:537:void onAttach(android.content.Context) -> onAttach
-    540:540:void onAttach(android.content.Context) -> onAttach
-    541:541:void onAttach(android.content.Context) -> onAttach
-    545:545:void onAttach(android.content.Context) -> onAttach
-    546:546:void onAttach(android.content.Context) -> onAttach
+    270:270:void hideCustomKeyboard(android.view.View) -> hideCustomKeyboard
+    382:382:boolean lambda$onViewCreated$1(android.view.View,android.view.MotionEvent) -> lambda$onViewCreated$1
+    383:383:boolean lambda$onViewCreated$1(android.view.View,android.view.MotionEvent) -> lambda$onViewCreated$1
+    384:384:boolean lambda$onViewCreated$1(android.view.View,android.view.MotionEvent) -> lambda$onViewCreated$1
+    385:385:boolean lambda$onViewCreated$1(android.view.View,android.view.MotionEvent) -> lambda$onViewCreated$1
+    386:386:boolean lambda$onViewCreated$1(android.view.View,android.view.MotionEvent) -> lambda$onViewCreated$1
+    389:389:boolean lambda$onViewCreated$1(android.view.View,android.view.MotionEvent) -> lambda$onViewCreated$1
+    436:436:void lambda$onViewCreated$2(android.view.View,boolean) -> lambda$onViewCreated$2
+    437:437:void lambda$onViewCreated$2(android.view.View,boolean) -> lambda$onViewCreated$2
+    438:438:void lambda$onViewCreated$2(android.view.View,boolean) -> lambda$onViewCreated$2
+    439:439:void lambda$onViewCreated$2(android.view.View,boolean) -> lambda$onViewCreated$2
+    440:440:void lambda$onViewCreated$2(android.view.View,boolean) -> lambda$onViewCreated$2
+    441:441:void lambda$onViewCreated$2(android.view.View,boolean) -> lambda$onViewCreated$2
+    442:442:void lambda$onViewCreated$2(android.view.View,boolean) -> lambda$onViewCreated$2
+    443:443:void lambda$onViewCreated$2(android.view.View,boolean) -> lambda$onViewCreated$2
+    444:444:void lambda$onViewCreated$2(android.view.View,boolean) -> lambda$onViewCreated$2
+    445:445:void lambda$onViewCreated$2(android.view.View,boolean) -> lambda$onViewCreated$2
+    446:446:void lambda$onViewCreated$2(android.view.View,boolean) -> lambda$onViewCreated$2
+    447:447:void lambda$onViewCreated$2(android.view.View,boolean) -> lambda$onViewCreated$2
+    452:452:void lambda$onViewCreated$2(android.view.View,boolean) -> lambda$onViewCreated$2
+    453:453:void lambda$onViewCreated$2(android.view.View,boolean) -> lambda$onViewCreated$2
+    455:455:void lambda$onViewCreated$2(android.view.View,boolean) -> lambda$onViewCreated$2
+    459:459:boolean lambda$onViewCreated$3(android.view.View,android.view.MotionEvent) -> lambda$onViewCreated$3
+    460:460:boolean lambda$onViewCreated$3(android.view.View,android.view.MotionEvent) -> lambda$onViewCreated$3
+    461:461:boolean lambda$onViewCreated$3(android.view.View,android.view.MotionEvent) -> lambda$onViewCreated$3
+    462:462:boolean lambda$onViewCreated$3(android.view.View,android.view.MotionEvent) -> lambda$onViewCreated$3
+    464:464:boolean lambda$onViewCreated$3(android.view.View,android.view.MotionEvent) -> lambda$onViewCreated$3
+    117:117:void lambda$static$0(long) -> lambda$static$0
+    485:485:void onAttach(android.content.Context) -> onAttach
+    488:488:void onAttach(android.content.Context) -> onAttach
+    489:489:void onAttach(android.content.Context) -> onAttach
+    493:493:void onAttach(android.content.Context) -> onAttach
+    494:494:void onAttach(android.content.Context) -> onAttach
+    177:177:void onClick(android.view.View) -> onClick
     178:178:void onClick(android.view.View) -> onClick
     179:179:void onClick(android.view.View) -> onClick
     180:180:void onClick(android.view.View) -> onClick
-    181:181:void onClick(android.view.View) -> onClick
+    182:182:void onClick(android.view.View) -> onClick
     183:183:void onClick(android.view.View) -> onClick
-    184:184:void onClick(android.view.View) -> onClick
+    187:187:void onClick(android.view.View) -> onClick
     188:188:void onClick(android.view.View) -> onClick
-    189:189:void onClick(android.view.View) -> onClick
-    193:193:void onClick(android.view.View) -> onClick
-    195:195:void onClick(android.view.View) -> onClick
+    192:192:void onClick(android.view.View) -> onClick
+    194:194:void onClick(android.view.View) -> onClick
+    196:196:void onClick(android.view.View) -> onClick
     197:197:void onClick(android.view.View) -> onClick
-    198:198:void onClick(android.view.View) -> onClick
+    199:199:void onClick(android.view.View) -> onClick
     200:200:void onClick(android.view.View) -> onClick
     201:201:void onClick(android.view.View) -> onClick
     202:202:void onClick(android.view.View) -> onClick
     203:203:void onClick(android.view.View) -> onClick
     204:204:void onClick(android.view.View) -> onClick
-    205:205:void onClick(android.view.View) -> onClick
-    207:207:void onClick(android.view.View) -> onClick
-    219:219:android.view.View onCreateView(android.view.LayoutInflater,android.view.ViewGroup,android.os.Bundle) -> onCreateView
+    206:206:void onClick(android.view.View) -> onClick
+    566:566:androidx.loader.content.Loader onCreateLoader(int,android.os.Bundle) -> onCreateLoader
+    569:569:androidx.loader.content.Loader onCreateLoader(int,android.os.Bundle) -> onCreateLoader
+    218:218:android.view.View onCreateView(android.view.LayoutInflater,android.view.ViewGroup,android.os.Bundle) -> onCreateView
+    220:220:android.view.View onCreateView(android.view.LayoutInflater,android.view.ViewGroup,android.os.Bundle) -> onCreateView
     221:221:android.view.View onCreateView(android.view.LayoutInflater,android.view.ViewGroup,android.os.Bundle) -> onCreateView
-    222:222:android.view.View onCreateView(android.view.LayoutInflater,android.view.ViewGroup,android.os.Bundle) -> onCreateView
+    223:223:android.view.View onCreateView(android.view.LayoutInflater,android.view.ViewGroup,android.os.Bundle) -> onCreateView
     224:224:android.view.View onCreateView(android.view.LayoutInflater,android.view.ViewGroup,android.os.Bundle) -> onCreateView
     225:225:android.view.View onCreateView(android.view.LayoutInflater,android.view.ViewGroup,android.os.Bundle) -> onCreateView
-    226:226:android.view.View onCreateView(android.view.LayoutInflater,android.view.ViewGroup,android.os.Bundle) -> onCreateView
-    229:229:android.view.View onCreateView(android.view.LayoutInflater,android.view.ViewGroup,android.os.Bundle) -> onCreateView
-    231:231:android.view.View onCreateView(android.view.LayoutInflater,android.view.ViewGroup,android.os.Bundle) -> onCreateView
-    233:233:android.view.View onCreateView(android.view.LayoutInflater,android.view.ViewGroup,android.os.Bundle) -> onCreateView
-    572:572:void onDetach() -> onDetach
-    575:575:void onDetach() -> onDetach
-    576:576:void onDetach() -> onDetach
-    581:581:void onListItemClick(android.widget.ListView,android.view.View,int,long) -> onListItemClick
-    585:585:void onListItemClick(android.widget.ListView,android.view.View,int,long) -> onListItemClick
-    586:586:void onListItemClick(android.widget.ListView,android.view.View,int,long) -> onListItemClick
-    587:587:void onListItemClick(android.widget.ListView,android.view.View,int,long) -> onListItemClick
-    589:589:void onListItemClick(android.widget.ListView,android.view.View,int,long) -> onListItemClick
-    562:562:void onPause() -> onPause
-    568:568:void onPause() -> onPause
-    550:550:void onResume() -> onResume
-    551:551:void onResume() -> onResume
-    555:555:void onResume() -> onResume
-    556:556:void onResume() -> onResume
-    557:557:void onResume() -> onResume
-    559:559:void onResume() -> onResume
-    523:523:void onSaveInstanceState(android.os.Bundle) -> onSaveInstanceState
-    524:524:void onSaveInstanceState(android.os.Bundle) -> onSaveInstanceState
-    526:526:void onSaveInstanceState(android.os.Bundle) -> onSaveInstanceState
-    527:527:void onSaveInstanceState(android.os.Bundle) -> onSaveInstanceState
-    528:528:void onSaveInstanceState(android.os.Bundle) -> onSaveInstanceState
-    530:530:void onSaveInstanceState(android.os.Bundle) -> onSaveInstanceState
-    532:532:void onSaveInstanceState(android.os.Bundle) -> onSaveInstanceState
-    534:534:void onSaveInstanceState(android.os.Bundle) -> onSaveInstanceState
+    228:228:android.view.View onCreateView(android.view.LayoutInflater,android.view.ViewGroup,android.os.Bundle) -> onCreateView
+    230:230:android.view.View onCreateView(android.view.LayoutInflater,android.view.ViewGroup,android.os.Bundle) -> onCreateView
+    232:232:android.view.View onCreateView(android.view.LayoutInflater,android.view.ViewGroup,android.os.Bundle) -> onCreateView
+    520:520:void onDetach() -> onDetach
+    523:523:void onDetach() -> onDetach
+    524:524:void onDetach() -> onDetach
+    529:529:void onListItemClick(android.widget.ListView,android.view.View,int,long) -> onListItemClick
+    533:533:void onListItemClick(android.widget.ListView,android.view.View,int,long) -> onListItemClick
+    534:534:void onListItemClick(android.widget.ListView,android.view.View,int,long) -> onListItemClick
+    535:535:void onListItemClick(android.widget.ListView,android.view.View,int,long) -> onListItemClick
+    537:537:void onListItemClick(android.widget.ListView,android.view.View,int,long) -> onListItemClick
+    66:66:void onLoadFinished(androidx.loader.content.Loader,java.lang.Object) -> onLoadFinished
+    574:574:void onLoadFinished(androidx.loader.content.Loader,android.database.Cursor) -> onLoadFinished
+    575:575:void onLoadFinished(androidx.loader.content.Loader,android.database.Cursor) -> onLoadFinished
+    576:576:void onLoadFinished(androidx.loader.content.Loader,android.database.Cursor) -> onLoadFinished
+    581:581:void onLoadFinished(androidx.loader.content.Loader,android.database.Cursor) -> onLoadFinished
+    582:582:void onLoadFinished(androidx.loader.content.Loader,android.database.Cursor) -> onLoadFinished
+    583:583:void onLoadFinished(androidx.loader.content.Loader,android.database.Cursor) -> onLoadFinished
+    586:586:void onLoadFinished(androidx.loader.content.Loader,android.database.Cursor) -> onLoadFinished
+    587:587:void onLoadFinished(androidx.loader.content.Loader,android.database.Cursor) -> onLoadFinished
+    588:588:void onLoadFinished(androidx.loader.content.Loader,android.database.Cursor) -> onLoadFinished
+    589:589:void onLoadFinished(androidx.loader.content.Loader,android.database.Cursor) -> onLoadFinished
+    590:590:void onLoadFinished(androidx.loader.content.Loader,android.database.Cursor) -> onLoadFinished
+    593:593:void onLoadFinished(androidx.loader.content.Loader,android.database.Cursor) -> onLoadFinished
+    594:594:void onLoadFinished(androidx.loader.content.Loader,android.database.Cursor) -> onLoadFinished
+    596:596:void onLoadFinished(androidx.loader.content.Loader,android.database.Cursor) -> onLoadFinished
+    599:599:void onLoadFinished(androidx.loader.content.Loader,android.database.Cursor) -> onLoadFinished
+    600:600:void onLoadFinished(androidx.loader.content.Loader,android.database.Cursor) -> onLoadFinished
+    602:602:void onLoadFinished(androidx.loader.content.Loader,android.database.Cursor) -> onLoadFinished
+    606:606:void onLoaderReset(androidx.loader.content.Loader) -> onLoaderReset
+    607:607:void onLoaderReset(androidx.loader.content.Loader) -> onLoaderReset
+    608:608:void onLoaderReset(androidx.loader.content.Loader) -> onLoaderReset
+    610:610:void onLoaderReset(androidx.loader.content.Loader) -> onLoaderReset
+    510:510:void onPause() -> onPause
+    516:516:void onPause() -> onPause
+    498:498:void onResume() -> onResume
+    499:499:void onResume() -> onResume
+    503:503:void onResume() -> onResume
+    504:504:void onResume() -> onResume
+    505:505:void onResume() -> onResume
+    507:507:void onResume() -> onResume
+    471:471:void onSaveInstanceState(android.os.Bundle) -> onSaveInstanceState
+    472:472:void onSaveInstanceState(android.os.Bundle) -> onSaveInstanceState
+    474:474:void onSaveInstanceState(android.os.Bundle) -> onSaveInstanceState
+    475:475:void onSaveInstanceState(android.os.Bundle) -> onSaveInstanceState
+    476:476:void onSaveInstanceState(android.os.Bundle) -> onSaveInstanceState
+    478:478:void onSaveInstanceState(android.os.Bundle) -> onSaveInstanceState
+    480:480:void onSaveInstanceState(android.os.Bundle) -> onSaveInstanceState
+    482:482:void onSaveInstanceState(android.os.Bundle) -> onSaveInstanceState
+    274:274:void onViewCreated(android.view.View,android.os.Bundle) -> onViewCreated
     275:275:void onViewCreated(android.view.View,android.os.Bundle) -> onViewCreated
-    276:276:void onViewCreated(android.view.View,android.os.Bundle) -> onViewCreated
-    278:278:void onViewCreated(android.view.View,android.os.Bundle) -> onViewCreated
-    283:283:void onViewCreated(android.view.View,android.os.Bundle) -> onViewCreated
-    285:285:void onViewCreated(android.view.View,android.os.Bundle) -> onViewCreated
-    287:287:void onViewCreated(android.view.View,android.os.Bundle) -> onViewCreated
-    289:289:void onViewCreated(android.view.View,android.os.Bundle) -> onViewCreated
-    298:298:void onViewCreated(android.view.View,android.os.Bundle) -> onViewCreated
+    277:277:void onViewCreated(android.view.View,android.os.Bundle) -> onViewCreated
+    282:282:void onViewCreated(android.view.View,android.os.Bundle) -> onViewCreated
+    284:284:void onViewCreated(android.view.View,android.os.Bundle) -> onViewCreated
+    286:286:void onViewCreated(android.view.View,android.os.Bundle) -> onViewCreated
+    288:288:void onViewCreated(android.view.View,android.os.Bundle) -> onViewCreated
+    297:297:void onViewCreated(android.view.View,android.os.Bundle) -> onViewCreated
+    299:299:void onViewCreated(android.view.View,android.os.Bundle) -> onViewCreated
     300:300:void onViewCreated(android.view.View,android.os.Bundle) -> onViewCreated
-    301:301:void onViewCreated(android.view.View,android.os.Bundle) -> onViewCreated
+    303:303:void onViewCreated(android.view.View,android.os.Bundle) -> onViewCreated
     304:304:void onViewCreated(android.view.View,android.os.Bundle) -> onViewCreated
-    305:305:void onViewCreated(android.view.View,android.os.Bundle) -> onViewCreated
-    308:308:void onViewCreated(android.view.View,android.os.Bundle) -> onViewCreated
-    310:310:void onViewCreated(android.view.View,android.os.Bundle) -> onViewCreated
+    307:307:void onViewCreated(android.view.View,android.os.Bundle) -> onViewCreated
+    309:309:void onViewCreated(android.view.View,android.os.Bundle) -> onViewCreated
+    311:311:void onViewCreated(android.view.View,android.os.Bundle) -> onViewCreated
     312:312:void onViewCreated(android.view.View,android.os.Bundle) -> onViewCreated
-    313:313:void onViewCreated(android.view.View,android.os.Bundle) -> onViewCreated
-    317:317:void onViewCreated(android.view.View,android.os.Bundle) -> onViewCreated
-    319:319:void onViewCreated(android.view.View,android.os.Bundle) -> onViewCreated
+    316:316:void onViewCreated(android.view.View,android.os.Bundle) -> onViewCreated
+    318:318:void onViewCreated(android.view.View,android.os.Bundle) -> onViewCreated
+    324:324:void onViewCreated(android.view.View,android.os.Bundle) -> onViewCreated
     325:325:void onViewCreated(android.view.View,android.os.Bundle) -> onViewCreated
     326:326:void onViewCreated(android.view.View,android.os.Bundle) -> onViewCreated
-    327:327:void onViewCreated(android.view.View,android.os.Bundle) -> onViewCreated
+    328:328:void onViewCreated(android.view.View,android.os.Bundle) -> onViewCreated
     329:329:void onViewCreated(android.view.View,android.os.Bundle) -> onViewCreated
-    330:330:void onViewCreated(android.view.View,android.os.Bundle) -> onViewCreated
+    331:331:void onViewCreated(android.view.View,android.os.Bundle) -> onViewCreated
     332:332:void onViewCreated(android.view.View,android.os.Bundle) -> onViewCreated
     333:333:void onViewCreated(android.view.View,android.os.Bundle) -> onViewCreated
     334:334:void onViewCreated(android.view.View,android.os.Bundle) -> onViewCreated
     335:335:void onViewCreated(android.view.View,android.os.Bundle) -> onViewCreated
-    336:336:void onViewCreated(android.view.View,android.os.Bundle) -> onViewCreated
+    337:337:void onViewCreated(android.view.View,android.os.Bundle) -> onViewCreated
     338:338:void onViewCreated(android.view.View,android.os.Bundle) -> onViewCreated
-    339:339:void onViewCreated(android.view.View,android.os.Bundle) -> onViewCreated
+    341:341:void onViewCreated(android.view.View,android.os.Bundle) -> onViewCreated
     342:342:void onViewCreated(android.view.View,android.os.Bundle) -> onViewCreated
-    343:343:void onViewCreated(android.view.View,android.os.Bundle) -> onViewCreated
+    347:347:void onViewCreated(android.view.View,android.os.Bundle) -> onViewCreated
     348:348:void onViewCreated(android.view.View,android.os.Bundle) -> onViewCreated
     349:349:void onViewCreated(android.view.View,android.os.Bundle) -> onViewCreated
     350:350:void onViewCreated(android.view.View,android.os.Bundle) -> onViewCreated
-    351:351:void onViewCreated(android.view.View,android.os.Bundle) -> onViewCreated
+    352:352:void onViewCreated(android.view.View,android.os.Bundle) -> onViewCreated
     353:353:void onViewCreated(android.view.View,android.os.Bundle) -> onViewCreated
-    354:354:void onViewCreated(android.view.View,android.os.Bundle) -> onViewCreated
+    356:356:void onViewCreated(android.view.View,android.os.Bundle) -> onViewCreated
     357:357:void onViewCreated(android.view.View,android.os.Bundle) -> onViewCreated
     358:358:void onViewCreated(android.view.View,android.os.Bundle) -> onViewCreated
     359:359:void onViewCreated(android.view.View,android.os.Bundle) -> onViewCreated
-    360:360:void onViewCreated(android.view.View,android.os.Bundle) -> onViewCreated
+    362:362:void onViewCreated(android.view.View,android.os.Bundle) -> onViewCreated
     363:363:void onViewCreated(android.view.View,android.os.Bundle) -> onViewCreated
     364:364:void onViewCreated(android.view.View,android.os.Bundle) -> onViewCreated
-    365:365:void onViewCreated(android.view.View,android.os.Bundle) -> onViewCreated
-    369:369:void onViewCreated(android.view.View,android.os.Bundle) -> onViewCreated
-    372:372:void onViewCreated(android.view.View,android.os.Bundle) -> onViewCreated
-    373:373:void onViewCreated(android.view.View,android.os.Bundle) -> onViewCreated
-    427:427:void onViewCreated(android.view.View,android.os.Bundle) -> onViewCreated
-    428:428:void onViewCreated(android.view.View,android.os.Bundle) -> onViewCreated
-    429:429:void onViewCreated(android.view.View,android.os.Bundle) -> onViewCreated
-    430:430:void onViewCreated(android.view.View,android.os.Bundle) -> onViewCreated
+    368:368:void onViewCreated(android.view.View,android.os.Bundle) -> onViewCreated
+    371:371:void onViewCreated(android.view.View,android.os.Bundle) -> onViewCreated
+    375:375:void onViewCreated(android.view.View,android.os.Bundle) -> onViewCreated
+    376:376:void onViewCreated(android.view.View,android.os.Bundle) -> onViewCreated
+    377:377:void onViewCreated(android.view.View,android.os.Bundle) -> onViewCreated
+    378:378:void onViewCreated(android.view.View,android.os.Bundle) -> onViewCreated
+    381:381:void onViewCreated(android.view.View,android.os.Bundle) -> onViewCreated
+    394:394:void onViewCreated(android.view.View,android.os.Bundle) -> onViewCreated
+    396:396:void onViewCreated(android.view.View,android.os.Bundle) -> onViewCreated
+    397:397:void onViewCreated(android.view.View,android.os.Bundle) -> onViewCreated
+    398:398:void onViewCreated(android.view.View,android.os.Bundle) -> onViewCreated
+    401:401:void onViewCreated(android.view.View,android.os.Bundle) -> onViewCreated
+    431:431:void onViewCreated(android.view.View,android.os.Bundle) -> onViewCreated
+    432:432:void onViewCreated(android.view.View,android.os.Bundle) -> onViewCreated
     433:433:void onViewCreated(android.view.View,android.os.Bundle) -> onViewCreated
-    446:446:void onViewCreated(android.view.View,android.os.Bundle) -> onViewCreated
-    448:448:void onViewCreated(android.view.View,android.os.Bundle) -> onViewCreated
-    449:449:void onViewCreated(android.view.View,android.os.Bundle) -> onViewCreated
-    450:450:void onViewCreated(android.view.View,android.os.Bundle) -> onViewCreated
-    453:453:void onViewCreated(android.view.View,android.os.Bundle) -> onViewCreated
-    483:483:void onViewCreated(android.view.View,android.os.Bundle) -> onViewCreated
-    484:484:void onViewCreated(android.view.View,android.os.Bundle) -> onViewCreated
-    485:485:void onViewCreated(android.view.View,android.os.Bundle) -> onViewCreated
-    487:487:void onViewCreated(android.view.View,android.os.Bundle) -> onViewCreated
-    510:510:void onViewCreated(android.view.View,android.os.Bundle) -> onViewCreated
-    518:518:void onViewCreated(android.view.View,android.os.Bundle) -> onViewCreated
-    238:238:void openKeyboard(android.view.View) -> openKeyboard
+    435:435:void onViewCreated(android.view.View,android.os.Bundle) -> onViewCreated
+    458:458:void onViewCreated(android.view.View,android.os.Bundle) -> onViewCreated
+    466:466:void onViewCreated(android.view.View,android.os.Bundle) -> onViewCreated
+    237:237:void openKeyboard(android.view.View) -> openKeyboard
+    239:239:void openKeyboard(android.view.View) -> openKeyboard
     240:240:void openKeyboard(android.view.View) -> openKeyboard
-    241:241:void openKeyboard(android.view.View) -> openKeyboard
+    242:242:void openKeyboard(android.view.View) -> openKeyboard
     243:243:void openKeyboard(android.view.View) -> openKeyboard
     244:244:void openKeyboard(android.view.View) -> openKeyboard
     245:245:void openKeyboard(android.view.View) -> openKeyboard
-    246:246:void openKeyboard(android.view.View) -> openKeyboard
+    247:247:void openKeyboard(android.view.View) -> openKeyboard
     248:248:void openKeyboard(android.view.View) -> openKeyboard
     249:249:void openKeyboard(android.view.View) -> openKeyboard
     250:250:void openKeyboard(android.view.View) -> openKeyboard
     251:251:void openKeyboard(android.view.View) -> openKeyboard
-    252:252:void openKeyboard(android.view.View) -> openKeyboard
-    255:255:void openKeyboard(android.view.View) -> openKeyboard
-    598:598:void setActivateOnItemClick(boolean) -> setActivateOnItemClick
-    599:599:void setActivateOnItemClick(boolean) -> setActivateOnItemClick
-    600:600:void setActivateOnItemClick(boolean) -> setActivateOnItemClick
-    601:601:void setActivateOnItemClick(boolean) -> setActivateOnItemClick
-    604:604:void setActivatedPosition(int) -> setActivatedPosition
-    605:605:void setActivatedPosition(int) -> setActivatedPosition
-    607:607:void setActivatedPosition(int) -> setActivatedPosition
-    610:610:void setActivatedPosition(int) -> setActivatedPosition
-    611:611:void setActivatedPosition(int) -> setActivatedPosition
+    254:254:void openKeyboard(android.view.View) -> openKeyboard
+    546:546:void setActivateOnItemClick(boolean) -> setActivateOnItemClick
+    547:547:void setActivateOnItemClick(boolean) -> setActivateOnItemClick
+    548:548:void setActivateOnItemClick(boolean) -> setActivateOnItemClick
+    549:549:void setActivateOnItemClick(boolean) -> setActivateOnItemClick
+    552:552:void setActivatedPosition(int) -> setActivatedPosition
+    553:553:void setActivatedPosition(int) -> setActivatedPosition
+    555:555:void setActivatedPosition(int) -> setActivatedPosition
+    558:558:void setActivatedPosition(int) -> setActivatedPosition
+    559:559:void setActivatedPosition(int) -> setActivatedPosition
+    128:128:void setLang(int) -> setLang
     129:129:void setLang(int) -> setLang
     130:130:void setLang(int) -> setLang
-    131:131:void setLang(int) -> setLang
-    134:134:void setLang(int) -> setLang
-    136:136:void setLang(int) -> setLang
+    133:133:void setLang(int) -> setLang
+    135:135:void setLang(int) -> setLang
+    137:137:void setLang(int) -> setLang
     138:138:void setLang(int) -> setLang
     139:139:void setLang(int) -> setLang
-    140:140:void setLang(int) -> setLang
+    141:141:void setLang(int) -> setLang
     142:142:void setLang(int) -> setLang
-    143:143:void setLang(int) -> setLang
-    145:145:void setLang(int) -> setLang
+    144:144:void setLang(int) -> setLang
+    149:149:void setLang(int) -> setLang
     150:150:void setLang(int) -> setLang
     151:151:void setLang(int) -> setLang
     152:152:void setLang(int) -> setLang
-    153:153:void setLang(int) -> setLang
+    154:154:void setLang(int) -> setLang
     155:155:void setLang(int) -> setLang
-    156:156:void setLang(int) -> setLang
-    158:158:void setLang(int) -> setLang
+    157:157:void setLang(int) -> setLang
+    160:160:void setLang(int) -> setLang
     161:161:void setLang(int) -> setLang
-    162:162:void setLang(int) -> setLang
-    164:164:void setLang(int) -> setLang
+    163:163:void setLang(int) -> setLang
 com.philolog.philologus.WordListFragment$$ExternalSyntheticLambda0 -> com.philolog.philologus.WordListFragment$$ExternalSyntheticLambda0:
 # {"id":"sourceFile","fileName":"R8$$SyntheticClass"}
 # {"id":"com.android.tools.r8.synthesized"}
@@ -36436,51 +36459,24 @@ com.philolog.philologus.WordListFragment$$ExternalSyntheticLambda3 -> com.philol
       # {"id":"com.android.tools.r8.synthesized"}
 com.philolog.philologus.WordListFragment$1 -> com.philolog.philologus.WordListFragment$1:
 # {"id":"sourceFile","fileName":"WordListFragment.java"}
-    373:373:void <init>(com.philolog.philologus.WordListFragment) -> <init>
-    378:378:androidx.loader.content.Loader onCreateLoader(int,android.os.Bundle) -> onCreateLoader
-    381:381:androidx.loader.content.Loader onCreateLoader(int,android.os.Bundle) -> onCreateLoader
-    373:373:void onLoadFinished(androidx.loader.content.Loader,java.lang.Object) -> onLoadFinished
-    386:386:void onLoadFinished(androidx.loader.content.Loader,android.database.Cursor) -> onLoadFinished
-    387:387:void onLoadFinished(androidx.loader.content.Loader,android.database.Cursor) -> onLoadFinished
-    388:388:void onLoadFinished(androidx.loader.content.Loader,android.database.Cursor) -> onLoadFinished
-    393:393:void onLoadFinished(androidx.loader.content.Loader,android.database.Cursor) -> onLoadFinished
-    394:394:void onLoadFinished(androidx.loader.content.Loader,android.database.Cursor) -> onLoadFinished
-    395:395:void onLoadFinished(androidx.loader.content.Loader,android.database.Cursor) -> onLoadFinished
-    398:398:void onLoadFinished(androidx.loader.content.Loader,android.database.Cursor) -> onLoadFinished
-    399:399:void onLoadFinished(androidx.loader.content.Loader,android.database.Cursor) -> onLoadFinished
-    400:400:void onLoadFinished(androidx.loader.content.Loader,android.database.Cursor) -> onLoadFinished
-    401:401:void onLoadFinished(androidx.loader.content.Loader,android.database.Cursor) -> onLoadFinished
-    402:402:void onLoadFinished(androidx.loader.content.Loader,android.database.Cursor) -> onLoadFinished
-    405:405:void onLoadFinished(androidx.loader.content.Loader,android.database.Cursor) -> onLoadFinished
-    406:406:void onLoadFinished(androidx.loader.content.Loader,android.database.Cursor) -> onLoadFinished
-    408:408:void onLoadFinished(androidx.loader.content.Loader,android.database.Cursor) -> onLoadFinished
-    411:411:void onLoadFinished(androidx.loader.content.Loader,android.database.Cursor) -> onLoadFinished
-    412:412:void onLoadFinished(androidx.loader.content.Loader,android.database.Cursor) -> onLoadFinished
-    414:414:void onLoadFinished(androidx.loader.content.Loader,android.database.Cursor) -> onLoadFinished
-    418:418:void onLoaderReset(androidx.loader.content.Loader) -> onLoaderReset
-    419:419:void onLoaderReset(androidx.loader.content.Loader) -> onLoaderReset
-    420:420:void onLoaderReset(androidx.loader.content.Loader) -> onLoaderReset
-    422:422:void onLoaderReset(androidx.loader.content.Loader) -> onLoaderReset
-com.philolog.philologus.WordListFragment$2 -> com.philolog.philologus.WordListFragment$2:
-# {"id":"sourceFile","fileName":"WordListFragment.java"}
-    453:453:void <init>(com.philolog.philologus.WordListFragment,android.view.View) -> <init>
-    456:456:void afterTextChanged(android.text.Editable) -> afterTextChanged
-    461:461:void beforeTextChanged(java.lang.CharSequence,int,int,int) -> beforeTextChanged
-    466:466:void onTextChanged(java.lang.CharSequence,int,int,int) -> onTextChanged
-    467:467:void onTextChanged(java.lang.CharSequence,int,int,int) -> onTextChanged
-    470:470:void onTextChanged(java.lang.CharSequence,int,int,int) -> onTextChanged
-    471:471:void onTextChanged(java.lang.CharSequence,int,int,int) -> onTextChanged
-    475:475:void onTextChanged(java.lang.CharSequence,int,int,int) -> onTextChanged
-    477:477:void onTextChanged(java.lang.CharSequence,int,int,int) -> onTextChanged
-    478:478:void onTextChanged(java.lang.CharSequence,int,int,int) -> onTextChanged
-    480:480:void onTextChanged(java.lang.CharSequence,int,int,int) -> onTextChanged
+    401:401:void <init>(com.philolog.philologus.WordListFragment,android.view.View) -> <init>
+    404:404:void afterTextChanged(android.text.Editable) -> afterTextChanged
+    409:409:void beforeTextChanged(java.lang.CharSequence,int,int,int) -> beforeTextChanged
+    414:414:void onTextChanged(java.lang.CharSequence,int,int,int) -> onTextChanged
+    415:415:void onTextChanged(java.lang.CharSequence,int,int,int) -> onTextChanged
+    418:418:void onTextChanged(java.lang.CharSequence,int,int,int) -> onTextChanged
+    419:419:void onTextChanged(java.lang.CharSequence,int,int,int) -> onTextChanged
+    423:423:void onTextChanged(java.lang.CharSequence,int,int,int) -> onTextChanged
+    425:425:void onTextChanged(java.lang.CharSequence,int,int,int) -> onTextChanged
+    426:426:void onTextChanged(java.lang.CharSequence,int,int,int) -> onTextChanged
+    428:428:void onTextChanged(java.lang.CharSequence,int,int,int) -> onTextChanged
 com.philolog.philologus.WordListFragment$Callbacks -> com.philolog.philologus.WordListFragment$Callbacks:
 # {"id":"sourceFile","fileName":"WordListFragment.java"}
 com.philolog.philologus.WordListFragment$WordHolder -> com.philolog.philologus.WordListFragment$WordHolder:
 # {"id":"sourceFile","fileName":"WordListFragment.java"}
+    78:78:void <init>(android.view.View) -> <init>
     79:79:void <init>(android.view.View) -> <init>
     80:80:void <init>(android.view.View) -> <init>
-    81:81:void <init>(android.view.View) -> <init>
 com.philolog.philologus.database.PHDBHandler -> com.philolog.philologus.database.PHDBHandler:
 # {"id":"sourceFile","fileName":"PHDBHandler.java"}
     63:63:void <init>(android.content.Context) -> <init>

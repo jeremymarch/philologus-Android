@@ -1,7 +1,7 @@
 /*
   Copyright © 2017 Jeremy March. All rights reserved.
 
-This file is part of philologus-Android.
+    This file is part of philologus-Android.
 
     philologus-Android is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -15,11 +15,11 @@ This file is part of philologus-Android.
 
     You should have received a copy of the GNU General Public License
     along with Foobar.  If not, see <https://www.gnu.org/licenses/>.
-
  */
 
 package com.philolog.philologus;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
@@ -34,7 +34,6 @@ import android.text.InputType;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
@@ -64,7 +63,7 @@ import com.philolog.philologus.phkeyboard.PHLocalOnKeyboardActionListener;
 
 import java.util.Objects;
 
-public class WordListFragment extends ListFragment implements View.OnClickListener {
+public class WordListFragment extends ListFragment implements View.OnClickListener, LoaderCallbacks<Cursor> {
     public PHKeyboardView mKeyboardView;
     public ListAdapter gla;
     public CursorLoader cc;
@@ -369,58 +368,7 @@ public class WordListFragment extends ListFragment implements View.OnClickListen
         setListAdapter(gla);
 
         // Load the content
-        LoaderManager lm = LoaderManager.getInstance(this);
-        lm.initLoader(0, null, new LoaderCallbacks<Cursor>() {
-            @NonNull
-            @Override
-            public Loader<Cursor> onCreateLoader(int id, Bundle args) {
-
-                cc = new CursorLoader(Objects.requireNonNull(requireActivity()),
-                        WordProvider.URI_WORDS, Word.FIELDS, null, null,
-                        null);
-                return cc;
-            }
-
-            @Override
-            public void onLoadFinished(@NonNull Loader<Cursor> loader, Cursor c) {
-                SimpleCursorAdapter cursor = (SimpleCursorAdapter) getListAdapter();
-                if (cursor != null) {
-                    cursor.swapCursor(c);
-                }
-
-                //load finished, scroll to selected item
-
-                if (WordProvider.selectedSeq > 1) {
-                    int listHeight = 0;
-                    int itemHeight = 0;
-
-                    try {
-                        listHeight = mWordListView.getMeasuredHeight();
-                        itemHeight = mWordListView.getChildAt(0).getMeasuredHeight();
-                    } catch (Exception ex) {
-                        Log.e("jwm", "exception getting listHeight");
-                    }
-
-                    //checking item sets color
-                    mWordListView.setItemChecked(WordProvider.selectedSeq - 1, true);
-                    mWordListView.setSelectionFromTop(WordProvider.selectedSeq, listHeight / 2 - (itemHeight * 2));
-
-                }
-                else
-                {
-                    mWordListView.clearChoices(); //this clears color
-                    mWordListView.setSelectionFromTop(0, 0);
-                }
-            }
-
-            @Override
-            public void onLoaderReset(@NonNull Loader<Cursor> arg0) {
-                SimpleCursorAdapter cursor = (SimpleCursorAdapter) getListAdapter();
-                if (cursor != null) {
-                    cursor.swapCursor(null);
-                }
-            }
-        });
+        LoaderManager.getInstance(this).initLoader(0, null, this);
 
 
         // Restore the previously serialized activated item position.
@@ -608,6 +556,57 @@ public class WordListFragment extends ListFragment implements View.OnClickListen
         }
 
         mActivatedPosition = position;
+    }
+
+    @SuppressLint("StaticFieldLeak")
+    @NonNull
+    @Override
+    public Loader<Cursor> onCreateLoader(int id, Bundle args) {
+
+        cc = new CursorLoader(Objects.requireNonNull(requireActivity()),
+                WordProvider.URI_WORDS, Word.FIELDS, null, null,
+                null);
+        return cc;
+    }
+
+    @Override
+    public void onLoadFinished(@NonNull Loader<Cursor> loader, Cursor c) {
+        SimpleCursorAdapter cursor = (SimpleCursorAdapter) getListAdapter();
+        if (cursor != null) {
+            cursor.swapCursor(c);
+        }
+
+        //load finished, scroll to selected item
+
+        if (WordProvider.selectedSeq > 1) {
+            int listHeight = 0;
+            int itemHeight = 0;
+
+            try {
+                listHeight = mWordListView.getMeasuredHeight();
+                itemHeight = mWordListView.getChildAt(0).getMeasuredHeight();
+            } catch (Exception ex) {
+                Log.e("jwm", "exception getting listHeight");
+            }
+
+            //checking item sets color
+            mWordListView.setItemChecked(WordProvider.selectedSeq - 1, true);
+            mWordListView.setSelectionFromTop(WordProvider.selectedSeq, listHeight / 2 - (itemHeight * 2));
+
+        }
+        else
+        {
+            mWordListView.clearChoices(); //this clears color
+            mWordListView.setSelectionFromTop(0, 0);
+        }
+    }
+
+    @Override
+    public void onLoaderReset(@NonNull Loader<Cursor> arg0) {
+        SimpleCursorAdapter cursor = (SimpleCursorAdapter) getListAdapter();
+        if (cursor != null) {
+            cursor.swapCursor(null);
+        }
     }
 }
 
