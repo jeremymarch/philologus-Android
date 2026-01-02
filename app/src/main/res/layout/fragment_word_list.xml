@@ -25,7 +25,7 @@
             android:id="@+id/toggleButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignParentLeft="true"
+            android.layout_alignParentLeft="true"
             android:paddingLeft="8dp"
             android:paddingRight="6dp"
             android:text="Greek:"
@@ -75,8 +75,9 @@
     <!--End search bar-->
     <LinearLayout
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:layout_below="@id/tvLOL"
+        android:layout_above="@+id/keyboardview"
         android:orientation="vertical" >
     <LinearLayout
         android:id="@+id/progressContainer"
