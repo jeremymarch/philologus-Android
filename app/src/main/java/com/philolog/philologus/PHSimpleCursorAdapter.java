@@ -60,14 +60,12 @@ public class PHSimpleCursorAdapter extends SimpleCursorAdapter
 
         mCustomFont = Typeface.createFromAsset(context.getAssets(), "fonts/newathu5.ttf");
 
-        this.setViewBinder(new ViewBinder() {
-
-            public boolean setViewValue(View view, Cursor cursor, int columnIndex) {
-                    String word = cursor.getString(columnIndex);
-                    TextView textView = (TextView) view;
-                    //strip numbers from string
-                    textView.setText(word.replaceAll("\\d", ""));
-                    return true;
+        this.setViewBinder((view, cursor, columnIndex) -> {
+                String word = cursor.getString(columnIndex);
+                TextView textView = (TextView) view;
+                //strip numbers from string
+                textView.setText(word.replaceAll("\\d", ""));
+                return true;
 
 //                if (aColumnIndex == 1 && Word.TABLE_NAME.equals(Word.LATIN_TABLE_NAME)) {
 //                    String word = aCursor.getString(aColumnIndex);
@@ -76,8 +74,7 @@ public class PHSimpleCursorAdapter extends SimpleCursorAdapter
 //                    return true;
 //                }
 
-                //return false;
-            }
+            //return false;
         });
     }
 
