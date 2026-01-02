@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Keyboard xmlns:android="http://schemas.android.com/apk/res/android"
-    android:keyWidth="9.1%p"
-    android:keyHeight="8.4%p"
-    android:horizontalGap="0.8%p"
-    android:verticalGap="3dp">
+    android:keyWidth="8.9%p"
+    android:keyHeight="7%p"
+    android:horizontalGap="1%p"
+    android:verticalGap="12dp">
     <!--https://stackoverflow.com/questions/7752580/creating-a-softkeyboard-with-multiple-alternate-characters-per-key-->
     <!--blank top row gives space between top of keys and top of keyboard-->
     <Row android:horizontalGap="0%p" android:keyHeight="0.1%p" android:rowEdgeFlags="top">
@@ -45,5 +45,8 @@
         <Key android:codes="38" android:keyLabel=" " android:keyWidth="18.5%p" android:isRepeatable="true"/>
 
     </Row>
+    <!--blank bottom row gives space between bottom of keys and bottom of keyboard-->
+    <Row android:horizontalGap="0%p" android:keyHeight="0.1%p" android:rowEdgeFlags="bottom">
 
+    </Row>
 </Keyboard>
