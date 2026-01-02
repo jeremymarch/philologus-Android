@@ -31,22 +31,22 @@
         <item name="android:windowFullscreen">true</item>
         <item name="android:windowContentOverlay">@null</item>
 
-        <item name="phTextColor">#FFFFFFFF</item>
-        <item name="phBGColor">#FF000000</item>
+        <item name="phTextColor">#FFE0E0E0</item>
+        <item name="phBGColor">#FF121212</item>
 
         <item name="phKeyBgColor">#FF333333</item>
-        <item name="phKeyTextColor">#FFFFFFFF</item>
-        <item name="phKeyBgColorDown">#FF000000</item>
-        <item name="phKeyTextColorDown">#FFFFFFFF</item>
+        <item name="phKeyTextColor">#FFE0E0E0</item>
+        <item name="phKeyBgColorDown">#FF121212</item>
+        <item name="phKeyTextColorDown">#FFE0E0E0</item>
 
         <item name="phDeleteKeyBgColor">#FF777777</item>
-        <item name="phDeleteKeyTextColor">#FFFFFFFF</item>
-        <item name="phDeleteKeyBgColorDown">#FF000000</item>
-        <item name="phDeleteKeyTextColorDown">#FFFFFFFF</item>
+        <item name="phDeleteKeyTextColor">#FFE0E0E0</item>
+        <item name="phDeleteKeyBgColorDown">#FF121212</item>
+        <item name="phDeleteKeyTextColorDown">#FFE0E0E0</item>
 
         <item name="phSelectedRow">@color/colorPrimary</item>
         <item name="phCursorColor">#FF4464FF</item>
-        <item name="phkeyboardBgColor">#FF000000</item>
+        <item name="phkeyboardBgColor">#FF121212</item>
     </style>
 
     <style name="PHDayNight" parent="PHLight">

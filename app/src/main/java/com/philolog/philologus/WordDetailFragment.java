@@ -117,8 +117,8 @@ public class WordDetailFragment extends Fragment {
                 //fixes white flashing of webview
                 definitionView.setBackgroundColor(Color.BLACK);
 
-                bg = "black";
-                text = "white";
+                bg = "#121212";
+                text = "#E0E0E0";
                 foreign = "#03a5fc";
                 quote = "#03a5fc";
             }
