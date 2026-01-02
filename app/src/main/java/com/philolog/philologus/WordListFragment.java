@@ -217,6 +217,7 @@ public class WordListFragment extends ListFragment implements View.OnClickListen
 
         EditText e = view.findViewById(R.id.word_search);
         e.setShowSoftInputOnFocus(false); //prevent default keyboard from showing
+        e.setTextSize(26.0F);
 
         Button b = view.findViewById(R.id.toggleButton);
         if (lang == Word.LANG_GREEK) {

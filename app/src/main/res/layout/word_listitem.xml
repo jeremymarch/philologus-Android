@@ -19,6 +19,8 @@
         android:layout_height="wrap_content"
         android:paddingLeft="14dp"
         android:paddingRight="8dp"
+        android:paddingTop="3dp"
+        android:paddingBottom="3dp"
         android:textColor="?attr/phTextColor"
         android:textSize="23sp"
         android:duplicateParentState="true"/>

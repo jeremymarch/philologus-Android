@@ -127,13 +127,13 @@ public class PHSimpleCursorAdapter extends SimpleCursorAdapter
         WordHolder viewHolder = (WordHolder) view.getTag();
         if (Word.TABLE_NAME.equals(Word.GREEK_TABLE_NAME)) {
             viewHolder.wordTextView.setTypeface(mCustomFont);
-            viewHolder.wordTextView.setTextSize(23);
+            viewHolder.wordTextView.setTextSize(28);
             //viewHolder.wordTextView.setText(cursor.getString(1));
         }
         else
         {
             viewHolder.wordTextView.setTypeface(Typeface.SANS_SERIF);
-            viewHolder.wordTextView.setTextSize(21);
+            viewHolder.wordTextView.setTextSize(26);
             //viewHolder.wordTextView.setText(cursor.getString(1));
         }
     }
