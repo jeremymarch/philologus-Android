@@ -21,7 +21,6 @@ This file is part of philologus-Android.
 package com.philolog.philologus.phkeyboard;
 
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.content.res.Resources;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -30,7 +29,6 @@ import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
 import android.inputmethodservice.Keyboard;
 import android.inputmethodservice.KeyboardView;
-import androidx.preference.PreferenceManager;
 import android.util.AttributeSet;
 import android.util.TypedValue;
 import android.view.animation.Animation;
@@ -183,10 +181,10 @@ public class PHKeyboardView extends KeyboardView {
         }
     }
 
-    public int getUnicodeMode() {
-        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(getContext());
-        return Integer.parseInt(sharedPref.getString("UnicodeMode", "0"));
-    }
+//    public int getUnicodeMode() {
+//        SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(getContext());
+//        return Integer.parseInt(sharedPref.getString("UnicodeMode", "0"));
+//    }
 
     public void showWithAnimation(Animation animation, final Runnable onComplete) {
         animation.setAnimationListener(new Animation.AnimationListener() {
@@ -206,8 +204,5 @@ public class PHKeyboardView extends KeyboardView {
         });
 
         setAnimation(animation);
-    }
-
-    public void hideKBWithAnimation(Animation animation, final Runnable onComplete) {
     }
 }
