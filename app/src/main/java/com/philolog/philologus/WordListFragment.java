@@ -1,7 +1,7 @@
 /*
   Copyright © 2017 Jeremy March. All rights reserved.
 
-    This file is part of philologus-Android.
+This file is part of philologus-Android.
 
     philologus-Android is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
@@ -15,6 +15,7 @@
 
     You should have received a copy of the GNU General Public License
     along with Foobar.  If not, see <https://www.gnu.org/licenses/>.
+
  */
 
 package com.philolog.philologus;
@@ -26,13 +27,13 @@ import android.content.pm.ActivityInfo;
 import android.database.Cursor;
 import android.inputmethodservice.Keyboard;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.text.Editable;
 import android.text.InputType;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -43,9 +44,9 @@ import android.view.animation.LinearInterpolator;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 import android.widget.ListAdapter;
 import android.widget.ListView;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -71,6 +72,8 @@ public class WordListFragment extends ListFragment implements View.OnClickListen
     View mView;
     ListView mWordListView;
     Parcelable mWordListInstance;
+    private EditText search_textbox;
+
 
     static class WordHolder {
         public TextView wordTextView;
@@ -215,9 +218,9 @@ public class WordListFragment extends ListFragment implements View.OnClickListen
                              Bundle savedInstanceState) {
         final View view = inflater.inflate(R.layout.fragment_word_list, null);
 
-        EditText e = view.findViewById(R.id.word_search);
-        e.setShowSoftInputOnFocus(false); //prevent default keyboard from showing
-        e.setTextSize(26.0F);
+        search_textbox = view.findViewById(R.id.word_search);
+        search_textbox.setShowSoftInputOnFocus(false); //prevent default keyboard from showing
+        search_textbox.setTextSize(26.0F);
 
         Button b = view.findViewById(R.id.toggleButton);
         if (lang == Word.LANG_GREEK) {
@@ -275,77 +278,17 @@ public class WordListFragment extends ListFragment implements View.OnClickListen
 
         mWordListView = getListView();
 
-        //mWordListView.setChoiceMode(ListView.CHOICE_MODE_SINGLE);
-        //mWordListView.setSelector(android.R.color.holo_red_dark);
-
-        EditText search_textbox = view.findViewById(R.id.word_search);
-
         if (savedInstanceState != null) {
 
             mActivatedPosition = savedInstanceState.getInt(STATE_ACTIVATED_POSITION);
 
             lang = savedInstanceState.getInt("lang");
 
-            /*
-            String wordPrefix = savedInstanceState.getString("wordPrefix");
-            if (wordPrefix != null) {
-                e.setText(wordPrefix.toString());
-            }
-            */
-
             setLang(lang);
 
             mWordListInstance = savedInstanceState.getParcelable("WordListInstance");
             mWordListView.onRestoreInstanceState(mWordListInstance);
         }
-
-        WordListActivity wla = (WordListActivity) requireActivity();
-        RelativeLayout.LayoutParams params = new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.WRAP_CONTENT);
-
-        // Select a parent for the keyboard. First search for a R.id.keyboardContainer viewgroup. If not found, use the rootWindow as parent
-        ViewGroup parentViewGroup;
-        if (wla.mTwoPane)
-        {
-            Log.e("abc", "two pane");
-            int currentapiVersion = android.os.Build.VERSION.SDK_INT;
-            // Get the root view to add the keyboard subview
-            ViewGroup rootView;
-
-            if (currentapiVersion > Build.VERSION_CODES.KITKAT) {
-                // Workaround for devices with softkeys. We cant not use  getRootView() because the keyboard would be below the softkeys.
-                rootView = requireActivity().findViewById(android.R.id.content);
-            } else {
-                rootView = (ViewGroup) requireActivity().getWindow().getDecorView().getRootView();
-            }
-
-            // Create a dummy relative layout to align the keyboardView to the bottom
-            ViewGroup relativeLayout = new RelativeLayout(requireActivity());
-            relativeLayout.setLayoutParams(new RelativeLayout.LayoutParams(RelativeLayout.LayoutParams.MATCH_PARENT, RelativeLayout.LayoutParams.MATCH_PARENT));
-            rootView.addView(relativeLayout);
-
-            params.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);     // Align to the bottom of the relativelayout
-            parentViewGroup = relativeLayout;
-
-            mKeyboardView = new PHKeyboardView(getContext(), null);
-            mKeyboardView.setLayoutParams(params);
-            mKeyboardView.setFocusable(true);
-            mKeyboardView.setFocusableInTouchMode(true);
-            mKeyboardView.setVisibility(View.GONE);
-
-            parentViewGroup.addView(mKeyboardView);
-        }
-        else
-        {
-            Log.e("abc", "one pane");
-            mKeyboardView = view.findViewById(R.id.keyboardview);
-        }
-
-        // The Keyboard and KeyboardView APIs are deprecated, and you should consider
-        // migrating to an Input Method Editor (IME) for a more modern and robust solution.
-        Keyboard mKeyboard= new Keyboard(getContext(), R.xml.phkeyboardgreek);
-        mKeyboardView.setKeyboard( mKeyboard );
-        mKeyboardView.setOnKeyboardActionListener(new PHLocalOnKeyboardActionListener(search_textbox, mKeyboardView, getContext()));
-        mKeyboardView.setLang(lang);
 
         if(getResources().getBoolean(R.bool.portrait_only)){
             requireActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
@@ -437,6 +380,7 @@ public class WordListFragment extends ListFragment implements View.OnClickListen
             if (hasFocus) {
                 openKeyboard(v);
                 v.requestFocus();
+                EditText e = (EditText)v;
                 Context context1 = getContext();
                 if (context1 != null) {
                     InputMethodManager imm3 = (InputMethodManager) context1.getSystemService(Context.INPUT_METHOD_SERVICE);
@@ -444,14 +388,11 @@ public class WordListFragment extends ListFragment implements View.OnClickListen
                         imm3.hideSoftInputFromWindow(v.getWindowToken(), 0);
                     }
                 }
-                //e.setCursorVisible(true);
-                //e.setTextIsSelectable(true);
             } else {
                 hideCustomKeyboard(v);
             }
         });
 
-        //https://stackoverflow.com/questions/13586354/android-hide-soft-keyboard-from-edittext-while-not-losing-cursor/13975236
         search_textbox.setOnTouchListener((v, event) -> {
             v.onTouchEvent(event);
             InputMethodManager imm1 = (InputMethodManager)v.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
@@ -462,7 +403,40 @@ public class WordListFragment extends ListFragment implements View.OnClickListen
         });
     }
 
-    //https://stackoverflow.com/questions/32998439/saving-instance-of-fragments-listview
+    public void onTwoPaneChanged(boolean isTwoPane) {
+        if (isTwoPane) {
+            Log.e("abcjwm", "two pane");
+            // The root view is a FrameLayout, which is what we need.
+            FrameLayout rootView = requireActivity().findViewById(android.R.id.content);
+
+            // Create layout params to align the keyboard to the bottom of the screen.
+            FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(
+                    FrameLayout.LayoutParams.MATCH_PARENT,
+                    FrameLayout.LayoutParams.WRAP_CONTENT,
+                    Gravity.BOTTOM
+            );
+
+            mKeyboardView = new PHKeyboardView(getContext(), null);
+            mKeyboardView.setLayoutParams(params);
+            mKeyboardView.setFocusable(true);
+            mKeyboardView.setFocusableInTouchMode(true);
+            mKeyboardView.setVisibility(View.GONE);
+
+            rootView.addView(mKeyboardView);
+
+        } else {
+            Log.e("abcjwm", "one pane");
+            mKeyboardView = requireView().findViewById(R.id.keyboardview);
+        }
+
+        // The Keyboard and KeyboardView APIs are deprecated, and you should consider
+        // migrating to an Input Method Editor (IME) for a more modern and robust solution.
+        Keyboard mKeyboard= new Keyboard(getContext(), R.xml.phkeyboardgreek);
+        mKeyboardView.setKeyboard( mKeyboard );
+        mKeyboardView.setOnKeyboardActionListener(new PHLocalOnKeyboardActionListener(search_textbox, mKeyboardView, getContext()));
+        mKeyboardView.setLang(lang);
+    }
+
     @Override
     public void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
@@ -473,7 +447,6 @@ public class WordListFragment extends ListFragment implements View.OnClickListen
         outState.putParcelable("WordListInstance", mWordListView.onSaveInstanceState());
 
         if (mActivatedPosition != ListView.INVALID_POSITION) {
-            // Serialize and persist the activated item position.
             outState.putInt(STATE_ACTIVATED_POSITION, mActivatedPosition);
         }
     }
@@ -481,7 +454,6 @@ public class WordListFragment extends ListFragment implements View.OnClickListen
     public void onAttach(@NonNull Context context) {
         super.onAttach(context);
 
-        // Activities containing this fragment must implement its callbacks.
         if (!(context instanceof Callbacks)) {
             throw new IllegalStateException(
                     "Activity must implement fragment's callbacks.");
@@ -494,9 +466,6 @@ public class WordListFragment extends ListFragment implements View.OnClickListen
     public void onResume() {
         super.onResume();
         cc.forceLoad();
-        //loadData(); // make sure data has been reloaded into adapter first
-        // ONLY call this part once the data items have been loaded back into the adapter
-        // for example, inside a success callback from the network
         if (mWordListInstance != null) {
             mWordListView.onRestoreInstanceState(mWordListInstance);
             mWordListInstance = null;
@@ -505,18 +474,11 @@ public class WordListFragment extends ListFragment implements View.OnClickListen
     @Override
     public void onPause() {
         super.onPause();
-        //cc = null;
-        //gla = null;
-        //loadData(); // make sure data has been reloaded into adapter first
-        // ONLY call this part once the data items have been loaded back into the adapter
-        // for example, inside a success callback from the network
     }
 
     @Override
     public void onDetach() {
         super.onDetach();
-
-        // Reset the active callbacks interface to the dummy implementation.
         mCallbacks = sDummyCallbacks;
     }
 
@@ -524,22 +486,13 @@ public class WordListFragment extends ListFragment implements View.OnClickListen
     public void onListItemClick(@NonNull ListView listView, @NonNull View view, int position,
                                 long id) {
         super.onListItemClick(listView, view, position, id);
-
-        // Notify the active callbacks interface (the activity, if the
-        // fragment is attached to one) that an item has been selected.
         ListAdapter list = getListAdapter();
         if (list != null) {
             mCallbacks.onItemSelected(list.getItemId(position));
         }
     }
 
-    /**
-     * Turns on activate-on-click mode. When this mode is on, list items will be
-     * given the 'activated' state when touched.
-     */
     public void setActivateOnItemClick(boolean activateOnItemClick) {
-        // When setting CHOICE_MODE_SINGLE, ListView will automatically
-        // give items the 'activated' state when touched.
         getListView().setChoiceMode(
                 activateOnItemClick ? ListView.CHOICE_MODE_SINGLE
                         : ListView.CHOICE_MODE_NONE);
@@ -573,8 +526,6 @@ public class WordListFragment extends ListFragment implements View.OnClickListen
             cursor.swapCursor(c);
         }
 
-        //load finished, scroll to selected item
-
         if (WordProvider.selectedSeq > 1) {
             int listHeight = 0;
             int itemHeight = 0;
@@ -586,14 +537,13 @@ public class WordListFragment extends ListFragment implements View.OnClickListen
                 Log.e("jwm", "exception getting listHeight");
             }
 
-            //checking item sets color
             mWordListView.setItemChecked(WordProvider.selectedSeq - 1, true);
             mWordListView.setSelectionFromTop(WordProvider.selectedSeq, listHeight / 2 - (itemHeight * 2));
 
         }
         else
         {
-            mWordListView.clearChoices(); //this clears color
+            mWordListView.clearChoices();
             mWordListView.setSelectionFromTop(0, 0);
         }
     }
@@ -606,4 +556,3 @@ public class WordListFragment extends ListFragment implements View.OnClickListen
         }
     }
 }
-

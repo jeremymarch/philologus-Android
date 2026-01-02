@@ -171,6 +171,8 @@ public class WordListActivity extends FragmentActivity implements
         // Install databases if necessary.
         loadDatabase();
 
+        WordListFragment wordListFragment = (WordListFragment) getSupportFragmentManager().findFragmentById(R.id.word_list);
+
         if (findViewById(R.id.word_detail_container) != null) {
             // The detail container view will be present only in the
             // large-screen layouts (res/values-large and
@@ -182,10 +184,14 @@ public class WordListActivity extends FragmentActivity implements
 
             // In two-pane mode, list items should be given the
             // 'activated' state when touched.
-            WordListFragment w = (WordListFragment) getSupportFragmentManager().findFragmentById(R.id.word_list);
-            if (w != null) {
-                w.setActivateOnItemClick(true);
+
+            if (wordListFragment != null) {
+                wordListFragment.setActivateOnItemClick(true);
             }
+        }
+
+        if (wordListFragment != null) {
+            wordListFragment.onTwoPaneChanged(mTwoPane);
         }
 
         // TODO: If exposing deep links into your app, handle intents here.
