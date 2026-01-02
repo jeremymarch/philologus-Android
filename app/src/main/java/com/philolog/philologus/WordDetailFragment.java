@@ -26,8 +26,6 @@ import android.content.res.Resources;
 import android.graphics.Color;
 import android.os.Bundle;
 import androidx.fragment.app.Fragment;
-
-import android.util.Log;
 import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -36,9 +34,6 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 
 import com.philolog.philologus.database.PHDBHandler;
-import com.philolog.philologus.database.Word;
-
-import java.util.Arrays;
 
 /**
  * A fragment representing a single Word detail screen.
@@ -53,12 +48,7 @@ public class WordDetailFragment extends Fragment {
      */
     public static final String ARG_ITEM_ID = "item_id";
 
-    private Word mItem;
     private String def = "";
-    /**
-     * The UI elements showing the details of the Word
-     */
-    private WebView definitionView;
 
     /**
      * Mandatory empty constructor for the fragment manager to instantiate the
@@ -74,19 +64,19 @@ public class WordDetailFragment extends Fragment {
         super.onCreate(savedInstanceState);
 
         TypedValue typedValue = new TypedValue();
-        Resources.Theme theme = getActivity().getTheme();
+        Resources.Theme theme = requireActivity().getTheme();
         theme.resolveAttribute(R.attr.phThemeName, typedValue, true);
         themeName = typedValue.string.toString();
 
-        if (getArguments().containsKey(ARG_ITEM_ID)) {
+        if (getArguments() != null && getArguments().containsKey(ARG_ITEM_ID)) {
             // Should use the contentprovider here ideally
             //mItem = PHDBHandler.getInstance(getActivity()).getWord(getArguments().getLong(ARG_ITEM_ID));
             //Log.e("abcdefid", "id: " + getArguments().getLong(ARG_ITEM_ID));
 
-            def = PHDBHandler.getInstance(getContext()).getDef(getArguments().getLong(ARG_ITEM_ID));
+            def = PHDBHandler.getInstance(requireContext()).getDef(getArguments().getLong(ARG_ITEM_ID));
         }
         if(getResources().getBoolean(R.bool.portrait_only)){
-            getActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+            requireActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         }
     }
 
@@ -95,11 +85,14 @@ public class WordDetailFragment extends Fragment {
                              Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_word_detail, container, false);
 
-        if (!def.equals("")) {
-            definitionView = ((WebView) rootView.findViewById(R.id.definition));
+        if (!def.isEmpty()) {
+            /*
+             * The UI elements showing the details of the Word
+             */
+            WebView definitionView = rootView.findViewById(R.id.definition);
 
             //SharedPreferences pref = getContext().getApplicationContext().getSharedPreferences("PhilologusPref", 0); // 0 - for private mode
-            SharedPreferences pref = androidx.preference.PreferenceManager.getDefaultSharedPreferences(getContext());
+            SharedPreferences pref = androidx.preference.PreferenceManager.getDefaultSharedPreferences(requireContext());
             boolean deepIndent = pref.getBoolean("PHMultiLevelIndent", true);
             int indentPx = 38;
             int[] indents;
@@ -129,7 +122,6 @@ public class WordDetailFragment extends Fragment {
                 foreign = "#03a5fc";
                 quote = "#03a5fc";
             }
-            boolean trItalics = true; //false for bold
 
             //int minWidthForDeepIndent = 393;
             //pixel 3a width = 411
@@ -149,7 +141,7 @@ public class WordDetailFragment extends Fragment {
                     ".qu {color:" + quote + ";} " +
                     ".qu:before { content: '\"'; } " +
                     ".qu:after { content: '\"'; }  " +
-                ((trItalics) ? ".tr {font-style:italic;} " : ".tr {font-weight:bold;} ") +
+                    ".tr {font-style:italic;} " + // : ".tr {font-weight:bold;} ") +
                     ".au {color:" + author + ";} " +
                     ".bi {color:" + bibl + ";} " +
                     ".ti {color:" + title + ";} " +
@@ -172,16 +164,5 @@ public class WordDetailFragment extends Fragment {
     @Override
     public void onPause() {
         super.onPause();
-        updateWordFromUI();
-    }
-
-    private void updateWordFromUI() {
-        /*
-    	if (mItem != null) {
-    		mItem.word = word.getText().toString();
-
-    		DatabaseHandler.getInstance(getActivity()).putWord(mItem);
-        }
-        */
     }
 }

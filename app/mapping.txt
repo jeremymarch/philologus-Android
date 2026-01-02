@@ -3,8 +3,8 @@
 # min_api: 24
 # common_typos_disable
 # {"id":"com.android.tools.r8.mapping","version":"2.2"}
-# pg_map_id: a652b902fc8a8e0060e412365c6ab436e379a727bc73f75bc452c579f132eb69
-# pg_map_hash: SHA-256 a652b902fc8a8e0060e412365c6ab436e379a727bc73f75bc452c579f132eb69
+# pg_map_id: 676353d2edce955f2fcf7b74cbefddac028b2f559f8cd5ff069913036c279ee2
+# pg_map_hash: SHA-256 676353d2edce955f2fcf7b74cbefddac028b2f559f8cd5ff069913036c279ee2
 android.app.AppComponentFactory -> android.app.AppComponentFactory:
 # {"id":"com.android.tools.r8.synthesized"}
     void <clinit>() -> <clinit>
@@ -36036,56 +36036,52 @@ com.philolog.philologus.WordDetailActivity -> com.philolog.philologus.WordDetail
     87:87:boolean onOptionsItemSelected(android.view.MenuItem) -> onOptionsItemSelected
 com.philolog.philologus.WordDetailFragment -> com.philolog.philologus.WordDetailFragment:
 # {"id":"sourceFile","fileName":"WordDetailFragment.java"}
+    51:51:void <init>() -> <init>
     57:57:void <init>() -> <init>
-    67:67:void <init>() -> <init>
-    68:68:void <init>() -> <init>
-    74:74:void onCreate(android.os.Bundle) -> onCreate
+    58:58:void <init>() -> <init>
+    64:64:void onCreate(android.os.Bundle) -> onCreate
+    66:66:void onCreate(android.os.Bundle) -> onCreate
+    67:67:void onCreate(android.os.Bundle) -> onCreate
+    68:68:void onCreate(android.os.Bundle) -> onCreate
+    69:69:void onCreate(android.os.Bundle) -> onCreate
+    71:71:void onCreate(android.os.Bundle) -> onCreate
     76:76:void onCreate(android.os.Bundle) -> onCreate
-    77:77:void onCreate(android.os.Bundle) -> onCreate
     78:78:void onCreate(android.os.Bundle) -> onCreate
     79:79:void onCreate(android.os.Bundle) -> onCreate
     81:81:void onCreate(android.os.Bundle) -> onCreate
-    86:86:void onCreate(android.os.Bundle) -> onCreate
-    88:88:void onCreate(android.os.Bundle) -> onCreate
-    89:89:void onCreate(android.os.Bundle) -> onCreate
-    91:91:void onCreate(android.os.Bundle) -> onCreate
+    86:86:android.view.View onCreateView(android.view.LayoutInflater,android.view.ViewGroup,android.os.Bundle) -> onCreateView
+    88:88:android.view.View onCreateView(android.view.LayoutInflater,android.view.ViewGroup,android.os.Bundle) -> onCreateView
+    92:92:android.view.View onCreateView(android.view.LayoutInflater,android.view.ViewGroup,android.os.Bundle) -> onCreateView
+    95:95:android.view.View onCreateView(android.view.LayoutInflater,android.view.ViewGroup,android.os.Bundle) -> onCreateView
     96:96:android.view.View onCreateView(android.view.LayoutInflater,android.view.ViewGroup,android.os.Bundle) -> onCreateView
-    98:98:android.view.View onCreateView(android.view.LayoutInflater,android.view.ViewGroup,android.os.Bundle) -> onCreateView
+    97:97:android.view.View onCreateView(android.view.LayoutInflater,android.view.ViewGroup,android.os.Bundle) -> onCreateView
     99:99:android.view.View onCreateView(android.view.LayoutInflater,android.view.ViewGroup,android.os.Bundle) -> onCreateView
+    100:100:android.view.View onCreateView(android.view.LayoutInflater,android.view.ViewGroup,android.os.Bundle) -> onCreateView
     102:102:android.view.View onCreateView(android.view.LayoutInflater,android.view.ViewGroup,android.os.Bundle) -> onCreateView
     103:103:android.view.View onCreateView(android.view.LayoutInflater,android.view.ViewGroup,android.os.Bundle) -> onCreateView
-    104:104:android.view.View onCreateView(android.view.LayoutInflater,android.view.ViewGroup,android.os.Bundle) -> onCreateView
     106:106:android.view.View onCreateView(android.view.LayoutInflater,android.view.ViewGroup,android.os.Bundle) -> onCreateView
-    107:107:android.view.View onCreateView(android.view.LayoutInflater,android.view.ViewGroup,android.os.Bundle) -> onCreateView
     109:109:android.view.View onCreateView(android.view.LayoutInflater,android.view.ViewGroup,android.os.Bundle) -> onCreateView
     110:110:android.view.View onCreateView(android.view.LayoutInflater,android.view.ViewGroup,android.os.Bundle) -> onCreateView
+    111:111:android.view.View onCreateView(android.view.LayoutInflater,android.view.ViewGroup,android.os.Bundle) -> onCreateView
+    112:112:android.view.View onCreateView(android.view.LayoutInflater,android.view.ViewGroup,android.os.Bundle) -> onCreateView
     113:113:android.view.View onCreateView(android.view.LayoutInflater,android.view.ViewGroup,android.os.Bundle) -> onCreateView
+    114:114:android.view.View onCreateView(android.view.LayoutInflater,android.view.ViewGroup,android.os.Bundle) -> onCreateView
+    115:115:android.view.View onCreateView(android.view.LayoutInflater,android.view.ViewGroup,android.os.Bundle) -> onCreateView
     116:116:android.view.View onCreateView(android.view.LayoutInflater,android.view.ViewGroup,android.os.Bundle) -> onCreateView
-    117:117:android.view.View onCreateView(android.view.LayoutInflater,android.view.ViewGroup,android.os.Bundle) -> onCreateView
     118:118:android.view.View onCreateView(android.view.LayoutInflater,android.view.ViewGroup,android.os.Bundle) -> onCreateView
-    119:119:android.view.View onCreateView(android.view.LayoutInflater,android.view.ViewGroup,android.os.Bundle) -> onCreateView
     120:120:android.view.View onCreateView(android.view.LayoutInflater,android.view.ViewGroup,android.os.Bundle) -> onCreateView
     121:121:android.view.View onCreateView(android.view.LayoutInflater,android.view.ViewGroup,android.os.Bundle) -> onCreateView
     122:122:android.view.View onCreateView(android.view.LayoutInflater,android.view.ViewGroup,android.os.Bundle) -> onCreateView
     123:123:android.view.View onCreateView(android.view.LayoutInflater,android.view.ViewGroup,android.os.Bundle) -> onCreateView
-    125:125:android.view.View onCreateView(android.view.LayoutInflater,android.view.ViewGroup,android.os.Bundle) -> onCreateView
-    127:127:android.view.View onCreateView(android.view.LayoutInflater,android.view.ViewGroup,android.os.Bundle) -> onCreateView
-    128:128:android.view.View onCreateView(android.view.LayoutInflater,android.view.ViewGroup,android.os.Bundle) -> onCreateView
     129:129:android.view.View onCreateView(android.view.LayoutInflater,android.view.ViewGroup,android.os.Bundle) -> onCreateView
-    130:130:android.view.View onCreateView(android.view.LayoutInflater,android.view.ViewGroup,android.os.Bundle) -> onCreateView
-    132:132:android.view.View onCreateView(android.view.LayoutInflater,android.view.ViewGroup,android.os.Bundle) -> onCreateView
-    137:137:android.view.View onCreateView(android.view.LayoutInflater,android.view.ViewGroup,android.os.Bundle) -> onCreateView
-    152:152:android.view.View onCreateView(android.view.LayoutInflater,android.view.ViewGroup,android.os.Bundle) -> onCreateView
+    153:153:android.view.View onCreateView(android.view.LayoutInflater,android.view.ViewGroup,android.os.Bundle) -> onCreateView
+    154:154:android.view.View onCreateView(android.view.LayoutInflater,android.view.ViewGroup,android.os.Bundle) -> onCreateView
+    155:155:android.view.View onCreateView(android.view.LayoutInflater,android.view.ViewGroup,android.os.Bundle) -> onCreateView
+    156:156:android.view.View onCreateView(android.view.LayoutInflater,android.view.ViewGroup,android.os.Bundle) -> onCreateView
+    158:158:android.view.View onCreateView(android.view.LayoutInflater,android.view.ViewGroup,android.os.Bundle) -> onCreateView
     161:161:android.view.View onCreateView(android.view.LayoutInflater,android.view.ViewGroup,android.os.Bundle) -> onCreateView
-    162:162:android.view.View onCreateView(android.view.LayoutInflater,android.view.ViewGroup,android.os.Bundle) -> onCreateView
-    163:163:android.view.View onCreateView(android.view.LayoutInflater,android.view.ViewGroup,android.os.Bundle) -> onCreateView
-    164:164:android.view.View onCreateView(android.view.LayoutInflater,android.view.ViewGroup,android.os.Bundle) -> onCreateView
-    166:166:android.view.View onCreateView(android.view.LayoutInflater,android.view.ViewGroup,android.os.Bundle) -> onCreateView
-    169:169:android.view.View onCreateView(android.view.LayoutInflater,android.view.ViewGroup,android.os.Bundle) -> onCreateView
-    174:174:void onPause() -> onPause
-    175:175:void onPause() -> onPause
-    176:176:void onPause() -> onPause
-    186:186:void updateWordFromUI() -> updateWordFromUI
+    166:166:void onPause() -> onPause
+    167:167:void onPause() -> onPause
 com.philolog.philologus.WordListActivity -> com.philolog.philologus.WordListActivity:
 # {"id":"sourceFile","fileName":"WordListActivity.java"}
     51:51:void <init>() -> <init>
@@ -36476,26 +36472,26 @@ com.philolog.philologus.WordListFragment$WordHolder -> com.philolog.philologus.W
     80:80:void <init>(android.view.View) -> <init>
 com.philolog.philologus.database.PHDBHandler -> com.philolog.philologus.database.PHDBHandler:
 # {"id":"sourceFile","fileName":"PHDBHandler.java"}
+    59:59:void <init>(android.content.Context) -> <init>
     60:60:void <init>(android.content.Context) -> <init>
     61:61:void <init>(android.content.Context) -> <init>
     62:62:void <init>(android.content.Context) -> <init>
-    63:63:void <init>(android.content.Context) -> <init>
-    105:105:java.lang.String getDef(long) -> getDef
-    106:106:java.lang.String getDef(long) -> getDef
-    107:107:java.lang.String getDef(long) -> getDef
-    108:108:java.lang.String getDef(long) -> getDef
-    109:109:java.lang.String getDef(long) -> getDef
-    112:112:java.lang.String getDef(long) -> getDef
-    113:113:java.lang.String getDef(long) -> getDef
-    114:114:java.lang.String getDef(long) -> getDef
-    116:116:java.lang.String getDef(long) -> getDef
-    117:117:java.lang.String getDef(long) -> getDef
+    70:70:java.lang.String getDef(long) -> getDef
+    71:71:java.lang.String getDef(long) -> getDef
+    72:72:java.lang.String getDef(long) -> getDef
+    73:73:java.lang.String getDef(long) -> getDef
+    74:74:java.lang.String getDef(long) -> getDef
+    77:77:java.lang.String getDef(long) -> getDef
+    78:78:java.lang.String getDef(long) -> getDef
+    79:79:java.lang.String getDef(long) -> getDef
+    81:81:java.lang.String getDef(long) -> getDef
+    82:82:java.lang.String getDef(long) -> getDef
+    49:49:com.philolog.philologus.database.PHDBHandler getInstance(android.content.Context) -> getInstance
     50:50:com.philolog.philologus.database.PHDBHandler getInstance(android.content.Context) -> getInstance
-    51:51:com.philolog.philologus.database.PHDBHandler getInstance(android.content.Context) -> getInstance
-    54:54:com.philolog.philologus.database.PHDBHandler getInstance(android.content.Context) -> getInstance
-    56:56:com.philolog.philologus.database.PHDBHandler getInstance(android.content.Context) -> getInstance
+    53:53:com.philolog.philologus.database.PHDBHandler getInstance(android.content.Context) -> getInstance
+    55:55:com.philolog.philologus.database.PHDBHandler getInstance(android.content.Context) -> getInstance
+    67:67:void onUpgrade(android.database.sqlite.SQLiteDatabase,int,int) -> onUpgrade
     68:68:void onUpgrade(android.database.sqlite.SQLiteDatabase,int,int) -> onUpgrade
-    69:69:void onUpgrade(android.database.sqlite.SQLiteDatabase,int,int) -> onUpgrade
 com.philolog.philologus.database.Word -> com.philolog.philologus.database.Word:
 # {"id":"sourceFile","fileName":"Word.java"}
     35:35:void <clinit>() -> <clinit>
