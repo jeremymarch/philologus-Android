@@ -53,8 +53,7 @@ public class PHKeyboardView extends KeyboardView {
     private int keyboardBGColor = 0;
 
     //https://stackoverflow.com/questions/7752580/creating-a-softkeyboard-with-multiple-alternate-characters-per-key
-    public PHKeyboardView(Context context, AttributeSet attrs)
-    {
+    public PHKeyboardView(Context context, AttributeSet attrs) {
         super(context, attrs);
 
         TypedValue typedValue = new TypedValue();
@@ -67,22 +66,20 @@ public class PHKeyboardView extends KeyboardView {
         keyboardBGColor = typedValue.data;
     }
 
-    public void setLang(int lang)
-    {
+    public void setLang(int lang) {
         Keyboard keyboard;
 
         if (lang == Word.LANG_GREEK) {
-
             keyboard = new Keyboard(getContext(), R.xml.phkeyboardgreek);
         }
-        else
-        {
+        else {
             keyboard = new Keyboard(getContext(), R.xml.phkeyboardlatin);
         }
         this.setKeyboard(keyboard);
         //this.setOnKeyboardActionListener(this);
         this.invalidateAllKeys();
     }
+
     //http://stackoverflow.com/questions/3972445/how-to-put-text-in-a-drawable
     @Override
     public void onDraw(Canvas canvas) {
@@ -122,7 +119,7 @@ public class PHKeyboardView extends KeyboardView {
                     dr = ContextCompat.getDrawable(context, R.drawable.deleteicon);
                 }
                 //Log.e("abc", key.width + " " + key.height);
-                double a = ((key.width < key.height) ? key.width : key.height) * 0.66;
+                double a = (Math.min(key.width, key.height)) * 0.66;
                 if (key.width < key.height)
                 {
                     double y = key.y + ((key.height - a) / 2);
@@ -234,17 +231,11 @@ public class PHKeyboardView extends KeyboardView {
                 }
                 else {
                     s = key.label.toString();
-                    /*
-                    if (caps && key.codes[0] > 0 && key.codes[0] < 25)
-                    {
-                        s = s.toUpperCase();
-                    }
-                    */
                     offset = 9;
                 }
                 offset = (int) (offset * scale + 0.5f); //convert dp to px
-                canvas.drawText(s, key.x + (key.width / 2),
-                        key.y + (key.height / 2) + offset, paint);
+                canvas.drawText(s, key.x + ((float) key.width / 2),
+                        key.y + ((float) key.height / 2) + offset, paint);
             } else {
                 key.icon.setBounds(key.x, key.y, key.x + key.width, key.y + key.height);
                 key.icon.draw(canvas);
@@ -252,8 +243,7 @@ public class PHKeyboardView extends KeyboardView {
         }
     }
 
-    public int getUnicodeMode()
-    {
+    public int getUnicodeMode() {
         SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(getContext());
         return Integer.parseInt(sharedPref.getString("UnicodeMode", "0"));
     }
@@ -263,12 +253,10 @@ public class PHKeyboardView extends KeyboardView {
 
             @Override
             public void onAnimationStart(Animation animation) {
-
             }
 
             @Override
             public void onAnimationRepeat(Animation animation) {
-
             }
 
             @Override
@@ -281,6 +269,5 @@ public class PHKeyboardView extends KeyboardView {
         setAnimation(animation);
     }
     public void hideKBWithAnimation(Animation animation, final Runnable onComplete) {
-
     }
 }

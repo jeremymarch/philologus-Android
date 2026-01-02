@@ -20,9 +20,7 @@ This file is part of philologus-Android.
 
 package com.philolog.philologus.phkeyboard;
 
-import android.app.Activity;
 import android.content.Context;
-import android.content.ContextWrapper;
 import android.content.SharedPreferences;
 import android.inputmethodservice.KeyboardView;
 import android.media.AudioManager;
@@ -30,24 +28,14 @@ import android.os.Build;
 import android.os.VibrationEffect;
 import android.os.Vibrator;
 import android.text.Editable;
-import android.view.KeyEvent;
-import android.view.View;
-import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
-import android.util.Log;
-import android.inputmethodservice.Keyboard;
 
-import com.philolog.philologus.R;
 
-/**
+/*
  * Created by jeremy on 5/13/17.
  */
 
-import android.inputmethodservice.KeyboardView;
-
 import androidx.preference.PreferenceManager;
-
-import com.philolog.philologus.phkeyboard.PHKeyboardView;
 
 import static android.content.Context.AUDIO_SERVICE;
 import static android.content.Context.VIBRATOR_SERVICE;
@@ -229,7 +217,7 @@ public class PHLocalOnKeyboardActionListener implements KeyboardView.OnKeyboardA
             vibrate();
         }
 
-        if (!s.equals("")) {
+        if (!s.isEmpty()) {
             editable.insert(start, s);
         }
     }
@@ -237,12 +225,11 @@ public class PHLocalOnKeyboardActionListener implements KeyboardView.OnKeyboardA
     private void playClick(int keyCode){
         AudioManager am = (AudioManager)c.getSystemService(AUDIO_SERVICE);
         if (am != null) {
-            switch (keyCode) {
-                case 38: //delete
-                    am.playSoundEffect(AudioManager.FX_KEYPRESS_DELETE);
-                    break;
-                default:
-                    am.playSoundEffect(AudioManager.FX_KEYPRESS_STANDARD);
+             if (keyCode == 38) { //: //delete
+                am.playSoundEffect(AudioManager.FX_KEYPRESS_DELETE);
+            }
+            else{
+                am.playSoundEffect(AudioManager.FX_KEYPRESS_STANDARD);
             }
         }
     }
@@ -311,7 +298,7 @@ public class PHLocalOnKeyboardActionListener implements KeyboardView.OnKeyboardA
     public boolean isCombiningCharacter(char s)
     {
         //test this with a visible character: s == 0x03B2 ||
-        if (s == COMBINING_GRAVE ||
+        return s == COMBINING_GRAVE ||
                 s == COMBINING_ACUTE ||
                 s == COMBINING_CIRCUMFLEX ||
                 s == COMBINING_MACRON ||
@@ -319,9 +306,6 @@ public class PHLocalOnKeyboardActionListener implements KeyboardView.OnKeyboardA
                 s == COMBINING_SMOOTH_BREATHING ||
                 s == COMBINING_ROUGH_BREATHING ||
                 s == COMBINING_IOTA_SUBSCRIPT ||
-                s == COMBINING_BREVE)
-            return true;
-        else
-            return false;
+                s == COMBINING_BREVE;
     }
 }
