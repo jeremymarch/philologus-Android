@@ -22,6 +22,7 @@
         <item name="phkeyboardBgColor">#FFCCCCCC</item>
         <item name="phCursorColor">#FF4464FF</item>
         <item name="phSelectedRow">@color/colorPrimaryLight</item>
+        <item name="phSelectedRowTextColor">#FFFFFFFF</item>
     </style>
 
     <style name="PHDark" parent="@style/Theme.AppCompat.DayNight.NoActionBar">
@@ -45,6 +46,7 @@
         <item name="phDeleteKeyTextColorDown">#FFE0E0E0</item>
 
         <item name="phSelectedRow">@color/colorPrimary</item>
+        <item name="phSelectedRowTextColor">#FFE0E0E0</item>
         <item name="phCursorColor">#FF4464FF</item>
         <item name="phkeyboardBgColor">#FF121212</item>
     </style>

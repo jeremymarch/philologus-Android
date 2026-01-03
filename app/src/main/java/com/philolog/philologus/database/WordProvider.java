@@ -28,8 +28,6 @@ import android.net.Uri;
 
 import androidx.annotation.NonNull;
 
-import com.philolog.philologus.PHSimpleCursorAdapter;
-
 public class WordProvider extends ContentProvider {
 
 	// All URIs share these parts
@@ -48,6 +46,7 @@ public class WordProvider extends ContentProvider {
     public static final int GREEK_MAX_ID = 116655;
     public static final int LATIN_MAX_ID = 51675;
     public static int LANG_MAX_ID = GREEK_MAX_ID;
+    public static final int PAGE_SIZE = 1000;
 
 	public static Uri URI_WORDS = GREEK_URI_WORDS;
 
@@ -91,9 +90,9 @@ public class WordProvider extends ContentProvider {
 					.getInstance(getContext())
 					.getReadableDatabase()
 					.query(Word.TABLE_NAME, Word.FIELDS, null, null, null,
-							null, Word.COL_ID, String.valueOf(PHSimpleCursorAdapter.pageSize*2));
+							null, Word.COL_ID, String.valueOf(PAGE_SIZE * 2));
 			selectedSeq = 1;
-			result.setNotificationUri(requireContext().getContentResolver(), URI_WORDS);
+			result.setNotificationUri(getContext().getContentResolver(), URI_WORDS);
 		}
 		else if (uri.toString().startsWith(GREEK_WORD_BASE) || uri.toString().startsWith(LATIN_WORD_BASE))
 		{
@@ -125,29 +124,29 @@ public class WordProvider extends ContentProvider {
             int startRequestSeq;
             int fullRequestSize;
 
-            if (seq <= PHSimpleCursorAdapter.pageSize)
+            if (seq <= PAGE_SIZE)
 			{
                 beforePageSize = seq - 1;
-                afterPageSize = PHSimpleCursorAdapter.pageSize;
+                afterPageSize = PAGE_SIZE;
                 startRequestSeq = 1;
 				fullRequestSize = beforePageSize + afterPageSize + 1;
 				selectedSeq = seq;
 			}
-			else if (seq + PHSimpleCursorAdapter.pageSize >= LANG_MAX_ID)
+			else if (seq + PAGE_SIZE >= LANG_MAX_ID)
 			{
-                beforePageSize = PHSimpleCursorAdapter.pageSize;
+                beforePageSize = PAGE_SIZE;
                 afterPageSize = LANG_MAX_ID - seq;
-                startRequestSeq = seq - PHSimpleCursorAdapter.pageSize;
+                startRequestSeq = seq - PAGE_SIZE;
                 fullRequestSize = beforePageSize + afterPageSize + 1;
-                selectedSeq = PHSimpleCursorAdapter.pageSize + 1;
+                selectedSeq = PAGE_SIZE + 1;
 			}
             else
             {
-                beforePageSize = PHSimpleCursorAdapter.pageSize;
-                afterPageSize = PHSimpleCursorAdapter.pageSize;
-                startRequestSeq = seq - PHSimpleCursorAdapter.pageSize;
+                beforePageSize = PAGE_SIZE;
+                afterPageSize = PAGE_SIZE;
+                startRequestSeq = seq - PAGE_SIZE;
                 fullRequestSize = beforePageSize + afterPageSize + 1;
-                selectedSeq = PHSimpleCursorAdapter.pageSize + 1;
+                selectedSeq = PAGE_SIZE + 1;
             }
 
             //Log.e("abc", "before: " + beforePageSize + ", after: " + afterPageSize + ", startid: " +startRequestSeq + ", selectedid: " + selectedSeq);
@@ -160,7 +159,7 @@ public class WordProvider extends ContentProvider {
                             new String[] { String.valueOf(startRequestSeq) }, null, null,
                             "_id", String.valueOf(fullRequestSize));
 
-			result.setNotificationUri(requireContext().getContentResolver(), URI_WORDS);
+			result.setNotificationUri(getContext().getContentResolver(), URI_WORDS);
 		}
 		else
         {

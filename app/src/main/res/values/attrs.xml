@@ -15,6 +15,7 @@
     <attr name="phkeyboardBgColor" format="reference|color" />
 
     <attr name="phSelectedRow" format="reference|color" />
+    <attr name="phSelectedRowTextColor" format="reference|color" />
     <attr name="phCursorColor" format="reference|color"/>
     <attr name="phThemeName" format="string"/>
 
