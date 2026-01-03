@@ -146,8 +146,8 @@ public class WordDetailFragment extends Fragment {
                     ".bi {color:" + bibl + ";} " +
                     ".ti {color:" + title + ";} " +
                     ".orth {font-weight:bold; } " +
-                    "</style></head><BODY>" +
-                    def + "</br></body></html>";
+                    "</style></head><BODY><br/>" +
+                    def + "<br/><br/></body></html>";
             //Log.e("jwm", html.substring(18500));
             //definitionView.setLayerType(View.LAYER_TYPE_HARDWARE, null); //this crashes on gero?
             definitionView.getSettings().setCacheMode(WebSettings.LOAD_NO_CACHE);

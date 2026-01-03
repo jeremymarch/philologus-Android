@@ -42,4 +42,8 @@
         <Key android:codes="52"    android:keyLabel="m"  />
         <Key android:codes="38" android:keyLabel=" " android:keyWidth="18.5%p" android:isRepeatable="true"/>
     </Row>
+    <!--blank bottom row gives space between bottom of keys and bottom of keyboard-->
+    <Row android:horizontalGap="0%p" android:keyHeight="0.1%p" android:rowEdgeFlags="bottom">
+
+    </Row>
 </Keyboard>
