@@ -136,7 +136,7 @@ public class WordDetailFragment extends Fragment {
                     //".label:after { content: ' '; } " +
                     "@font-face {font-family: 'newathu5'; src: url('fonts/newathu5.ttf'); } " +
                     "BODY {color:" + text + ";background-color:" + bg + "; margin-top:16px;} " +
-                    ".body {font-family: 'newathu5';line-height:1.2;margin:8px 8px;font-size:18pt;} " +
+                    ".body {font-family: 'newathu5';line-height:1.2;margin:8px 8px;font-size:16pt;} " +
                     ".fo {color:" + foreign + ";} " +
                     ".qu {color:" + quote + ";} " +
                     ".qu:before { content: '\"'; } " +
