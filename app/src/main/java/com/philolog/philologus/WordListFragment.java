@@ -33,6 +33,7 @@ import android.text.Editable;
 import android.text.InputType;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -207,7 +208,7 @@ public class WordListFragment extends ListFragment implements View.OnClickListen
 
         search_textbox = view.findViewById(R.id.word_search);
         search_textbox.setShowSoftInputOnFocus(false);
-        search_textbox.setTextSize(26.0F);
+        search_textbox.setTextSize(TypedValue.COMPLEX_UNIT_SP,26.0F);
 
         Button b = view.findViewById(R.id.toggleButton);
         if (lang == Word.LANG_GREEK) {

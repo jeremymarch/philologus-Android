@@ -23,6 +23,7 @@ package com.philolog.philologus;
 import android.content.Context;
 import android.database.Cursor;
 import android.graphics.Typeface;
+import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -127,13 +128,13 @@ public class PHSimpleCursorAdapter extends SimpleCursorAdapter
         WordHolder viewHolder = (WordHolder) view.getTag();
         if (Word.TABLE_NAME.equals(Word.GREEK_TABLE_NAME)) {
             viewHolder.wordTextView.setTypeface(mCustomFont);
-            viewHolder.wordTextView.setTextSize(28);
+            viewHolder.wordTextView.setTextSize(TypedValue.COMPLEX_UNIT_SP,28.0F);
             //viewHolder.wordTextView.setText(cursor.getString(1));
         }
         else
         {
             viewHolder.wordTextView.setTypeface(Typeface.SANS_SERIF);
-            viewHolder.wordTextView.setTextSize(26);
+            viewHolder.wordTextView.setTextSize(TypedValue.COMPLEX_UNIT_SP,26.0F);
             //viewHolder.wordTextView.setText(cursor.getString(1));
         }
     }
