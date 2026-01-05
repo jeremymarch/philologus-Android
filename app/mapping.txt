@@ -3,8 +3,8 @@
 # min_api: 24
 # common_typos_disable
 # {"id":"com.android.tools.r8.mapping","version":"2.2"}
-# pg_map_id: c7cd397c7ef2d92e1f9906341d05f0b05ac8ae8402d18cf573ddadc7c238fe20
-# pg_map_hash: SHA-256 c7cd397c7ef2d92e1f9906341d05f0b05ac8ae8402d18cf573ddadc7c238fe20
+# pg_map_id: 5de35fac17d0aff609539295bb090c792db621b02cdbd909505045101f12c1a4
+# pg_map_hash: SHA-256 5de35fac17d0aff609539295bb090c792db621b02cdbd909505045101f12c1a4
 android.app.AppComponentFactory -> android.app.AppComponentFactory:
 # {"id":"com.android.tools.r8.synthesized"}
     void <clinit>() -> <clinit>
@@ -45747,76 +45747,74 @@ com.philolog.philologus.database.WordProvider -> com.philolog.philologus.databas
     176:176:int update(android.net.Uri,android.content.ContentValues,java.lang.String,java.lang.String[]) -> update
 com.philolog.philologus.phkeyboard.PHKeyboardView -> com.philolog.philologus.phkeyboard.PHKeyboardView:
 # {"id":"sourceFile","fileName":"PHKeyboardView.java"}
-    44:44:void <init>(android.content.Context,android.util.AttributeSet) -> <init>
+    57:57:void <init>(android.content.Context,android.util.AttributeSet) -> <init>
+    59:59:void <init>(android.content.Context,android.util.AttributeSet) -> <init>
     60:60:void <init>(android.content.Context,android.util.AttributeSet) -> <init>
+    61:61:void <init>(android.content.Context,android.util.AttributeSet) -> <init>
     62:62:void <init>(android.content.Context,android.util.AttributeSet) -> <init>
     63:63:void <init>(android.content.Context,android.util.AttributeSet) -> <init>
     64:64:void <init>(android.content.Context,android.util.AttributeSet) -> <init>
     65:65:void <init>(android.content.Context,android.util.AttributeSet) -> <init>
     66:66:void <init>(android.content.Context,android.util.AttributeSet) -> <init>
-    67:67:void <init>(android.content.Context,android.util.AttributeSet) -> <init>
     68:68:void <init>(android.content.Context,android.util.AttributeSet) -> <init>
     69:69:void <init>(android.content.Context,android.util.AttributeSet) -> <init>
-    71:71:void <init>(android.content.Context,android.util.AttributeSet) -> <init>
     72:72:void <init>(android.content.Context,android.util.AttributeSet) -> <init>
     73:73:void <init>(android.content.Context,android.util.AttributeSet) -> <init>
+    74:74:void <init>(android.content.Context,android.util.AttributeSet) -> <init>
+    75:75:void <init>(android.content.Context,android.util.AttributeSet) -> <init>
     76:76:void <init>(android.content.Context,android.util.AttributeSet) -> <init>
     77:77:void <init>(android.content.Context,android.util.AttributeSet) -> <init>
     78:78:void <init>(android.content.Context,android.util.AttributeSet) -> <init>
-    79:79:void <init>(android.content.Context,android.util.AttributeSet) -> <init>
-    80:80:void <init>(android.content.Context,android.util.AttributeSet) -> <init>
-    81:81:void <init>(android.content.Context,android.util.AttributeSet) -> <init>
-    82:82:void <init>(android.content.Context,android.util.AttributeSet) -> <init>
+    96:96:void onDraw(android.graphics.Canvas) -> onDraw
+    98:98:void onDraw(android.graphics.Canvas) -> onDraw
+    99:99:void onDraw(android.graphics.Canvas) -> onDraw
     100:100:void onDraw(android.graphics.Canvas) -> onDraw
-    102:102:void onDraw(android.graphics.Canvas) -> onDraw
     103:103:void onDraw(android.graphics.Canvas) -> onDraw
     104:104:void onDraw(android.graphics.Canvas) -> onDraw
-    107:107:void onDraw(android.graphics.Canvas) -> onDraw
-    108:108:void onDraw(android.graphics.Canvas) -> onDraw
+    105:105:void onDraw(android.graphics.Canvas) -> onDraw
     109:109:void onDraw(android.graphics.Canvas) -> onDraw
-    113:113:void onDraw(android.graphics.Canvas) -> onDraw
-    114:114:void onDraw(android.graphics.Canvas) -> onDraw
+    110:110:void onDraw(android.graphics.Canvas) -> onDraw
+    111:111:void onDraw(android.graphics.Canvas) -> onDraw
+    112:112:void onDraw(android.graphics.Canvas) -> onDraw
     115:115:void onDraw(android.graphics.Canvas) -> onDraw
     116:116:void onDraw(android.graphics.Canvas) -> onDraw
+    117:117:void onDraw(android.graphics.Canvas) -> onDraw
     119:119:void onDraw(android.graphics.Canvas) -> onDraw
-    120:120:void onDraw(android.graphics.Canvas) -> onDraw
-    121:121:void onDraw(android.graphics.Canvas) -> onDraw
+    122:122:void onDraw(android.graphics.Canvas) -> onDraw
     123:123:void onDraw(android.graphics.Canvas) -> onDraw
-    126:126:void onDraw(android.graphics.Canvas) -> onDraw
+    125:125:void onDraw(android.graphics.Canvas) -> onDraw
     127:127:void onDraw(android.graphics.Canvas) -> onDraw
+    128:128:void onDraw(android.graphics.Canvas) -> onDraw
     129:129:void onDraw(android.graphics.Canvas) -> onDraw
-    131:131:void onDraw(android.graphics.Canvas) -> onDraw
-    132:132:void onDraw(android.graphics.Canvas) -> onDraw
     133:133:void onDraw(android.graphics.Canvas) -> onDraw
+    136:136:void onDraw(android.graphics.Canvas) -> onDraw
     137:137:void onDraw(android.graphics.Canvas) -> onDraw
+    138:138:void onDraw(android.graphics.Canvas) -> onDraw
+    139:139:void onDraw(android.graphics.Canvas) -> onDraw
     140:140:void onDraw(android.graphics.Canvas) -> onDraw
     141:141:void onDraw(android.graphics.Canvas) -> onDraw
     142:142:void onDraw(android.graphics.Canvas) -> onDraw
     143:143:void onDraw(android.graphics.Canvas) -> onDraw
-    144:144:void onDraw(android.graphics.Canvas) -> onDraw
     145:145:void onDraw(android.graphics.Canvas) -> onDraw
     146:146:void onDraw(android.graphics.Canvas) -> onDraw
     147:147:void onDraw(android.graphics.Canvas) -> onDraw
     149:149:void onDraw(android.graphics.Canvas) -> onDraw
     150:150:void onDraw(android.graphics.Canvas) -> onDraw
-    151:151:void onDraw(android.graphics.Canvas) -> onDraw
+    152:152:void onDraw(android.graphics.Canvas) -> onDraw
     153:153:void onDraw(android.graphics.Canvas) -> onDraw
-    154:154:void onDraw(android.graphics.Canvas) -> onDraw
+    155:155:void onDraw(android.graphics.Canvas) -> onDraw
     156:156:void onDraw(android.graphics.Canvas) -> onDraw
-    157:157:void onDraw(android.graphics.Canvas) -> onDraw
+    158:158:void onDraw(android.graphics.Canvas) -> onDraw
     159:159:void onDraw(android.graphics.Canvas) -> onDraw
     160:160:void onDraw(android.graphics.Canvas) -> onDraw
     162:162:void onDraw(android.graphics.Canvas) -> onDraw
     163:163:void onDraw(android.graphics.Canvas) -> onDraw
-    164:164:void onDraw(android.graphics.Canvas) -> onDraw
-    166:166:void onDraw(android.graphics.Canvas) -> onDraw
-    167:167:void onDraw(android.graphics.Canvas) -> onDraw
-    88:88:void setLang(int) -> setLang
+    84:84:void setLang(int) -> setLang
+    85:85:void setLang(int) -> setLang
+    87:87:void setLang(int) -> setLang
     89:89:void setLang(int) -> setLang
+    90:90:void setLang(int) -> setLang
     91:91:void setLang(int) -> setLang
-    93:93:void setLang(int) -> setLang
-    94:94:void setLang(int) -> setLang
-    95:95:void setLang(int) -> setLang
 com.philolog.philologus.phkeyboard.PHLocalOnKeyboardActionListener -> com.philolog.philologus.phkeyboard.PHLocalOnKeyboardActionListener:
 # {"id":"sourceFile","fileName":"PHLocalOnKeyboardActionListener.java"}
     82:82:void <init>(android.widget.EditText,com.philolog.philologus.phkeyboard.PHKeyboardView,android.content.Context) -> <init>

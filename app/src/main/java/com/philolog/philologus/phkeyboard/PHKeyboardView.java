@@ -23,7 +23,6 @@ package com.philolog.philologus.phkeyboard;
 import android.content.Context;
 import android.content.res.Resources;
 import android.graphics.Canvas;
-import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Typeface;
 import android.graphics.drawable.Drawable;
@@ -31,7 +30,6 @@ import android.inputmethodservice.Keyboard;
 import android.inputmethodservice.KeyboardView;
 import android.util.AttributeSet;
 import android.util.TypedValue;
-import android.view.animation.Animation;
 import androidx.core.content.ContextCompat;
 
 import com.philolog.philologus.R;
@@ -41,12 +39,10 @@ import java.util.List;
 
 public class PHKeyboardView extends KeyboardView {
 
-    public boolean mMFPressed = false;
     private final int keyTextColor;
     private final int keyTextColorDown;
     private final int keyboardBGColor;
     private final Paint mPaint;
-    private final Typeface mGreekTypeface;
     private final float mScale;
     private final Drawable mKeyBackground;
     private final Drawable mKeyPressedBackground;
@@ -69,7 +65,6 @@ public class PHKeyboardView extends KeyboardView {
         keyboardBGColor = typedValue.data;
 
         mPaint = new Paint();
-        mGreekTypeface = Typeface.createFromAsset(context.getAssets(), "fonts/newathu5.ttf");
         mScale = context.getResources().getDisplayMetrics().density;
 
         // Cache drawables
@@ -164,25 +159,5 @@ public class PHKeyboardView extends KeyboardView {
                 key.icon.draw(canvas);
             }
         }
-    }
-
-    public void showWithAnimation(Animation animation, final Runnable onComplete) {
-        animation.setAnimationListener(new Animation.AnimationListener() {
-
-            @Override
-            public void onAnimationStart(Animation animation) {
-            }
-
-            @Override
-            public void onAnimationRepeat(Animation animation) {
-            }
-
-            @Override
-            public void onAnimationEnd(Animation animation) {
-                postDelayed(onComplete, 200);
-            }
-        });
-
-        setAnimation(animation);
     }
 }
