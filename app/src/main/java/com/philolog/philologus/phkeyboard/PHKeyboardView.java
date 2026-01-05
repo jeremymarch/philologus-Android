@@ -48,6 +48,12 @@ public class PHKeyboardView extends KeyboardView {
     private final Paint mPaint;
     private final Typeface mGreekTypeface;
     private final float mScale;
+    private final Drawable mKeyBackground;
+    private final Drawable mKeyPressedBackground;
+    private final Drawable mDeleteKeyBackground;
+    private final Drawable mDeleteKeyPressedBackground;
+    private final Drawable mDeleteIcon;
+    private final Drawable mDeleteIconPressed;
 
     @SuppressWarnings("deprecation")
     public PHKeyboardView(Context context, AttributeSet attrs) {
@@ -65,6 +71,14 @@ public class PHKeyboardView extends KeyboardView {
         mPaint = new Paint();
         mGreekTypeface = Typeface.createFromAsset(context.getAssets(), "fonts/newathu5.ttf");
         mScale = context.getResources().getDisplayMetrics().density;
+
+        // Cache drawables
+        mKeyBackground = ContextCompat.getDrawable(context, R.drawable.normalbutton);
+        mKeyPressedBackground = ContextCompat.getDrawable(context, R.drawable.normalbuttondown);
+        mDeleteKeyBackground = ContextCompat.getDrawable(context, R.drawable.greybutton);
+        mDeleteKeyPressedBackground = ContextCompat.getDrawable(context, R.drawable.normalbuttondown);
+        mDeleteIcon = ContextCompat.getDrawable(context, R.drawable.deleteicon);
+        mDeleteIconPressed = ContextCompat.getDrawable(context, R.drawable.deleteicond);
     }
 
     @SuppressWarnings("deprecation")
@@ -101,33 +115,30 @@ public class PHKeyboardView extends KeyboardView {
         mPaint.setStyle(Paint.Style.FILL);
         canvas.drawRect(0, 0, getWidth(), getHeight(), mPaint);
 
-        final Context context = getContext();
+        // Setup constant paint properties
+        mPaint.setTextAlign(Paint.Align.CENTER);
+        mPaint.setAntiAlias(true);
+        mPaint.setFakeBoldText(true);
 
         for (Keyboard.Key key : keys) {
             // Draw key background
             Drawable dr;
             if (key.codes[0] == 38) { // Delete key
-                dr = ContextCompat.getDrawable(context, key.pressed ? R.drawable.normalbuttondown : R.drawable.greybutton);
+                dr = key.pressed ? mDeleteKeyPressedBackground : mDeleteKeyBackground;
             } else {
-                dr = ContextCompat.getDrawable(context, key.pressed ? R.drawable.normalbuttondown : R.drawable.normalbutton);
+                dr = key.pressed ? mKeyPressedBackground : mKeyBackground;
             }
             if (dr != null) {
                 dr.setBounds(key.x, key.y, key.x + key.width, key.y + key.height);
                 dr.draw(canvas);
             }
 
-            // Setup paint for text/icon
-            mPaint.setTextAlign(Paint.Align.CENTER);
-            mPaint.setAntiAlias(true);
-            mPaint.setFakeBoldText(true);
+            // Set text color
             mPaint.setColor(key.pressed ? keyTextColorDown : keyTextColor);
-            if (key.codes[0] == 39) {
-                mPaint.setColor(Color.GRAY);
-            }
 
-            // Draw delete icon
-            if (key.codes[0] == 38) {
-                Drawable icon = ContextCompat.getDrawable(context, key.pressed ? R.drawable.deleteicond : R.drawable.deleteicon);
+            // Draw icon or label
+            if (key.codes[0] == 38) { // Delete icon
+                Drawable icon = key.pressed ? mDeleteIconPressed : mDeleteIcon;
                 if (icon != null) {
                     double a = (Math.min(key.width, key.height)) * 0.66;
                     double y = key.y + ((key.height - a) / 2);
@@ -135,46 +146,20 @@ public class PHKeyboardView extends KeyboardView {
                     icon.setBounds((int) x, (int) y, (int) (x + a), (int) (y + a));
                     icon.draw(canvas);
                 }
-            }
-            // Draw key label
-            else if (key.label != null) {
-                float FONT_SIZE;
-                // Determine font size and typeface
-                if (key.codes[0] == 28 || key.codes[0] == 27 || key.codes[0] == 29 || key.codes[0] == 34) {
-                    FONT_SIZE = (key.codes[0] == 29 || key.codes[0] == 34) ? 44.0f : 38.0f;
-                    mPaint.setTypeface(mGreekTypeface);
-                } else if (key.codes[0] == 32) {
-                    FONT_SIZE = 23.0f;
-                } else if (key.codes[0] == 33 && mMFPressed) {
-                    FONT_SIZE = 32.0f;
-                    mPaint.setTypeface(mGreekTypeface);
-                } else {
-                    FONT_SIZE = 23.0f;
-                    mPaint.setTypeface(Typeface.DEFAULT);
-                }
+            } else if (key.label != null) { // Key label
+                float FONT_SIZE = 23.0f;
+                mPaint.setTypeface(Typeface.DEFAULT);
 
                 final int fontSizeInPx = (int) (FONT_SIZE * mScale + 0.5f);
                 mPaint.setTextSize(fontSizeInPx);
 
-                // Determine label text and offset
-                String s;
-                int offset;
-                if (key.codes[0] == 27) { s = "῾"; offset = 20; }
-                else if (key.codes[0] == 28) { s = "᾿"; offset = 20; }
-                else if (key.codes[0] == 29) { s = "´"; offset = 19; }
-                else if (key.codes[0] == 34) { s = "`"; offset = 21; }
-                else if (key.codes[0] == 30) { s = key.label.toString(); offset = 2; }
-                else if (key.codes[0] == 33) { s = "—"; offset = 4; }
-                else if (key.codes[0] == 32) { s = "ι"; offset = 14; }
-                else if (key.codes[0] == 33 && mMFPressed) { s = ","; offset = 5; }
-                else { s = key.label.toString(); offset = 9; }
+                String s = key.label.toString();
+                int offset = 9;
 
                 int finalOffset = (int) (offset * mScale + 0.5f);
                 canvas.drawText(s, key.x + ((float) key.width / 2), key.y + ((float) key.height / 2) + finalOffset, mPaint);
 
-            }
-            // Fallback to draw other icons
-            else if (key.icon != null) {
+            } else if (key.icon != null) { // Fallback for other icons
                 key.icon.setBounds(key.x, key.y, key.x + key.width, key.y + key.height);
                 key.icon.draw(canvas);
             }
