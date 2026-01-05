@@ -43,13 +43,14 @@ public class PHKeyboardView extends KeyboardView {
     private final int keyTextColorDown;
     private final int keyboardBGColor;
     private final Paint mPaint;
-    private final float mScale;
     private final Drawable mKeyBackground;
     private final Drawable mKeyPressedBackground;
     private final Drawable mDeleteKeyBackground;
     private final Drawable mDeleteKeyPressedBackground;
     private final Drawable mDeleteIcon;
     private final Drawable mDeleteIconPressed;
+    private final int mLabelFontSizePx;
+    private final int mLabelOffsetPx;
 
     @SuppressWarnings("deprecation")
     public PHKeyboardView(Context context, AttributeSet attrs) {
@@ -65,7 +66,11 @@ public class PHKeyboardView extends KeyboardView {
         keyboardBGColor = typedValue.data;
 
         mPaint = new Paint();
-        mScale = context.getResources().getDisplayMetrics().density;
+        float scale = context.getResources().getDisplayMetrics().density;
+
+        // Pre-calculate pixel values
+        mLabelFontSizePx = (int) (23.0f * scale + 0.5f);
+        mLabelOffsetPx = (int) (9 * scale + 0.5f);
 
         // Cache drawables
         mKeyBackground = ContextCompat.getDrawable(context, R.drawable.normalbutton);
@@ -114,6 +119,8 @@ public class PHKeyboardView extends KeyboardView {
         mPaint.setTextAlign(Paint.Align.CENTER);
         mPaint.setAntiAlias(true);
         mPaint.setFakeBoldText(true);
+        mPaint.setTypeface(Typeface.DEFAULT);
+        mPaint.setTextSize(mLabelFontSizePx);
 
         for (Keyboard.Key key : keys) {
             // Draw key background
@@ -142,17 +149,10 @@ public class PHKeyboardView extends KeyboardView {
                     icon.draw(canvas);
                 }
             } else if (key.label != null) { // Key label
-                float FONT_SIZE = 23.0f;
-                mPaint.setTypeface(Typeface.DEFAULT);
-
-                final int fontSizeInPx = (int) (FONT_SIZE * mScale + 0.5f);
-                mPaint.setTextSize(fontSizeInPx);
-
-                String s = key.label.toString();
-                int offset = 9;
-
-                int finalOffset = (int) (offset * mScale + 0.5f);
-                canvas.drawText(s, key.x + ((float) key.width / 2), key.y + ((float) key.height / 2) + finalOffset, mPaint);
+                canvas.drawText(key.label, 0, key.label.length(),
+                        key.x + ((float) key.width / 2),
+                        key.y + ((float) key.height / 2) + mLabelOffsetPx,
+                        mPaint);
 
             } else if (key.icon != null) { // Fallback for other icons
                 key.icon.setBounds(key.x, key.y, key.x + key.width, key.y + key.height);
