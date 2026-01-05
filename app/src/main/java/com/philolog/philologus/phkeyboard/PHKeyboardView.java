@@ -41,7 +41,6 @@ public class PHKeyboardView extends KeyboardView {
 
     private final int keyTextColor;
     private final int keyTextColorDown;
-    private final int keyboardBGColor;
     private final Paint mPaint;
     private final Drawable mKeyBackground;
     private final Drawable mKeyPressedBackground;
@@ -62,8 +61,6 @@ public class PHKeyboardView extends KeyboardView {
         keyTextColor = typedValue.data;
         theme.resolveAttribute(R.attr.phKeyTextColorDown, typedValue, true);
         keyTextColorDown = typedValue.data;
-        theme.resolveAttribute(R.attr.phkeyboardBgColor, typedValue, true);
-        keyboardBGColor = typedValue.data;
 
         mPaint = new Paint();
         float scale = context.getResources().getDisplayMetrics().density;
@@ -97,8 +94,6 @@ public class PHKeyboardView extends KeyboardView {
     @SuppressWarnings("deprecation")
     @Override
     public void onDraw(Canvas canvas) {
-        super.onDraw(canvas);
-
         final Keyboard keyboard = getKeyboard();
         if (keyboard == null) {
             return;
@@ -108,12 +103,6 @@ public class PHKeyboardView extends KeyboardView {
         if (keys == null || keys.isEmpty()) {
             return;
         }
-
-        // Draw background
-        mPaint.reset();
-        mPaint.setColor(keyboardBGColor);
-        mPaint.setStyle(Paint.Style.FILL);
-        canvas.drawRect(0, 0, getWidth(), getHeight(), mPaint);
 
         // Setup constant paint properties
         mPaint.setTextAlign(Paint.Align.CENTER);

@@ -30,6 +30,7 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.pm.ActivityInfo;
 import android.database.Cursor;
+import android.graphics.drawable.ColorDrawable;
 import android.inputmethodservice.Keyboard;
 import android.net.Uri;
 import android.os.Bundle;
@@ -376,6 +377,10 @@ public class WordListFragment extends ListFragment implements View.OnClickListen
             mKeyboardView = requireView().findViewById(R.id.keyboardview);
         }
 
+        TypedValue typedValue = new TypedValue();
+        requireContext().getTheme().resolveAttribute(R.attr.phkeyboardBgColor, typedValue, true);
+        mKeyboardView.setBackground(new ColorDrawable(typedValue.data));
+
         mKeyboardView.setFocusable(true);
         mKeyboardView.setFocusableInTouchMode(true);
         mKeyboardView.setVisibility(View.GONE);
@@ -394,7 +399,7 @@ public class WordListFragment extends ListFragment implements View.OnClickListen
             }
         });
 
-        search_textbox.setOnClickListener(v -> openKeyboard(v));
+        search_textbox.setOnClickListener(this::openKeyboard);
 
         requireActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
     }
