@@ -20,6 +20,11 @@ This file is part of philologus-Android.
 
 package com.philolog.philologus;
 
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
+import android.animation.AnimatorSet;
+import android.animation.ObjectAnimator;
+import android.animation.ValueAnimator;
 import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.SharedPreferences;
@@ -30,7 +35,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.text.Editable;
-import android.text.InputType;
 import android.text.TextWatcher;
 import android.util.Log;
 import android.util.TypedValue;
@@ -39,15 +43,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
-import android.view.animation.Animation;
-import android.view.animation.AnimationUtils;
-import android.view.animation.LinearInterpolator;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.ListAdapter;
 import android.widget.ListView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -222,38 +224,59 @@ public class WordListFragment extends ListFragment implements View.OnClickListen
         return view;
     }
 
-    public void openKeyboard(View v)
-    {
+    public void openKeyboard(View v) {
         if (mKeyboardView.getVisibility() == View.GONE) {
-            if (isTwoPane) {
-                mWordListView.setPadding(0, 0, 0, mKeyboardHeight);
-            }
-            Animation animation = AnimationUtils
-                    .loadAnimation(getContext(),
-                            R.anim.slide_in_bottom);
             mKeyboardView.setVisibility(View.VISIBLE);
-            mKeyboardView.bringToFront();
             mKeyboardView.setEnabled(true);
-            if ( v != null) {
-                ((InputMethodManager) requireActivity().getSystemService(Context.INPUT_METHOD_SERVICE)).hideSoftInputFromWindow(v.getWindowToken(), 0);
+
+            final View listContainer = requireView().findViewById(R.id.list_container);
+
+            ObjectAnimator keyboardAnimator = ObjectAnimator.ofFloat(mKeyboardView, "translationY", mKeyboardHeight, 0);
+
+            ValueAnimator listAnimator = ValueAnimator.ofInt(0, mKeyboardHeight);
+            listAnimator.addUpdateListener(animation -> {
+                Integer value = (Integer) animation.getAnimatedValue();
+                RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) listContainer.getLayoutParams();
+                params.bottomMargin = value;
+                listContainer.setLayoutParams(params);
+            });
+
+            AnimatorSet animatorSet = new AnimatorSet();
+            animatorSet.playTogether(keyboardAnimator, listAnimator);
+            animatorSet.setDuration(300);
+            animatorSet.start();
+
+            if (v != null) {
+                ((InputMethodManager) requireContext().getSystemService(Context.INPUT_METHOD_SERVICE)).hideSoftInputFromWindow(v.getWindowToken(), 0);
             }
         }
     }
 
     public void hideCustomKeyboard(View v) {
-        if (isTwoPane) {
-            mWordListView.setPadding(0, 0, 0, 0);
-        }
         if (mKeyboardView.getVisibility() == View.VISIBLE) {
-            Context context = getContext();
-            if (context != null) {
-                InputMethodManager imm = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
-                imm.hideSoftInputFromWindow(v.getWindowToken(), 0);
-                Animation animation = AnimationUtils.loadAnimation(context, R.anim.slide_out_bottom);
-                mKeyboardView.startAnimation(animation);
-                mKeyboardView.setVisibility(View.GONE);
-                mKeyboardView.setEnabled(false);
-            }
+            final View listContainer = requireView().findViewById(R.id.list_container);
+
+            ObjectAnimator keyboardAnimator = ObjectAnimator.ofFloat(mKeyboardView, "translationY", 0, mKeyboardHeight);
+
+            ValueAnimator listAnimator = ValueAnimator.ofInt(mKeyboardHeight, 0);
+            listAnimator.addUpdateListener(animation -> {
+                Integer value = (Integer) animation.getAnimatedValue();
+                RelativeLayout.LayoutParams params = (RelativeLayout.LayoutParams) listContainer.getLayoutParams();
+                params.bottomMargin = value;
+                listContainer.setLayoutParams(params);
+            });
+
+            AnimatorSet animatorSet = new AnimatorSet();
+            animatorSet.playTogether(keyboardAnimator, listAnimator);
+            animatorSet.setDuration(300);
+            animatorSet.addListener(new AnimatorListenerAdapter() {
+                @Override
+                public void onAnimationEnd(Animator animation) {
+                    mKeyboardView.setVisibility(View.GONE);
+                    mKeyboardView.setEnabled(false);
+                }
+            });
+            animatorSet.start();
         }
     }
 

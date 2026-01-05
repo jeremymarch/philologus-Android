@@ -1,141 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/word_list_fragment"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
-    android:translationZ="999dp"
     android:background="?attr/phBGColor"
-    android:id="@+id/word_list_fragment"
-    android:fitsSystemWindows="true">
+    android:fitsSystemWindows="true"
+    android:translationZ="999dp">
     <!--Search bar-->
     <RelativeLayout
+        android:id="@+id/tvLOL"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/tvLOL"
         android:layout_margin="5dp"
         android:background="@drawable/search_frame">
 
         <!--fake focusable, so EditText doesn't get focus on load-->
         <LinearLayout
-
-            android:focusable="true"
-            android:focusableInTouchMode="true"
             android:layout_width="0px"
             android:layout_height="0px"
-            />
+            android:focusable="true"
+            android:focusableInTouchMode="true" />
+
         <Button
             android:id="@+id/toggleButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
-            android:textAlignment="viewEnd"
-            android:paddingLeft="8dp"
-            android:paddingRight="6dp"
-            android:text="Greek:"
-            android:textColor="?attr/phTextColor"
-            android:textSize="21sp"
-            android:paddingTop="0dp"
-            android:paddingBottom="0dp"
-            android:background="@android:color/transparent"
             android:layout_marginTop="0dp"
             android:layout_marginBottom="0dp"
-            android:minHeight="50dp"
-            android:minWidth="50dp"
-            android:textAllCaps="false"/>
+            android:background="@android:color/transparent"
+            android:minWidth="0dp"
+            android:minHeight="0dp"
+            android:paddingLeft="8dp"
+            android:paddingTop="6dp"
+            android:paddingRight="6dp"
+            android:paddingBottom="0dp"
+            android:text="Greek:"
+            android:textAllCaps="false"
+            android:textColor="?attr/phTextColor"
+            android:textSize="21sp" />
+
         <EditText
             android:id="@+id/word_search"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:layout_toRightOf="@id/toggleButton"
+            android:layout_gravity="left"
             android:layout_toLeftOf="@id/clear"
-            android:textAlignment="textStart"
-            android:gravity="center_vertical"
-            android:text=""
-            android:textSize="21sp"
-            android:maxLines="1"
-            android:paddingTop="0dp"
-            android:paddingBottom="0dp"
-            android:layout_marginTop="0dp"
-            android:layout_marginBottom="0dp"
+            android:layout_toRightOf="@id/toggleButton"
             android:background="@android:color/transparent"
-            android:textCursorDrawable="@drawable/phcursor"
+            android:maxLines="1"
+            android:paddingTop="6dp"
+            android:paddingBottom="6dp"
+            android:text=""
             android:textColor="?attr/phTextColor"
-            android:minHeight="50dp"
-            android:minWidth="50dp"
-            android:textIsSelectable="true"/>
+            android:textCursorDrawable="@drawable/phcursor"
+            android:textIsSelectable="true"
+            android:textSize="21sp" />
+
         <Button
             android:id="@+id/clear"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
             android:layout_alignParentRight="true"
-            android:gravity="center_vertical"
             android:layout_marginTop="0dp"
             android:layout_marginRight="-8dp"
-            android:padding="0dp"
-            android:text=""
-            android:onClick="clearSearch"
             android:background="@drawable/xicon"
-            android:minHeight="50dp"
-            android:minWidth="50dp"/>
+            android:minWidth="10dp"
+            android:minHeight="10dp"
+            android:onClick="clearSearch"
+            android:padding="0dp"
+            android:text="" />
     </RelativeLayout>
     <!--End search bar-->
     <LinearLayout
+        android:id="@+id/list_container"
         android:layout_width="fill_parent"
         android:layout_height="match_parent"
         android:layout_below="@id/tvLOL"
-        android:layout_above="@+id/keyboardview"
-        android:orientation="vertical" >
-    <LinearLayout
-        android:id="@+id/progressContainer"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="vertical"
-        android:layout_margin="10dp"
-        android:visibility="gone">
-        <ProgressBar
-            android:id="@+id/dbprogressbar"
-            android:layout_width="match_parent"
-            android:layout_height="70dp"
-            android:progress="0"
-            android:indeterminate="false"
-            android:max="100"
-            android:progressTint="?attr/phTextColor"
-            style="?android:attr/progressBarStyleHorizontal" />
-        <TextView
-            android:id="@+id/dbprogresstext"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/progressContainer"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:textColor="?attr/phTextColor"
-            android:text="Updating database..."
-            android:gravity="center"
-            android:textSize="28sp"/>
-    </LinearLayout>
-        <FrameLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:visibility="visible"
-            android:id="@+id/hideduringcopy">
-        <ListView
+            android:layout_margin="10dp"
+            android:orientation="vertical"
+            android:visibility="gone">
 
-            android:id="@id/android:list"
+            <ProgressBar
+                android:id="@+id/dbprogressbar"
+                style="?android:attr/progressBarStyleHorizontal"
+                android:layout_width="match_parent"
+                android:layout_height="70dp"
+                android:indeterminate="false"
+                android:max="100"
+                android:progress="0"
+                android:progressTint="?attr/phTextColor" />
+
+            <TextView
+                android:id="@+id/dbprogresstext"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text="Updating database..."
+                android:textColor="?attr/phTextColor"
+                android:textSize="28sp" />
+        </LinearLayout>
+
+        <FrameLayout
+            android:id="@+id/hideduringcopy"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="?attr/phBGColor"
-            android:paddingLeft="0dp"
-            android:paddingRight="0dp"
-            android:divider="@null"
-            android:dividerHeight="0dp"
-            android:drawSelectorOnTop="true"
-            android:choiceMode="singleChoice"/>
-        <Button
-            android:id="@+id/settingsButton"
-            android:background="@drawable/ic_info_24px"
-            android:layout_width="28dp"
-            android:layout_height="28dp"
-            android:layout_gravity="bottom|right"
-            android:layout_margin="4dp"
-            android:onClick="openSettings"
-            />
+            android:visibility="visible">
+
+            <ListView
+                android:id="@id/android:list"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="?attr/phBGColor"
+                android:choiceMode="singleChoice"
+                android:divider="@null"
+                android:dividerHeight="0dp"
+                android:drawSelectorOnTop="true"
+                android:paddingLeft="0dp"
+                android:paddingRight="0dp" />
+
+            <Button
+                android:id="@+id/settingsButton"
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:layout_gravity="bottom|right"
+                android:layout_margin="4dp"
+                android:background="@drawable/ic_info_24px"
+                android:onClick="openSettings"
+                />
         </FrameLayout>
     </LinearLayout>
+
     <com.philolog.philologus.phkeyboard.PHKeyboardView
         android:id="@+id/keyboardview"
         android:layout_width="fill_parent"
@@ -144,8 +145,7 @@
         android:layout_centerHorizontal="true"
         android:focusable="true"
         android:focusableInTouchMode="true"
-        android:visibility="gone"
         android:padding="1dp"
         android:translationZ="999dp"
-        />
+        android:visibility="gone" />
 </RelativeLayout>
