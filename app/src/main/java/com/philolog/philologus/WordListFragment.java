@@ -400,7 +400,7 @@ public class WordListFragment extends ListFragment implements View.OnClickListen
             }
         });
 
-        search_textbox.setOnClickListener(this::openKeyboard);
+        search_textbox.setOnClickListener(v -> openKeyboard(v));
 
         requireActivity().getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
     }
@@ -498,18 +498,28 @@ public class WordListFragment extends ListFragment implements View.OnClickListen
 
             try {
                 listHeight = mWordListView.getMeasuredHeight();
-                itemHeight = mWordListView.getChildAt(0).getMeasuredHeight();
+                View listItem = mWordListView.getChildAt(0);
+                if (listItem != null) {
+                    itemHeight = listItem.getMeasuredHeight();
+                }
             } catch (Exception ex) {
-                Log.e("jwm", "exception getting listHeight");
+                Log.e("jwm", "exception getting listHeight or itemHeight");
             }
 
-            mWordListView.setItemChecked(WordProvider.selectedSeq - 1, true);
-            mWordListView.setSelectionFromTop(WordProvider.selectedSeq, listHeight / 2 - (itemHeight * 2));
+            // The position to scroll to
+            int position = WordProvider.selectedSeq - 1;
 
-        }
-        else
-        {
-            mWordListView.clearChoices();
+            // Set the item as checked
+            mWordListView.setItemChecked(position, true);
+
+            // Calculate the offset to center the item
+            int offset = (listHeight / 2) - (itemHeight / 2);
+
+            // Scroll to the item
+            mWordListView.setSelectionFromTop(position, offset);
+
+        } else {
+            mWordListView.clearChoices(); //this clears color
             mWordListView.setSelectionFromTop(0, 0);
         }
     }
