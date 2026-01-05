@@ -281,6 +281,7 @@ public class WordListFragment extends ListFragment implements View.OnClickListen
         }
     }
 
+    @SuppressLint("ClickableViewAccessibility")
     @Override
     public void onViewCreated(@NonNull final View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
