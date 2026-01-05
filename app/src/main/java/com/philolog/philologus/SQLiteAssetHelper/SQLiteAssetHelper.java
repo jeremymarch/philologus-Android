@@ -18,20 +18,12 @@ package com.philolog.philologus.SQLiteAssetHelper;
 
 //https://github.com/jgilfelt/android-sqlite-asset-helper
 
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteDatabase.CursorFactory;
 import android.database.sqlite.SQLiteException;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.os.AsyncTask;
 import android.util.Log;
-import android.widget.ProgressBar;
-import android.widget.TextView;
-
-import com.philolog.philologus.R;
-import com.philolog.philologus.database.PHDBHandler;
-
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -44,7 +36,7 @@ import java.util.zip.ZipInputStream;
 /**
  * A helper class to manage database creation and version management using
  * an application's raw asset files.
- *
+
  * This class provides developers with a simple way to ship their Android app
  * with an existing SQLite database (which may be pre-populated with data) and
  * to manage its initial creation and any upgrades required with subsequent
@@ -76,11 +68,11 @@ public class SQLiteAssetHelper extends SQLiteOpenHelper {
     private SQLiteDatabase mDatabase = null;
     private boolean mIsInitializing = false;
 
-    private String mDatabasePath;
+    private final String mDatabasePath;
 
-    private String mAssetPath;
+    private final String mAssetPath;
 
-    private String mUpgradePathFormat;
+    private final String mUpgradePathFormat;
 
     private int mForcedUpgradeVersion = 0;
 
@@ -225,7 +217,7 @@ public class SQLiteAssetHelper extends SQLiteOpenHelper {
             mIsInitializing = false;
             if (success) {
                 if (mDatabase != null) {
-                    try { mDatabase.close(); } catch (Exception e) { }
+                    try { mDatabase.close(); } catch (Exception ignored) { }
                     //mDatabase.unlock();
                 }
                 mDatabase = db;
@@ -339,13 +331,13 @@ public class SQLiteAssetHelper extends SQLiteOpenHelper {
                     List<String> cmds = Utils.splitSqlScript(sql, ';');
                     for (String cmd : cmds) {
                         //Log.d(TAG, "cmd=" + cmd);
-                        if (cmd.trim().length() > 0) {
+                        if (!cmd.trim().isEmpty()) {
                             db.execSQL(cmd);
                         }
                     }
                 }
             } catch (IOException e) {
-                e.printStackTrace();
+                //e.printStackTrace();
             }
         }
 
@@ -521,7 +513,6 @@ public class SQLiteAssetHelper extends SQLiteOpenHelper {
     /**
      * An exception that indicates there was an error with SQLite asset retrieval or parsing.
      */
-    @SuppressWarnings("serial")
     public static class SQLiteAssetException extends SQLiteException {
 
         public SQLiteAssetException() {}

@@ -1,6 +1,5 @@
 package com.philolog.philologus.SQLiteAssetHelper;
 
-import android.os.FileUtils;
 import android.util.Log;
 
 import java.io.IOException;
@@ -26,7 +25,7 @@ public class Utils {
                 inLiteral = !inLiteral;
             }
             if (content[i] == delim && !inLiteral) {
-                if (sb.length() > 0) {
+                if (!sb.isEmpty()) {
                     statements.add(sb.toString().trim());
                     sb = new StringBuilder();
                 }
@@ -34,7 +33,7 @@ public class Utils {
                 sb.append(content[i]);
             }
         }
-        if (sb.length() > 0) {
+        if (!sb.isEmpty()) {
             statements.add(sb.toString().trim());
         }
         return statements;

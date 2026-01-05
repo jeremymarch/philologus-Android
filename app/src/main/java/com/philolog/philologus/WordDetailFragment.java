@@ -75,7 +75,7 @@ public class WordDetailFragment extends Fragment {
 
             def = PHDBHandler.getInstance(requireContext()).getDef(getArguments().getLong(ARG_ITEM_ID));
         }
-        if(getResources().getBoolean(R.bool.portrait_only)){
+        if (getResources().getBoolean(R.bool.portrait_only)){
             requireActivity().setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
         }
     }

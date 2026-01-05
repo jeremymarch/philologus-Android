@@ -23,7 +23,7 @@ class VersionComparator implements Comparator<String> {
 
     private static final String TAG = SQLiteAssetHelper.class.getSimpleName();
 
-    private Pattern pattern = Pattern
+    private final Pattern pattern = Pattern
             .compile(".*_upgrade_([0-9]+)-([0-9]+).*");
 
     /**

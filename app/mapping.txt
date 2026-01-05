@@ -3,8 +3,8 @@
 # min_api: 24
 # common_typos_disable
 # {"id":"com.android.tools.r8.mapping","version":"2.2"}
-# pg_map_id: 267048363bf3d9d42af96f6a0aef6b19c1e90b9a957cf461862ebdd135b0c096
-# pg_map_hash: SHA-256 267048363bf3d9d42af96f6a0aef6b19c1e90b9a957cf461862ebdd135b0c096
+# pg_map_id: d8ced0db08321d320e8deb4e094a471d148b1ecfedbdffe8b1fcd00dc7dfa41e
+# pg_map_hash: SHA-256 d8ced0db08321d320e8deb4e094a471d148b1ecfedbdffe8b1fcd00dc7dfa41e
 android.app.AppComponentFactory -> android.app.AppComponentFactory:
 # {"id":"com.android.tools.r8.synthesized"}
     void <clinit>() -> <clinit>
@@ -44947,173 +44947,173 @@ com.philolog.philologus.PHSimpleCursorAdapter$$ExternalSyntheticLambda0 -> com.p
       # {"id":"com.android.tools.r8.synthesized"}
 com.philolog.philologus.SQLiteAssetHelper.SQLiteAssetHelper -> com.philolog.philologus.SQLiteAssetHelper.SQLiteAssetHelper:
 # {"id":"sourceFile","fileName":"SQLiteAssetHelper.java"}
-    68:68:void <clinit>() -> <clinit>
-    91:91:void <clinit>() -> <clinit>
-    76:76:void <init>(android.content.Context,java.lang.String,java.lang.String,android.database.sqlite.SQLiteDatabase$CursorFactory,int) -> <init>
+    60:60:void <clinit>() -> <clinit>
+    83:83:void <clinit>() -> <clinit>
+    68:68:void <init>(android.content.Context,java.lang.String,java.lang.String,android.database.sqlite.SQLiteDatabase$CursorFactory,int) -> <init>
+    69:69:void <init>(android.content.Context,java.lang.String,java.lang.String,android.database.sqlite.SQLiteDatabase$CursorFactory,int) -> <init>
     77:77:void <init>(android.content.Context,java.lang.String,java.lang.String,android.database.sqlite.SQLiteDatabase$CursorFactory,int) -> <init>
-    85:85:void <init>(android.content.Context,java.lang.String,java.lang.String,android.database.sqlite.SQLiteDatabase$CursorFactory,int) -> <init>
+    102:102:void <init>(android.content.Context,java.lang.String,java.lang.String,android.database.sqlite.SQLiteDatabase$CursorFactory,int) -> <init>
+    104:104:void <init>(android.content.Context,java.lang.String,java.lang.String,android.database.sqlite.SQLiteDatabase$CursorFactory,int) -> <init>
+    105:105:void <init>(android.content.Context,java.lang.String,java.lang.String,android.database.sqlite.SQLiteDatabase$CursorFactory,int) -> <init>
+    107:107:void <init>(android.content.Context,java.lang.String,java.lang.String,android.database.sqlite.SQLiteDatabase$CursorFactory,int) -> <init>
+    108:108:void <init>(android.content.Context,java.lang.String,java.lang.String,android.database.sqlite.SQLiteDatabase$CursorFactory,int) -> <init>
+    109:109:void <init>(android.content.Context,java.lang.String,java.lang.String,android.database.sqlite.SQLiteDatabase$CursorFactory,int) -> <init>
     110:110:void <init>(android.content.Context,java.lang.String,java.lang.String,android.database.sqlite.SQLiteDatabase$CursorFactory,int) -> <init>
     112:112:void <init>(android.content.Context,java.lang.String,java.lang.String,android.database.sqlite.SQLiteDatabase$CursorFactory,int) -> <init>
     113:113:void <init>(android.content.Context,java.lang.String,java.lang.String,android.database.sqlite.SQLiteDatabase$CursorFactory,int) -> <init>
-    115:115:void <init>(android.content.Context,java.lang.String,java.lang.String,android.database.sqlite.SQLiteDatabase$CursorFactory,int) -> <init>
+    114:114:void <init>(android.content.Context,java.lang.String,java.lang.String,android.database.sqlite.SQLiteDatabase$CursorFactory,int) -> <init>
     116:116:void <init>(android.content.Context,java.lang.String,java.lang.String,android.database.sqlite.SQLiteDatabase$CursorFactory,int) -> <init>
-    117:117:void <init>(android.content.Context,java.lang.String,java.lang.String,android.database.sqlite.SQLiteDatabase$CursorFactory,int) -> <init>
     118:118:void <init>(android.content.Context,java.lang.String,java.lang.String,android.database.sqlite.SQLiteDatabase$CursorFactory,int) -> <init>
-    120:120:void <init>(android.content.Context,java.lang.String,java.lang.String,android.database.sqlite.SQLiteDatabase$CursorFactory,int) -> <init>
-    121:121:void <init>(android.content.Context,java.lang.String,java.lang.String,android.database.sqlite.SQLiteDatabase$CursorFactory,int) -> <init>
-    122:122:void <init>(android.content.Context,java.lang.String,java.lang.String,android.database.sqlite.SQLiteDatabase$CursorFactory,int) -> <init>
-    124:124:void <init>(android.content.Context,java.lang.String,java.lang.String,android.database.sqlite.SQLiteDatabase$CursorFactory,int) -> <init>
-    126:126:void <init>(android.content.Context,java.lang.String,java.lang.String,android.database.sqlite.SQLiteDatabase$CursorFactory,int) -> <init>
-    127:127:void <init>(android.content.Context,java.lang.String,java.lang.String,android.database.sqlite.SQLiteDatabase$CursorFactory,int) -> <init>
-    144:144:void <init>(android.content.Context,java.lang.String,android.database.sqlite.SQLiteDatabase$CursorFactory,int) -> <init>
-    145:145:void <init>(android.content.Context,java.lang.String,android.database.sqlite.SQLiteDatabase$CursorFactory,int) -> <init>
-    299:299:void close() -> close
-    300:300:void close() -> close
-    302:302:void close() -> close
-    303:303:void close() -> close
-    304:304:void close() -> close
-    306:306:void close() -> close
+    119:119:void <init>(android.content.Context,java.lang.String,java.lang.String,android.database.sqlite.SQLiteDatabase$CursorFactory,int) -> <init>
+    136:136:void <init>(android.content.Context,java.lang.String,android.database.sqlite.SQLiteDatabase$CursorFactory,int) -> <init>
+    137:137:void <init>(android.content.Context,java.lang.String,android.database.sqlite.SQLiteDatabase$CursorFactory,int) -> <init>
+    291:291:void close() -> close
+    292:292:void close() -> close
+    294:294:void close() -> close
+    295:295:void close() -> close
+    296:296:void close() -> close
+    298:298:void close() -> close
+    425:425:void copyDatabaseFromAssets() -> copyDatabaseFromAssets
+    430:430:void copyDatabaseFromAssets() -> copyDatabaseFromAssets
+    431:431:void copyDatabaseFromAssets() -> copyDatabaseFromAssets
     433:433:void copyDatabaseFromAssets() -> copyDatabaseFromAssets
+    437:437:void copyDatabaseFromAssets() -> copyDatabaseFromAssets
     438:438:void copyDatabaseFromAssets() -> copyDatabaseFromAssets
-    439:439:void copyDatabaseFromAssets() -> copyDatabaseFromAssets
     441:441:void copyDatabaseFromAssets() -> copyDatabaseFromAssets
-    445:445:void copyDatabaseFromAssets() -> copyDatabaseFromAssets
+    442:442:void copyDatabaseFromAssets() -> copyDatabaseFromAssets
+    443:443:void copyDatabaseFromAssets() -> copyDatabaseFromAssets
     446:446:void copyDatabaseFromAssets() -> copyDatabaseFromAssets
+    447:447:void copyDatabaseFromAssets() -> copyDatabaseFromAssets
+    448:448:void copyDatabaseFromAssets() -> copyDatabaseFromAssets
     449:449:void copyDatabaseFromAssets() -> copyDatabaseFromAssets
     450:450:void copyDatabaseFromAssets() -> copyDatabaseFromAssets
     451:451:void copyDatabaseFromAssets() -> copyDatabaseFromAssets
-    454:454:void copyDatabaseFromAssets() -> copyDatabaseFromAssets
-    455:455:void copyDatabaseFromAssets() -> copyDatabaseFromAssets
+    452:452:void copyDatabaseFromAssets() -> copyDatabaseFromAssets
+    453:453:void copyDatabaseFromAssets() -> copyDatabaseFromAssets
     456:456:void copyDatabaseFromAssets() -> copyDatabaseFromAssets
     457:457:void copyDatabaseFromAssets() -> copyDatabaseFromAssets
     458:458:void copyDatabaseFromAssets() -> copyDatabaseFromAssets
     459:459:void copyDatabaseFromAssets() -> copyDatabaseFromAssets
     460:460:void copyDatabaseFromAssets() -> copyDatabaseFromAssets
     461:461:void copyDatabaseFromAssets() -> copyDatabaseFromAssets
+    463:463:void copyDatabaseFromAssets() -> copyDatabaseFromAssets
     464:464:void copyDatabaseFromAssets() -> copyDatabaseFromAssets
     465:465:void copyDatabaseFromAssets() -> copyDatabaseFromAssets
-    466:466:void copyDatabaseFromAssets() -> copyDatabaseFromAssets
-    467:467:void copyDatabaseFromAssets() -> copyDatabaseFromAssets
     468:468:void copyDatabaseFromAssets() -> copyDatabaseFromAssets
-    469:469:void copyDatabaseFromAssets() -> copyDatabaseFromAssets
+    470:470:void copyDatabaseFromAssets() -> copyDatabaseFromAssets
     471:471:void copyDatabaseFromAssets() -> copyDatabaseFromAssets
     472:472:void copyDatabaseFromAssets() -> copyDatabaseFromAssets
     473:473:void copyDatabaseFromAssets() -> copyDatabaseFromAssets
-    476:476:void copyDatabaseFromAssets() -> copyDatabaseFromAssets
-    478:478:void copyDatabaseFromAssets() -> copyDatabaseFromAssets
-    479:479:void copyDatabaseFromAssets() -> copyDatabaseFromAssets
-    480:480:void copyDatabaseFromAssets() -> copyDatabaseFromAssets
-    481:481:void copyDatabaseFromAssets() -> copyDatabaseFromAssets
-    482:482:void copyDatabaseFromAssets() -> copyDatabaseFromAssets
-    483:483:void copyDatabaseFromAssets() -> copyDatabaseFromAssets
-    398:398:android.database.sqlite.SQLiteDatabase createOrOpenDatabase(boolean) -> createOrOpenDatabase
+    474:474:void copyDatabaseFromAssets() -> copyDatabaseFromAssets
+    475:475:void copyDatabaseFromAssets() -> copyDatabaseFromAssets
+    390:390:android.database.sqlite.SQLiteDatabase createOrOpenDatabase(boolean) -> createOrOpenDatabase
+    391:391:android.database.sqlite.SQLiteDatabase createOrOpenDatabase(boolean) -> createOrOpenDatabase
+    392:392:android.database.sqlite.SQLiteDatabase createOrOpenDatabase(boolean) -> createOrOpenDatabase
+    393:393:android.database.sqlite.SQLiteDatabase createOrOpenDatabase(boolean) -> createOrOpenDatabase
+    397:397:android.database.sqlite.SQLiteDatabase createOrOpenDatabase(boolean) -> createOrOpenDatabase
     399:399:android.database.sqlite.SQLiteDatabase createOrOpenDatabase(boolean) -> createOrOpenDatabase
     400:400:android.database.sqlite.SQLiteDatabase createOrOpenDatabase(boolean) -> createOrOpenDatabase
     401:401:android.database.sqlite.SQLiteDatabase createOrOpenDatabase(boolean) -> createOrOpenDatabase
-    405:405:android.database.sqlite.SQLiteDatabase createOrOpenDatabase(boolean) -> createOrOpenDatabase
+    402:402:android.database.sqlite.SQLiteDatabase createOrOpenDatabase(boolean) -> createOrOpenDatabase
+    404:404:android.database.sqlite.SQLiteDatabase createOrOpenDatabase(boolean) -> createOrOpenDatabase
     407:407:android.database.sqlite.SQLiteDatabase createOrOpenDatabase(boolean) -> createOrOpenDatabase
     408:408:android.database.sqlite.SQLiteDatabase createOrOpenDatabase(boolean) -> createOrOpenDatabase
     409:409:android.database.sqlite.SQLiteDatabase createOrOpenDatabase(boolean) -> createOrOpenDatabase
-    410:410:android.database.sqlite.SQLiteDatabase createOrOpenDatabase(boolean) -> createOrOpenDatabase
-    412:412:android.database.sqlite.SQLiteDatabase createOrOpenDatabase(boolean) -> createOrOpenDatabase
-    415:415:android.database.sqlite.SQLiteDatabase createOrOpenDatabase(boolean) -> createOrOpenDatabase
-    416:416:android.database.sqlite.SQLiteDatabase createOrOpenDatabase(boolean) -> createOrOpenDatabase
-    417:417:android.database.sqlite.SQLiteDatabase createOrOpenDatabase(boolean) -> createOrOpenDatabase
-    259:259:android.database.sqlite.SQLiteDatabase getReadableDatabase() -> getReadableDatabase
-    260:260:android.database.sqlite.SQLiteDatabase getReadableDatabase() -> getReadableDatabase
+    251:251:android.database.sqlite.SQLiteDatabase getReadableDatabase() -> getReadableDatabase
+    252:252:android.database.sqlite.SQLiteDatabase getReadableDatabase() -> getReadableDatabase
+    253:253:android.database.sqlite.SQLiteDatabase getReadableDatabase() -> getReadableDatabase
+    256:256:android.database.sqlite.SQLiteDatabase getReadableDatabase() -> getReadableDatabase
+    257:257:android.database.sqlite.SQLiteDatabase getReadableDatabase() -> getReadableDatabase
     261:261:android.database.sqlite.SQLiteDatabase getReadableDatabase() -> getReadableDatabase
+    262:262:android.database.sqlite.SQLiteDatabase getReadableDatabase() -> getReadableDatabase
+    263:263:android.database.sqlite.SQLiteDatabase getReadableDatabase() -> getReadableDatabase
     264:264:android.database.sqlite.SQLiteDatabase getReadableDatabase() -> getReadableDatabase
-    265:265:android.database.sqlite.SQLiteDatabase getReadableDatabase() -> getReadableDatabase
+    267:267:android.database.sqlite.SQLiteDatabase getReadableDatabase() -> getReadableDatabase
     269:269:android.database.sqlite.SQLiteDatabase getReadableDatabase() -> getReadableDatabase
     270:270:android.database.sqlite.SQLiteDatabase getReadableDatabase() -> getReadableDatabase
     271:271:android.database.sqlite.SQLiteDatabase getReadableDatabase() -> getReadableDatabase
     272:272:android.database.sqlite.SQLiteDatabase getReadableDatabase() -> getReadableDatabase
-    275:275:android.database.sqlite.SQLiteDatabase getReadableDatabase() -> getReadableDatabase
+    273:273:android.database.sqlite.SQLiteDatabase getReadableDatabase() -> getReadableDatabase
+    274:274:android.database.sqlite.SQLiteDatabase getReadableDatabase() -> getReadableDatabase
     277:277:android.database.sqlite.SQLiteDatabase getReadableDatabase() -> getReadableDatabase
     278:278:android.database.sqlite.SQLiteDatabase getReadableDatabase() -> getReadableDatabase
     279:279:android.database.sqlite.SQLiteDatabase getReadableDatabase() -> getReadableDatabase
     280:280:android.database.sqlite.SQLiteDatabase getReadableDatabase() -> getReadableDatabase
-    281:281:android.database.sqlite.SQLiteDatabase getReadableDatabase() -> getReadableDatabase
     282:282:android.database.sqlite.SQLiteDatabase getReadableDatabase() -> getReadableDatabase
-    285:285:android.database.sqlite.SQLiteDatabase getReadableDatabase() -> getReadableDatabase
-    286:286:android.database.sqlite.SQLiteDatabase getReadableDatabase() -> getReadableDatabase
-    287:287:android.database.sqlite.SQLiteDatabase getReadableDatabase() -> getReadableDatabase
-    288:288:android.database.sqlite.SQLiteDatabase getReadableDatabase() -> getReadableDatabase
-    290:290:android.database.sqlite.SQLiteDatabase getReadableDatabase() -> getReadableDatabase
-    291:291:android.database.sqlite.SQLiteDatabase getReadableDatabase() -> getReadableDatabase
-    292:292:android.database.sqlite.SQLiteDatabase getReadableDatabase() -> getReadableDatabase
-    166:166:android.database.sqlite.SQLiteDatabase getWritableDatabase() -> getWritableDatabase
-    167:167:android.database.sqlite.SQLiteDatabase getWritableDatabase() -> getWritableDatabase
-    168:168:android.database.sqlite.SQLiteDatabase getWritableDatabase() -> getWritableDatabase
-    171:171:android.database.sqlite.SQLiteDatabase getWritableDatabase() -> getWritableDatabase
-    172:172:android.database.sqlite.SQLiteDatabase getWritableDatabase() -> getWritableDatabase
-    181:181:android.database.sqlite.SQLiteDatabase getWritableDatabase() -> getWritableDatabase
-    182:182:android.database.sqlite.SQLiteDatabase getWritableDatabase() -> getWritableDatabase
+    283:283:android.database.sqlite.SQLiteDatabase getReadableDatabase() -> getReadableDatabase
+    284:284:android.database.sqlite.SQLiteDatabase getReadableDatabase() -> getReadableDatabase
+    158:158:android.database.sqlite.SQLiteDatabase getWritableDatabase() -> getWritableDatabase
+    159:159:android.database.sqlite.SQLiteDatabase getWritableDatabase() -> getWritableDatabase
+    160:160:android.database.sqlite.SQLiteDatabase getWritableDatabase() -> getWritableDatabase
+    163:163:android.database.sqlite.SQLiteDatabase getWritableDatabase() -> getWritableDatabase
+    164:164:android.database.sqlite.SQLiteDatabase getWritableDatabase() -> getWritableDatabase
+    173:173:android.database.sqlite.SQLiteDatabase getWritableDatabase() -> getWritableDatabase
+    174:174:android.database.sqlite.SQLiteDatabase getWritableDatabase() -> getWritableDatabase
+    177:177:android.database.sqlite.SQLiteDatabase getWritableDatabase() -> getWritableDatabase
+    183:183:android.database.sqlite.SQLiteDatabase getWritableDatabase() -> getWritableDatabase
     185:185:android.database.sqlite.SQLiteDatabase getWritableDatabase() -> getWritableDatabase
+    188:188:android.database.sqlite.SQLiteDatabase getWritableDatabase() -> getWritableDatabase
+    189:189:android.database.sqlite.SQLiteDatabase getWritableDatabase() -> getWritableDatabase
+    190:190:android.database.sqlite.SQLiteDatabase getWritableDatabase() -> getWritableDatabase
     191:191:android.database.sqlite.SQLiteDatabase getWritableDatabase() -> getWritableDatabase
-    193:193:android.database.sqlite.SQLiteDatabase getWritableDatabase() -> getWritableDatabase
-    196:196:android.database.sqlite.SQLiteDatabase getWritableDatabase() -> getWritableDatabase
+    194:194:android.database.sqlite.SQLiteDatabase getWritableDatabase() -> getWritableDatabase
+    195:195:android.database.sqlite.SQLiteDatabase getWritableDatabase() -> getWritableDatabase
     197:197:android.database.sqlite.SQLiteDatabase getWritableDatabase() -> getWritableDatabase
     198:198:android.database.sqlite.SQLiteDatabase getWritableDatabase() -> getWritableDatabase
-    199:199:android.database.sqlite.SQLiteDatabase getWritableDatabase() -> getWritableDatabase
+    200:200:android.database.sqlite.SQLiteDatabase getWritableDatabase() -> getWritableDatabase
+    201:201:android.database.sqlite.SQLiteDatabase getWritableDatabase() -> getWritableDatabase
     202:202:android.database.sqlite.SQLiteDatabase getWritableDatabase() -> getWritableDatabase
-    203:203:android.database.sqlite.SQLiteDatabase getWritableDatabase() -> getWritableDatabase
-    205:205:android.database.sqlite.SQLiteDatabase getWritableDatabase() -> getWritableDatabase
+    204:204:android.database.sqlite.SQLiteDatabase getWritableDatabase() -> getWritableDatabase
     206:206:android.database.sqlite.SQLiteDatabase getWritableDatabase() -> getWritableDatabase
-    208:208:android.database.sqlite.SQLiteDatabase getWritableDatabase() -> getWritableDatabase
+    207:207:android.database.sqlite.SQLiteDatabase getWritableDatabase() -> getWritableDatabase
     209:209:android.database.sqlite.SQLiteDatabase getWritableDatabase() -> getWritableDatabase
     210:210:android.database.sqlite.SQLiteDatabase getWritableDatabase() -> getWritableDatabase
-    212:212:android.database.sqlite.SQLiteDatabase getWritableDatabase() -> getWritableDatabase
+    213:213:android.database.sqlite.SQLiteDatabase getWritableDatabase() -> getWritableDatabase
     214:214:android.database.sqlite.SQLiteDatabase getWritableDatabase() -> getWritableDatabase
     215:215:android.database.sqlite.SQLiteDatabase getWritableDatabase() -> getWritableDatabase
     217:217:android.database.sqlite.SQLiteDatabase getWritableDatabase() -> getWritableDatabase
     218:218:android.database.sqlite.SQLiteDatabase getWritableDatabase() -> getWritableDatabase
-    221:221:android.database.sqlite.SQLiteDatabase getWritableDatabase() -> getWritableDatabase
-    222:222:android.database.sqlite.SQLiteDatabase getWritableDatabase() -> getWritableDatabase
+    219:219:android.database.sqlite.SQLiteDatabase getWritableDatabase() -> getWritableDatabase
+    220:220:android.database.sqlite.SQLiteDatabase getWritableDatabase() -> getWritableDatabase
     223:223:android.database.sqlite.SQLiteDatabase getWritableDatabase() -> getWritableDatabase
-    225:225:android.database.sqlite.SQLiteDatabase getWritableDatabase() -> getWritableDatabase
     226:226:android.database.sqlite.SQLiteDatabase getWritableDatabase() -> getWritableDatabase
-    227:227:android.database.sqlite.SQLiteDatabase getWritableDatabase() -> getWritableDatabase
     228:228:android.database.sqlite.SQLiteDatabase getWritableDatabase() -> getWritableDatabase
-    231:231:android.database.sqlite.SQLiteDatabase getWritableDatabase() -> getWritableDatabase
-    234:234:android.database.sqlite.SQLiteDatabase getWritableDatabase() -> getWritableDatabase
-    236:236:android.database.sqlite.SQLiteDatabase getWritableDatabase() -> getWritableDatabase
-    311:311:void onConfigure(android.database.sqlite.SQLiteDatabase) -> onConfigure
-    317:317:void onCreate(android.database.sqlite.SQLiteDatabase) -> onCreate
-    359:359:void onDowngrade(android.database.sqlite.SQLiteDatabase,int,int) -> onDowngrade
-    423:423:android.database.sqlite.SQLiteDatabase returnDatabase() -> returnDatabase
-    424:424:android.database.sqlite.SQLiteDatabase returnDatabase() -> returnDatabase
-    425:425:android.database.sqlite.SQLiteDatabase returnDatabase() -> returnDatabase
-    426:426:android.database.sqlite.SQLiteDatabase returnDatabase() -> returnDatabase
-    427:427:android.database.sqlite.SQLiteDatabase returnDatabase() -> returnDatabase
-    428:428:android.database.sqlite.SQLiteDatabase returnDatabase() -> returnDatabase
-    383:383:void setForcedUpgrade(int) -> setForcedUpgrade
-    384:384:void setForcedUpgrade(int) -> setForcedUpgrade
-    391:391:void setForcedUpgrade() -> setForcedUpgrade
-    392:392:void setForcedUpgrade() -> setForcedUpgrade
+    303:303:void onConfigure(android.database.sqlite.SQLiteDatabase) -> onConfigure
+    309:309:void onCreate(android.database.sqlite.SQLiteDatabase) -> onCreate
+    351:351:void onDowngrade(android.database.sqlite.SQLiteDatabase,int,int) -> onDowngrade
+    415:415:android.database.sqlite.SQLiteDatabase returnDatabase() -> returnDatabase
+    416:416:android.database.sqlite.SQLiteDatabase returnDatabase() -> returnDatabase
+    417:417:android.database.sqlite.SQLiteDatabase returnDatabase() -> returnDatabase
+    418:418:android.database.sqlite.SQLiteDatabase returnDatabase() -> returnDatabase
+    419:419:android.database.sqlite.SQLiteDatabase returnDatabase() -> returnDatabase
+    420:420:android.database.sqlite.SQLiteDatabase returnDatabase() -> returnDatabase
+    375:375:void setForcedUpgrade(int) -> setForcedUpgrade
+    376:376:void setForcedUpgrade(int) -> setForcedUpgrade
+    383:383:void setForcedUpgrade() -> setForcedUpgrade
+    384:384:void setForcedUpgrade() -> setForcedUpgrade
 com.philolog.philologus.SQLiteAssetHelper.SQLiteAssetHelper$SQLiteAssetException -> com.philolog.philologus.SQLiteAssetHelper.SQLiteAssetHelper$SQLiteAssetException:
 # {"id":"sourceFile","fileName":"SQLiteAssetHelper.java"}
-    530:530:void <init>(java.lang.String) -> <init>
-    531:531:void <init>(java.lang.String) -> <init>
+    521:521:void <init>(java.lang.String) -> <init>
+    522:522:void <init>(java.lang.String) -> <init>
 com.philolog.philologus.SQLiteAssetHelper.Utils -> com.philolog.philologus.SQLiteAssetHelper.Utils:
 # {"id":"sourceFile","fileName":"Utils.java"}
-    17:17:void <clinit>() -> <clinit>
-    60:60:java.util.zip.ZipInputStream getFileFromZip(java.io.InputStream) -> getFileFromZip
+    16:16:void <clinit>() -> <clinit>
+    59:59:java.util.zip.ZipInputStream getFileFromZip(java.io.InputStream) -> getFileFromZip
+    61:61:java.util.zip.ZipInputStream getFileFromZip(java.io.InputStream) -> getFileFromZip
     62:62:java.util.zip.ZipInputStream getFileFromZip(java.io.InputStream) -> getFileFromZip
     63:63:java.util.zip.ZipInputStream getFileFromZip(java.io.InputStream) -> getFileFromZip
-    64:64:java.util.zip.ZipInputStream getFileFromZip(java.io.InputStream) -> getFileFromZip
-    66:66:java.util.zip.ZipInputStream getFileFromZip(java.io.InputStream) -> getFileFromZip
-    44:44:void writeExtractedFileToDisk(java.io.InputStream,java.io.OutputStream,com.philolog.philologus.SQLiteAssetHelper.Utils$ProgListener) -> writeExtractedFileToDisk
+    65:65:java.util.zip.ZipInputStream getFileFromZip(java.io.InputStream) -> getFileFromZip
+    43:43:void writeExtractedFileToDisk(java.io.InputStream,java.io.OutputStream,com.philolog.philologus.SQLiteAssetHelper.Utils$ProgListener) -> writeExtractedFileToDisk
+    45:45:void writeExtractedFileToDisk(java.io.InputStream,java.io.OutputStream,com.philolog.philologus.SQLiteAssetHelper.Utils$ProgListener) -> writeExtractedFileToDisk
     46:46:void writeExtractedFileToDisk(java.io.InputStream,java.io.OutputStream,com.philolog.philologus.SQLiteAssetHelper.Utils$ProgListener) -> writeExtractedFileToDisk
     47:47:void writeExtractedFileToDisk(java.io.InputStream,java.io.OutputStream,com.philolog.philologus.SQLiteAssetHelper.Utils$ProgListener) -> writeExtractedFileToDisk
     48:48:void writeExtractedFileToDisk(java.io.InputStream,java.io.OutputStream,com.philolog.philologus.SQLiteAssetHelper.Utils$ProgListener) -> writeExtractedFileToDisk
     49:49:void writeExtractedFileToDisk(java.io.InputStream,java.io.OutputStream,com.philolog.philologus.SQLiteAssetHelper.Utils$ProgListener) -> writeExtractedFileToDisk
     50:50:void writeExtractedFileToDisk(java.io.InputStream,java.io.OutputStream,com.philolog.philologus.SQLiteAssetHelper.Utils$ProgListener) -> writeExtractedFileToDisk
-    51:51:void writeExtractedFileToDisk(java.io.InputStream,java.io.OutputStream,com.philolog.philologus.SQLiteAssetHelper.Utils$ProgListener) -> writeExtractedFileToDisk
+    53:53:void writeExtractedFileToDisk(java.io.InputStream,java.io.OutputStream,com.philolog.philologus.SQLiteAssetHelper.Utils$ProgListener) -> writeExtractedFileToDisk
     54:54:void writeExtractedFileToDisk(java.io.InputStream,java.io.OutputStream,com.philolog.philologus.SQLiteAssetHelper.Utils$ProgListener) -> writeExtractedFileToDisk
     55:55:void writeExtractedFileToDisk(java.io.InputStream,java.io.OutputStream,com.philolog.philologus.SQLiteAssetHelper.Utils$ProgListener) -> writeExtractedFileToDisk
     56:56:void writeExtractedFileToDisk(java.io.InputStream,java.io.OutputStream,com.philolog.philologus.SQLiteAssetHelper.Utils$ProgListener) -> writeExtractedFileToDisk
-    57:57:void writeExtractedFileToDisk(java.io.InputStream,java.io.OutputStream,com.philolog.philologus.SQLiteAssetHelper.Utils$ProgListener) -> writeExtractedFileToDisk
 com.philolog.philologus.SQLiteAssetHelper.Utils$ProgListener -> com.philolog.philologus.SQLiteAssetHelper.Utils$ProgListener:
 # {"id":"sourceFile","fileName":"Utils.java"}
 com.philolog.philologus.SettingsActivity -> com.philolog.philologus.SettingsActivity:
