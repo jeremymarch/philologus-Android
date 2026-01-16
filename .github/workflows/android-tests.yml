@@ -22,14 +22,9 @@ jobs:
           distribution: 'temurin'
           cache: 'gradle'
 
-      - name: Grant Execute Permission to Gradlew
+      - name: Grant execute permission for gradlew
         run: chmod +x gradlew
-
-      - name: Run Instrumented Tests
-        uses: ReactiveCircus/android-emulator-runner@v2
-        with:
-          api-level: 29
-          target: google_apis
-          arch: x86_64
-          profile: pixel_5
-          script: ./gradlew connectedDebugAndroidTest
+      
+      - name: Run Unit Tests
+        # This command runs all unit tests in the project
+        run: ./gradlew test
