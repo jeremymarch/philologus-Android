@@ -42,6 +42,8 @@ public class WordListActivityTest {
                 .atPosition(0)
                 .perform(click());
 
+        Thread.sleep(5000);
+
         // In Two-Pane mode, the detail container should be visible.
         // In Single-Pane mode, a new Activity (WordDetailActivity) is launched.
         // We check for the detail container with a more flexible matcher.
