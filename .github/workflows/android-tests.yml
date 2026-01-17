@@ -48,8 +48,9 @@ jobs:
   instrumented-tests:
     runs-on: ubuntu-latest
     strategy:
+      fail-fast: false
       matrix:
-        api-level: [ 23, 34, 35, 36 ]
+        api-level: [ 23, 24, 25, 26, 27, 36 ]
         target: [ default, google_apis ]
     timeout-minutes: 45
     steps:
