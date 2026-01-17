@@ -20,7 +20,7 @@
     http://developer.android.com/training/multiscreen/screensizes.html#TaskUseAliasFilters
     -->
 
-    <fragment
+    <androidx.fragment.app.FragmentContainerView
         android:id="@+id/word_list"
         android:name="com.philolog.philologus.WordListFragment"
         android:layout_width="0dp"

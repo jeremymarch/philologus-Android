@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/word_list_fragment"
     android:layout_width="fill_parent"
     android:layout_height="fill_parent"
@@ -36,7 +37,7 @@
             android:paddingTop="0dp"
             android:paddingEnd="6dp"
             android:paddingBottom="0dp"
-            android:text="Greek:"
+            android:text="@string/GreekLabel"
             android:textAllCaps="false"
             android:textColor="?attr/phTextColor"
             android:textSize="21sp" />
@@ -49,6 +50,7 @@
             android:layout_toStartOf="@id/clear"
             android:layout_toEndOf="@id/toggleButton"
             android:background="@android:color/transparent"
+            android:inputType="textNoSuggestions"
             android:maxLines="1"
             android:minHeight="55dp"
             android:gravity="center_vertical"
@@ -58,7 +60,8 @@
             android:textColor="?attr/phTextColor"
             android:textCursorDrawable="@drawable/phcursor"
             android:textIsSelectable="true"
-            android:textSize="21sp" />
+            android:textSize="21sp"
+            tools:ignore="LabelFor" />
 
         <Button
             android:id="@+id/clear"
@@ -106,7 +109,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:gravity="center"
-                android:text="Updating database..."
+                android:text="@string/UpdateDatabaseMessage"
                 android:textColor="?attr/phTextColor"
                 android:textSize="28sp" />
         </LinearLayout>

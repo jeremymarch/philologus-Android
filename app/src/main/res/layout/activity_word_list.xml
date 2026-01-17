@@ -3,7 +3,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <fragment
+    <androidx.fragment.app.FragmentContainerView
         android:id="@+id/word_list"
         android:name="com.philolog.philologus.WordListFragment"
         android:layout_width="match_parent"
@@ -13,7 +13,7 @@
         android:background="?attr/phBGColor"/>
 
     <!-- This container is only used in two-pane mode (see activity_word_twopane.xml)
-         but we declare it here to avoid R.id resolution errors. -->
+         but we declare it here to avoid R.id resolution errors. Visibility must be set to GONE -->
     <FrameLayout
         android:id="@+id/word_detail_container"
         android:layout_width="0dp"

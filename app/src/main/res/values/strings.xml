@@ -6,5 +6,7 @@
     <string name="latin_button">Latin:</string>
     <string name="NewText">New</string>
     <string name="search">Search</string>
+    <string name="GreekLabel">Greek:</string>
+    <string name="UpdateDatabaseMessage">Updating database...</string>
     <!--<item type="string" name="databaseVersion" format="integer">500</item>-->
 </resources>
