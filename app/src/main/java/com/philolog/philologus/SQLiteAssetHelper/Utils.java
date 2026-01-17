@@ -15,7 +15,7 @@ public class Utils {
 
     private static final String TAG = SQLiteAssetHelper.class.getSimpleName();
 
-    public static List<String> splitSqlScript(String script, char delim) {
+    public static List<String> splitSqlScript(String script, char delimiter) {
         List<String> statements = new ArrayList<String>();
         StringBuilder sb = new StringBuilder();
         boolean inLiteral = false;
@@ -24,8 +24,8 @@ public class Utils {
             if (content[i] == '"') {
                 inLiteral = !inLiteral;
             }
-            if (content[i] == delim && !inLiteral) {
-                if (!sb.isEmpty()) {
+            if (content[i] == delimiter && !inLiteral) {
+                if (sb.length() > 0) {
                     statements.add(sb.toString().trim());
                     sb = new StringBuilder();
                 }
@@ -33,7 +33,7 @@ public class Utils {
                 sb.append(content[i]);
             }
         }
-        if (!sb.isEmpty()) {
+        if (sb.length() > 0) {
             statements.add(sb.toString().trim());
         }
         return statements;
