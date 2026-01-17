@@ -2,6 +2,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:baselineAligned="false"
     android:divider="?android:attr/dividerHorizontal"
     android:orientation="horizontal"
     android:showDividers="middle"
@@ -20,7 +21,7 @@
     http://developer.android.com/training/multiscreen/screensizes.html#TaskUseAliasFilters
     -->
 
-    <androidx.fragment.app.FragmentContainerView
+    <fragment
         android:id="@+id/word_list"
         android:name="com.philolog.philologus.WordListFragment"
         android:layout_width="0dp"
