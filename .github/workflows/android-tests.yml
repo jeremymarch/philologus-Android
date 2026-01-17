@@ -50,7 +50,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        api-level: [ 28, 29, 30, 31, 32, 33, 34, 35, 36 ]
+        api-level: [ 30, 31, 32, 33, 34, 35, 36 ]
         target: [ default, google_apis ]
     timeout-minutes: 59
     steps:
