@@ -8,7 +8,7 @@ on:
 
 jobs:
   instrumented-tests:
-    runs-on: macos-latest 
+    runs-on: ubuntu-latest
     timeout-minutes: 45
 
     steps:
@@ -32,3 +32,17 @@ jobs:
       - name: Run Android Lint
         # This command generates the lint-results.xml file
         run: ./gradlew lint
+
+      - name: Run Instrumented Tests
+        uses: Reactivecircus/android-emulator-runner@v2
+        with:
+          api-level: 33
+          target: google_apis
+          arch: x86_64
+          profile: pixel_6
+          script: ./gradlew connectedDebugAndroidTest
+
+      - name: Android Test Report
+        uses: asadmansr/android-test-report-action@v1.2.0
+        if: ${{ always() }} # IMPORTANT: run Android Test Report regardless
+  
