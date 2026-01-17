@@ -7,10 +7,8 @@ on:
     branches: [ "main" ]
 
 jobs:
-  instrumented-tests:
+  unit-tests:
     runs-on: ubuntu-latest
-    timeout-minutes: 45
-
     steps:
       - name: Checkout Code
         uses: actions/checkout@v4
@@ -26,12 +24,43 @@ jobs:
         run: chmod +x gradlew
       
       - name: Run Unit Tests
-        # This command runs all unit tests in the project
         run: ./gradlew test
 
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+          cache: 'gradle'
+
+      - name: Grant execute permission for gradlew
+        run: chmod +x gradlew
+
       - name: Run Android Lint
-        # This command generates the lint-results.xml file
         run: ./gradlew lint
+
+  instrumented-tests:
+    runs-on: ubuntu-latest
+    timeout-minutes: 45
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+          cache: 'gradle'
+
+      - name: Grant execute permission for gradlew
+        run: chmod +x gradlew
 
       - name: Run Instrumented Tests
         uses: Reactivecircus/android-emulator-runner@v2
@@ -44,5 +73,4 @@ jobs:
 
       - name: Android Test Report
         uses: asadmansr/android-test-report-action@v1.2.0
-        if: ${{ always() }} # IMPORTANT: run Android Test Report regardless
-  
+        if: ${{ always() }}
