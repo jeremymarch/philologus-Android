@@ -50,9 +50,9 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        api-level: [ 23, 24, 25, 26, 27, 36 ]
+        api-level: [ 28, 29, 30, 31, 32, 33, 34, 35, 36 ]
         target: [ default, google_apis ]
-    timeout-minutes: 45
+    timeout-minutes: 59
     steps:
       - name: Checkout Code
         uses: actions/checkout@v4
