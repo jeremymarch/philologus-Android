@@ -32,7 +32,7 @@ public class WordListActivityTest {
         // We use a simple sleep here if idling resources aren't implemented, 
         // but checking for isDisplayed() on the list is usually enough for Espresso to wait.
         // However, given the focus error, let's give it a moment to settle.
-        Thread.sleep(5000); 
+        Thread.sleep(8000);
 
         onView(withId(android.R.id.list)).check(matches(isDisplayed()));
 
