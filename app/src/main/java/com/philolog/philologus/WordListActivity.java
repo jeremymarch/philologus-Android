@@ -146,7 +146,10 @@ public class WordListActivity extends FragmentActivity implements
 
         WordListFragment wordListFragment = (WordListFragment) getSupportFragmentManager().findFragmentById(R.id.word_list);
 
-        if (findViewById(R.id.word_detail_container) != null) {
+        View word_detail = findViewById(R.id.word_detail_container);
+        if (word_detail != null &&
+                word_detail.getVisibility() != View.GONE) {
+            //word_detail's visibility will be GONE for phone devices
             mTwoPane = true;
 
             if (wordListFragment != null) {

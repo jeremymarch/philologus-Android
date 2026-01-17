@@ -28,3 +28,7 @@ jobs:
       - name: Run Unit Tests
         # This command runs all unit tests in the project
         run: ./gradlew test
+
+      - name: Run Android Lint
+        # This command generates the lint-results.xml file
+        run: ./gradlew lint
